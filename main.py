@@ -27,6 +27,11 @@ races: list[dict] = [{"Race": "Humain", "Âge_permis": [18, 120]},
 
 
 def verifier_race(numero: int) -> dict:
+    """
+    Vérifie si le numéro choisis correspond à une race
+    :param numero: Le numéro de race choisis
+    :return: La race choisis
+    """
     while True:
         if numero not in [1, 2, 3, 4]:
             print(f"\nEntrer un numero de 1 à {len(races)}\n")
@@ -46,9 +51,11 @@ if __name__ == '__main__':
     prenom: str = input("Veuillez entrer le prénom de votre personnage: ").capitalize()
     nom: str = input("Veuillez choisir votre nom de famille: ").capitalize()
     nom_complet = verifier_nom(prenom, nom)
+
     # Choix de la race du personnage
     print(f"Voici les races disponibles:")
     for position, race in enumerate(races):
         print(f"{position + 1} - {race['Race']}")
     num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: "))
-    print(verifier_race(num_race_choisi))
+
+
