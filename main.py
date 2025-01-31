@@ -17,11 +17,15 @@ def verifier_nom(p_prenom:str, p_nom:str) -> str:
 
     return p_nom_complet
 
-races: dict = {"Humain": [18,120],
-               "Ogre": [18,150],
-               "Nain": [15, 200],
-               "Elfs": [16,500]}
-
+races: list[dict] = [{"Race": "Humain",
+                      "Âge_permis": [18,120]},
+                     {"Race": "Ogre",
+                      "Âge_permis": [18, 150]},
+                     {"Race": "Nain",
+                      "Âge": [15, 200]},
+                     {"Race": "Elfe",
+                      "Âge": [16, 500]}
+                     ]
 def verifier_race(numero:int) -> str:
     liste_nom_race: list = []
     for nom_race in races:
