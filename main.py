@@ -68,6 +68,25 @@ def verifier_genre(p_genre: str) -> str:
 classes:list = ["Royauté","Villageois","Magicien","Armée"]
 
 
+def verifier_classe(numero: int) -> str:
+    """
+    Vérifie si la classe choisis est correcte
+    :param numero: Le numéro de la classe choisis
+    :return: La classe choisis
+    """
+    while True:
+        if numero not in range(1, len(classes) + 1):
+            print("\nVeuillez choisir un numéro de classe correcte")
+            time.sleep(1)
+            print("\n")
+            for p_position, p_classe in enumerate(classes):
+                print(f"{p_position + 1} - {p_classe}")
+            numero: int = int(input("Veuillez choisir votre classe: ").strip())
+        else:
+            break
+    classe_choisi = classes[numero - 1]
+
+    return classe_choisi
 if __name__ == '__main__':
     # Choix du nom du personnage
     prenom: str = input("Veuillez entrer le prénom de votre personnage: ").capitalize().strip()
@@ -78,14 +97,20 @@ if __name__ == '__main__':
     print(f"\nVoici les races disponibles:")
     for position, race in enumerate(races):
         print(f"{position + 1} - {race['Race']}")
-    num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: ").strip())
-    race = verifier_race(num_race_choisi)
+    while True:
+        num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: ").strip())
+        race = verifier_race(num_race_choisi)
+        break
 
     # Choix du genre du personnage
     genre: str = input("\nQuel est votre genre? (Homme/Femme/Autre): ").capitalize().strip()
     genre = verifier_genre(genre)
-    print(f"\nVoici les races disponibles:")
 
     # Choix de la classe du personnage
+    print(f"\nVoici les classes disponibles:")
+    for position, classe in enumerate(classes):
+        print(f"{position + 1} - {classe}")
+    num_classe:int = int(input("Veuillez choisir votre classe: ").strip())
+    classe = verifier_classe(num_classe)
 
 
