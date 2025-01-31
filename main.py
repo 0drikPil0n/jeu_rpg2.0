@@ -1,8 +1,9 @@
 import time
 import random
 
+
 # Création du personnage
-def verifier_nom(p_prenom:str, p_nom:str) -> str:
+def verifier_nom(p_prenom: str, p_nom: str) -> str:
     """
     Vérifie si le nom et le prénom sont correcte et retourne le nom complet
     :param p_prenom: Le prénom
@@ -17,26 +18,27 @@ def verifier_nom(p_prenom:str, p_nom:str) -> str:
 
     return p_nom_complet
 
-races: list[dict] = [{"Race": "Humain",
-                      "Âge_permis": [18,120]},
-                     {"Race": "Ogre",
-                      "Âge_permis": [18, 150]},
-                     {"Race": "Nain",
-                      "Âge": [15, 200]},
-                     {"Race": "Elfe",
-                      "Âge": [16, 500]}
+
+races: list[dict] = [{"Race": "Humain", "Âge_permis": [18, 120]},
+                     {"Race": "Ogre", "Âge_permis": [18, 150]},
+                     {"Race": "Nain", "Âge_permis": [15, 200]},
+                     {"Race": "Elfe", "Âge_permis": [16, 500]}
                      ]
-def verifier_race(numero:int) -> str:
-    liste_nom_race: list = []
-    for nom_race in races:
-        liste_nom_race.append(nom_race)
-    race_choisi = liste_nom_race[numero] in len(liste_nom_race)
-    if not race_choisi:
-        numero = input("Veuillez choisir une race valide: ")
-    return liste_nom_race[numero]
 
 
+def verifier_race(numero: int) -> dict:
+    while True:
+        if numero not in [1, 2, 3, 4]:
+            print(f"\nEntrer un numero de 1 à {len(races)}\n")
+            time.sleep(1)
+            for p_position, p_race in enumerate(races):
+                print(f"{p_position + 1} - {p_race['Race']}")
+            numero: int = int(input("Veuillez choisir une race par son numéro: "))
+        else:
+            break
+    race_choisi = races[numero - 1]
 
+    return race_choisi
 
 
 if __name__ == '__main__':
@@ -47,13 +49,6 @@ if __name__ == '__main__':
     # Choix de la race du personnage
     print(f"Voici les races disponibles:")
     for position, race in enumerate(races):
-        print(f"{position + 1} - {race}")
+        print(f"{position + 1} - {race['Race']}")
     num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: "))
-    verifier_race(num_race_choisi)
-
-
-
-
-
-
-
+    print(verifier_race(num_race_choisi))
