@@ -68,18 +68,19 @@ def verifier_genre(p_genre: str) -> str:
 classes:list = ["Royauté","Villageois","Magicien","Armée"]
 
 
-def verifier_classe(numero: int) -> str:
+def verifier_classe(numero: int, p_classes) -> str:
     """
     Vérifie si la classe choisis est correcte
     :param numero: Le numéro de la classe choisis
+    :param p_classes: La liste de classes
     :return: La classe choisis
     """
     while True:
-        if numero not in range(1, len(classes) + 1):
+        if numero not in range(1, len(p_classes) + 1):
             print("\nVeuillez choisir un numéro de classe correcte")
             time.sleep(1)
             print("\n")
-            for p_position, p_classe in enumerate(classes):
+            for p_position, p_classe in enumerate(p_classes):
                 print(f"{p_position + 1} - {p_classe}")
             numero: int = int(input("Veuillez choisir votre classe: ").strip())
         else:
@@ -91,8 +92,9 @@ def verifier_classe(numero: int) -> str:
 
 sous_classes:dict[str, list[str]] = {"Royauté": ["Prince","Princesse","Roi","Reine"],
                                      "Villageois": ["Fermier","Forgeron","Boucher","Pêcheur"],
-                                     "Magiciens": ["Mage","Sorcier","Alchimiste","Shaman"],
+                                     "Magicien": ["Mage","Sorcier","Alchimiste","Shaman"],
                                      "Armée": ["Archer","Cavalier","Infanterie","Mercenaire"]}
+
 
 if __name__ == '__main__':
     # Choix du nom du personnage
@@ -122,17 +124,31 @@ if __name__ == '__main__':
     while True:
         try:
             print(f"\nVoici les classes disponibles:")
-            for position, classe in enumerate(classes):
-                print(f"{position + 1} - {classe}")
+            for pos, c in enumerate(classes):
+                print(f"{pos + 1} - {c}")
             num_classe:int = int(input("Veuillez choisir votre classe: ").strip())
         except ValueError:
             print("\nVeuillez écrire un nombre entier\n")
             time.sleep(1)
         else:
             break
-    classe = verifier_classe(num_classe)
+    classe = verifier_classe(num_classe,classes)
 
     # Choix de la sous-classe du personnage
+    while True:
+        try:
+            s_classes = sous_classes[classe]
+            print(f"\nVoici les sous-classes disponibles:")
+            for position, sous_class in enumerate(s_classes):
+                print(f"{position + 1} - {sous_class}")
+            num_sous_classe:int = int(input("Veuillez choisir votre sous-classe: ").strip())
+        except ValueError:
+            print("\nVeuillez écrire un nombre entier\n")
+            time.sleep(1)
+        else:
+            break
+    sous_classe = verifier_classe(num_sous_classe,sous_classes)
+
 
 
 
