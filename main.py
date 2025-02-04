@@ -96,6 +96,24 @@ sous_classes:dict[str, list[str]] = {"Royauté": ["Prince","Princesse","Roi","Re
                                      "Armée": ["Archer","Cavalier","Infanterie","Mercenaire"]}
 
 
+Stats_role = {
+        "Prince":{    "Arme": "Poignard",           "PV": 200,  "Dégats": [20,15],         "Att.Spé.": [60,40]},
+        "Princesse":{ "Arme": "Dague",              "PV": 175,  "Dégats": [30,10],         "Att.Spé.": [50]},
+        "Roi":{       "Arme": "Épée",               "PV": 250,  "Dégats": [50,40,20,20],   "Att.Spé.": [75]},
+        "Reine":{     "Arme": "Épée",               "PV": 225,  "Dégats": [60,30,30,10],   "Att.Spé.": [70]},
+        "Fermier":{   "Arme": "Houe",               "PV": 100,  "Dégats": [10,8,8,5],      "Att.Spé.": [20]},
+        "Forgeron":{  "Arme": "Marteau",            "PV": 120,  "Dégats": [12,9,8,8],      "Att.Spé.": [25]},
+        "Boucher":{   "Arme": "Couteau",            "PV": 110,  "Dégats": [10,10,8,6],     "Att.Spé.": [20]},
+        "Pêcheur":{   "Arme": "Morue",              "PV": 110,  "Dégats": [10,10,8,6],     "Att.Spé.": [20]},
+        "Mage":{      "Arme": "Livre de sort",      "PV": 250,  "Dégats": [40,30],         "Att.Spé.": [100]},
+        "Sorcier":{   "Arme": "Baguette magique",   "PV": 250,  "Dégats": [50,35,25],      "Att.Spé.": [110]},
+        "Alchimiste":{"Arme": "Potions magiques",   "PV": 250,  "Dégats": [50,35,25],      "Att.Spé.": [110]},
+        "Shaman":{    "Arme": "Invocation d'esprit","PV": 230,  "Dégats": [60,40,20],      "Att.Spé.": [125,90]},
+        "Archer":{    "Arme": "Arc",                "PV": 150,  "Dégats": [100,40,40,40],  "Att.Spé.": [115,110]},
+        "Cavalier":{  "Arme": "Lance",              "PV": 300,  "Dégats": [40,20,20,10],   "Att.Spé.": [80,75]},
+        "Infantrie":{ "Arme": "Fusil",              "PV": 275,  "Dégats": [60,40,30,20],   "Att.Spé.": [100,90]},
+        "Mercenaire":{"Arme": "Double dague",       "PV": 200,  "Dégats": [75,40,30,30],   "Att.Spé.": [125,90]}}
+
 if __name__ == '__main__':
     # Choix du nom du personnage
     prenom: str = input("Veuillez entrer le prénom de votre personnage: ").capitalize().strip()
