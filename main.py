@@ -1,6 +1,6 @@
 import time
 import random
-
+from textwrap import dedent
 
 # Création du personnage
 def verifier_nom(p_prenom: str, p_nom: str) -> str:
@@ -124,8 +124,8 @@ if __name__ == '__main__':
     while True:
         try:
             print(f"\nVoici les races disponibles:")
-            for position, race in enumerate(races):
-                print(f"{position + 1} - {race['Race']}")
+            for position, r in enumerate(races):
+                print(f"{position + 1} - {r['Race']}")
             num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: ").strip())
         except ValueError:
             print("\nVeuillez écrire un nombre entier\n")
@@ -167,6 +167,15 @@ if __name__ == '__main__':
             break
     sous_classe = verifier_classe(num_sous_classe,sous_classes)
 
+    print("\n" * 15)
+    print(dedent(f"**********************************************************************************\n"
+                 f"Bonjour cher aventurier, voici votre personnage:\n"
+                 f"Nom: {nom_complet}\n"
+                 f"Race: {race["Race"]}\n"
+                 f"Genre: {genre}\n"
+                 f"Classe choisis: {classe}\n"
+                 f"Sous-classe choisis: {sous_classe}\n"
+                 f"**********************************************************************************"))
 
 
 
