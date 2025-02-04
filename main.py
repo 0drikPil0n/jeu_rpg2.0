@@ -64,6 +64,15 @@ def verifier_genre(p_genre: str) -> str:
             break
     return p_genre
 
+
+def verifier_age(p_age:int, p_race:dict) -> int:
+    """
+    Vérifie si l'âge est dans la limite d'âge
+    :param p_age:
+    :param p_race:
+    :return:
+    """
+
 # Création de la classe
 classes:list = ["Royauté","Villageois","Magicien","Armée"]
 
@@ -138,6 +147,17 @@ if __name__ == '__main__':
     genre: str = input("\nQuel est votre genre? (Homme/Femme/Autre): ").capitalize().strip()
     genre = verifier_genre(genre)
 
+    # Choix de l'âge du personnage
+    while True:
+        try:
+            age:int = int(input("Quel âge avez-vous?\n"
+                                "Indiquer vôtre âge: "))
+        except ValueError:
+            print("Veuillez écrire un nombre entier\n")
+            time.sleep(1)
+        else:
+            break
+    age =
     # Choix de la classe du personnage
     while True:
         try:
