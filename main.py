@@ -70,8 +70,27 @@ def verifier_age(p_age:int, p_race:dict) -> int:
     Vérifie si l'âge est dans la limite d'âge
     :param p_age: L'âge entrée
     :param p_race: la race choisis
-    :return:
+    :return: L'âge choisis
     """
+    range_age = p_race["Âge_permis"]
+    while True:
+        if p_age not in range(range_age[0], range_age[1] + 1):
+            if p_age < range_age[0]:
+                print(f"\nCet âge est trop petit\n"
+                      f"La tranche d'âge permise pour cette race est de {range_age[0]} à {range_age[1]}")
+                time.sleep(1)
+                p_age = int(input("\nIndiquer votre âge: ").strip())
+            elif p_age > range_age[1]:
+                print(f"\nCet âge est trop grand\n"
+                      f"La tranche d'âge permise pour cette race est de {range_age[0]} à {range_age[1]}")
+                time.sleep(1)
+                p_age = int(input("\nIndiquer votre âge: ").strip())
+        else:
+            break
+    age_choisis = p_age
+
+    return age_choisis
+
 
 # Création de la classe
 classes:list = ["Royauté","Villageois","Magicien","Armée"]
@@ -94,7 +113,7 @@ def verifier_classe(numero: int, p_classes) -> str:
             numero: int = int(input("Veuillez choisir votre classe: ").strip())
         else:
             break
-    classe_choisi = classes[numero - 1]
+    classe_choisi = p_classes[numero - 1]
 
     return classe_choisi
 
@@ -151,10 +170,10 @@ if __name__ == '__main__':
     while True:
         try:
             age:int = int(input("\nQuel âge avez-vous?\n"
-                                "Indiquer vôtre âge: "))
-            age =
+                                "Indiquer vôtre âge: ").strip())
+            age = verifier_age(age, race)
         except ValueError:
-            print("Veuillez écrire un nombre entier\n")
+            print("\nVeuillez écrire un nombre entier\n")
             time.sleep(1)
         else:
             break
