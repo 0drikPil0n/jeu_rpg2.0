@@ -91,7 +91,6 @@ def verifier_age(p_age:int, p_race:dict) -> int:
 
     return age_choisis
 
-
 # Création de la classe
 classes:list = ["Royauté","Villageois","Magicien","Armée"]
 
@@ -105,9 +104,8 @@ def verifier_classe(numero: int, p_classes) -> str:
     """
     while True:
         if numero not in range(1, len(p_classes) + 1):
-            print("\nVeuillez choisir un numéro de classe correcte")
+            print("\nVeuillez choisir un numéro de classe correcte\n")
             time.sleep(1)
-            print("\n")
             for p_position, p_classe in enumerate(p_classes):
                 print(f"{p_position + 1} - {p_classe}")
             numero: int = int(input("Veuillez choisir votre classe: ").strip())
@@ -142,81 +140,126 @@ Stats_role = {
         "Infantrie":{ "Arme": "Fusil",              "PV": 275,  "Dégats": [60,40,30,20],   "Att.Spé.": [100,90]},
         "Mercenaire":{"Arme": "Double dague",       "PV": 200,  "Dégats": [75,40,30,30],   "Att.Spé.": [125,90]}}
 
+# Choix de la mission
+liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique",
+                                        "Sauver la princesse de la tour", "Vaincre l'armée de Gobelin"]
+
+
+def verifier_aventure(numero:int, p_list_aventure) -> int:
+    """
+    Vérifie si le numéro correspond à une aventure
+    :param numero: Le numéro entré
+    :param p_list_aventure: Liste des aventures disponibles
+    :return: L'aventure choisi par le joueur
+    """
+    while True:
+        if numero not in range(len(p_list_aventure)):
+            print("Veuillez choisir un numéro de missions valide")
+            time.sleep(1)
+        else:
+            break
+    return numero
+
 if __name__ == '__main__':
-    # Choix du nom du personnage
-    prenom: str = input("Veuillez entrer le prénom de votre personnage: ").capitalize().strip()
-    nom: str = input("Veuillez choisir votre nom de famille: ").capitalize().strip()
-    nom_complet = verifier_nom(prenom, nom)
+    while True:
+        # Choix du nom du personnage
+        prenom: str = input("Veuillez entrer le prénom de votre personnage: ").capitalize().strip()
+        nom: str = input("Veuillez choisir votre nom de famille: ").capitalize().strip()
+        nom_complet = verifier_nom(prenom, nom)
 
-    # Choix de la race du personnage
+        # Choix de la race du personnage
+        while True:
+            try:
+                print(f"\nVoici les races disponibles:")
+                for pos, r in enumerate(races):
+                    print(f"{pos + 1} - {r['Race']}")
+                num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: ").strip())
+                race = verifier_race(num_race_choisi)
+            except ValueError:
+                print("\nVeuillez écrire un nombre entier\n")
+                time.sleep(1)
+            else:
+                break
+
+        # Choix du genre du personnage
+        genre: str = input("\nQuel est votre genre? (Homme/Femme/Autre): ").capitalize().strip()
+        genre = verifier_genre(genre)
+
+        # Choix de l'âge du personnage
+        while True:
+            try:
+                age:int = int(input("\nQuel âge avez-vous?\n"
+                                    "Indiquer vôtre âge: ").strip())
+                age = verifier_age(age, race)
+            except ValueError:
+                print("\nVeuillez écrire un nombre entier\n")
+                time.sleep(1)
+            else:
+                break
+
+        # Choix de la classe du personnage
+        while True:
+            try:
+                print(f"\nVoici les classes disponibles:")
+                for pos, c in enumerate(classes):
+                    print(f"{pos + 1} - {c}")
+                num_classe:int = int(input("Veuillez choisir votre classe: ").strip())
+                classe = verifier_classe(num_classe, classes)
+            except ValueError:
+                print("\nVeuillez écrire un nombre entier\n")
+                time.sleep(1)
+            else:
+                break
+
+        # Choix de la sous-classe du personnage
+        while True:
+            try:
+                sous_classes = list_sous_classes[classe]
+                print(f"\nVoici les sous-classes disponibles:")
+                for position, sous_class in enumerate(sous_classes):
+                    print(f"{position + 1} - {sous_class}")
+                num_sous_classe:int = int(input("Veuillez choisir votre sous-classe: ").strip())
+                sous_classe = verifier_classe(num_sous_classe, sous_classes)
+            except ValueError:
+                print("\nVeuillez écrire un nombre entier\n")
+                time.sleep(1)
+            else:
+                break
+
+        print("\n" * 15)
+        print(dedent(f"**********************************************************************************\n"
+                     f"Bonjour cher aventurier, voici votre personnage:\n"
+                     f"Nom: {nom_complet}\n"
+                     f"Âge: {age} ans\n"
+                     f"Race: {race["Race"]}\n"
+                     f"Genre: {genre}\n"
+                     f"Classe choisis: {classe}\n"
+                     f"Sous-classe choisis: {sous_classe}\n"
+                     f"**********************************************************************************"))
+        while True:
+            debut_aventure = input("\nÊtes-vous prêt(e) à commencer votre aventure? (oui/non): ").lower().strip()
+            if debut_aventure not in ["oui", "non"]:
+                print("\nVeuillez choisir entre oui ou non")
+                time.sleep(1)
+            else:
+                if debut_aventure == "non":
+                    print("\n")
+                break
+        if debut_aventure == "oui":
+            break
     while True:
         try:
-            print(f"\nVoici les races disponibles:")
-            for position, r in enumerate(races):
-                print(f"{position + 1} - {r['Race']}")
-            num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: ").strip())
-            race = verifier_race(num_race_choisi)
+            print("Voici les missions disponibles:")
+            for pos, mission in enumerate(liste_aventure):
+                print(f"{pos + 1} - {mission}")
+            num_aventure_choisi = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
+                                            f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
+            aventure = verifier_aventure(num_aventure_choisi, liste_aventure)
         except ValueError:
-            print("\nVeuillez écrire un nombre entier\n")
+            print("\nVeuillez choisir un nombre entier\n")
             time.sleep(1)
         else:
             break
-
-    # Choix du genre du personnage
-    genre: str = input("\nQuel est votre genre? (Homme/Femme/Autre): ").capitalize().strip()
-    genre = verifier_genre(genre)
-
-    # Choix de l'âge du personnage
-    while True:
-        try:
-            age:int = int(input("\nQuel âge avez-vous?\n"
-                                "Indiquer vôtre âge: ").strip())
-            age = verifier_age(age, race)
-        except ValueError:
-            print("\nVeuillez écrire un nombre entier\n")
-            time.sleep(1)
-        else:
-            break
-
-    # Choix de la classe du personnage
-    while True:
-        try:
-            print(f"\nVoici les classes disponibles:")
-            for pos, c in enumerate(classes):
-                print(f"{pos + 1} - {c}")
-            num_classe:int = int(input("Veuillez choisir votre classe: ").strip())
-            classe = verifier_classe(num_classe, classes)
-        except ValueError:
-            print("\nVeuillez écrire un nombre entier\n")
-            time.sleep(1)
-        else:
-            break
-
-    # Choix de la sous-classe du personnage
-    while True:
-        try:
-            sous_classes = list_sous_classes[classe]
-            print(f"\nVoici les sous-classes disponibles:")
-            for position, sous_class in enumerate(sous_classes):
-                print(f"{position + 1} - {sous_class}")
-            num_sous_classe:int = int(input("Veuillez choisir votre sous-classe: ").strip())
-            sous_classe = verifier_classe(num_sous_classe, sous_classes)
-        except ValueError:
-            print("\nVeuillez écrire un nombre entier\n")
-            time.sleep(1)
-        else:
-            break
-
-    print("\n" * 15)
-    print(dedent(f"**********************************************************************************\n"
-                 f"Bonjour cher aventurier, voici votre personnage:\n"
-                 f"Nom: {nom_complet}\n"
-                 f"Âge: {age}\n"
-                 f"Race: {race["Race"]}\n"
-                 f"Genre: {genre}\n"
-                 f"Classe choisis: {classe}\n"
-                 f"Sous-classe choisis: {sous_classe}\n"
-                 f"**********************************************************************************"))
 
 
 
