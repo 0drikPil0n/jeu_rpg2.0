@@ -118,7 +118,7 @@ def verifier_classe(numero: int, p_classes) -> str:
     return classe_choisi
 
 
-sous_classes:dict[str, list[str]] = {"Royauté": ["Prince","Princesse","Roi","Reine"],
+list_sous_classes:dict[str, list[str]] = {"Royauté": ["Prince","Princesse","Roi","Reine"],
                                      "Villageois": ["Fermier","Forgeron","Boucher","Pêcheur"],
                                      "Magicien": ["Mage","Sorcier","Alchimiste","Shaman"],
                                      "Armée": ["Archer","Cavalier","Infanterie","Mercenaire"]}
@@ -185,32 +185,33 @@ if __name__ == '__main__':
             for pos, c in enumerate(classes):
                 print(f"{pos + 1} - {c}")
             num_classe:int = int(input("Veuillez choisir votre classe: ").strip())
+            classe = verifier_classe(num_classe, classes)
         except ValueError:
             print("\nVeuillez écrire un nombre entier\n")
             time.sleep(1)
         else:
             break
-    classe = verifier_classe(num_classe,classes)
 
     # Choix de la sous-classe du personnage
     while True:
         try:
-            s_classes = sous_classes[classe]
+            sous_classes = list_sous_classes[classe]
             print(f"\nVoici les sous-classes disponibles:")
-            for position, sous_class in enumerate(s_classes):
+            for position, sous_class in enumerate(sous_classes):
                 print(f"{position + 1} - {sous_class}")
             num_sous_classe:int = int(input("Veuillez choisir votre sous-classe: ").strip())
+            sous_classe = verifier_classe(num_sous_classe, sous_classes)
         except ValueError:
             print("\nVeuillez écrire un nombre entier\n")
             time.sleep(1)
         else:
             break
-    sous_classe = verifier_classe(num_sous_classe,sous_classes)
 
     print("\n" * 15)
     print(dedent(f"**********************************************************************************\n"
                  f"Bonjour cher aventurier, voici votre personnage:\n"
                  f"Nom: {nom_complet}\n"
+                 f"Âge: {age}\n"
                  f"Race: {race["Race"]}\n"
                  f"Genre: {genre}\n"
                  f"Classe choisis: {classe}\n"
