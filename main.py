@@ -68,8 +68,8 @@ def verifier_genre(p_genre: str) -> str:
 def verifier_age(p_age:int, p_race:dict) -> int:
     """
     Vérifie si l'âge est dans la limite d'âge
-    :param p_age:
-    :param p_race:
+    :param p_age: L'âge entrée
+    :param p_race: la race choisis
     :return:
     """
 
@@ -136,12 +136,12 @@ if __name__ == '__main__':
             for position, r in enumerate(races):
                 print(f"{position + 1} - {r['Race']}")
             num_race_choisi: int = int(input("Veuillez choisir une race par son numéro: ").strip())
+            race = verifier_race(num_race_choisi)
         except ValueError:
             print("\nVeuillez écrire un nombre entier\n")
             time.sleep(1)
         else:
             break
-    race = verifier_race(num_race_choisi)
 
     # Choix du genre du personnage
     genre: str = input("\nQuel est votre genre? (Homme/Femme/Autre): ").capitalize().strip()
@@ -150,14 +150,15 @@ if __name__ == '__main__':
     # Choix de l'âge du personnage
     while True:
         try:
-            age:int = int(input("Quel âge avez-vous?\n"
+            age:int = int(input("\nQuel âge avez-vous?\n"
                                 "Indiquer vôtre âge: "))
+            age =
         except ValueError:
             print("Veuillez écrire un nombre entier\n")
             time.sleep(1)
         else:
             break
-    age =
+
     # Choix de la classe du personnage
     while True:
         try:
