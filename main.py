@@ -145,7 +145,7 @@ liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique
                                         "Sauver la princesse de la tour", "Vaincre l'armée de Gobelin"]
 
 
-def verifier_aventure(numero:int, p_list_aventure) -> int:
+def verifier_aventure(numero:int, p_list_aventure) -> tuple[int, str]:
     """
     Vérifie si le numéro correspond à une aventure
     :param numero: Le numéro entré
@@ -164,7 +164,7 @@ def verifier_aventure(numero:int, p_list_aventure) -> int:
                                             f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
         else:
             break
-    return numero
+    return numero, liste_aventure[numero - 1]
 
 if __name__ == '__main__':
     while True:
@@ -268,6 +268,14 @@ if __name__ == '__main__':
         else:
             break
 
-
+    match str(aventure[0]):
+        case "1":
+            print(f"Vous avez choisis {aventure[1]}")
+        case "2":
+            pass
+        case "3":
+            pass
+        case "4":
+            pass
 
 
