@@ -154,8 +154,14 @@ def verifier_aventure(numero:int, p_list_aventure) -> int:
     """
     while True:
         if numero not in range(len(p_list_aventure)):
-            print("Veuillez choisir un numéro de missions valide")
+            print("\nVeuillez choisir un numéro de missions valide")
             time.sleep(1)
+            print("\nVoici les missions disponibles:")
+            for p_pos, p_mission in enumerate(liste_aventure):
+                print(f"{p_pos + 1} - {p_mission}")
+                time.sleep(0.3)
+            numero = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
+                                            f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
         else:
             break
     return numero
@@ -249,9 +255,10 @@ if __name__ == '__main__':
             break
     while True:
         try:
-            print("Voici les missions disponibles:")
+            print("\nVoici les missions disponibles:")
             for pos, mission in enumerate(liste_aventure):
                 print(f"{pos + 1} - {mission}")
+                time.sleep(0.3)
             num_aventure_choisi = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
                                             f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
             aventure = verifier_aventure(num_aventure_choisi, liste_aventure)
@@ -260,6 +267,7 @@ if __name__ == '__main__':
             time.sleep(1)
         else:
             break
+
 
 
 
