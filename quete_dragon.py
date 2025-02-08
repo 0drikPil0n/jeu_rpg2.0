@@ -98,6 +98,13 @@ def combat_dragon(stats:dict,role:str,attaque:int,esquive:bool):
         print("\nVous esquiver l'attaque du dragon")
     else:
         print(f"\nVous attaquer le dragon! Vous utilisez {arme} et lui infligé {attaque} dégats!")
-
+        pv_dragon -= attaque
+        time.sleep(1)
+        if pv_dragon > 0:
+            print(f"Il lui reste {pv_dragon} point de vie")
+        if pv_dragon <= 0:
+            print(f"Le dragon n'a plus de point de vie")
+        time.sleep(1)
+        if pv_dragon
 
 
