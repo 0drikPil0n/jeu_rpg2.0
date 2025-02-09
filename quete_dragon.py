@@ -37,74 +37,99 @@ def afficher_dragon():
     return None
 
 
-def choisir_decision_combat(stats: dict, role: str) -> tuple[int | Any, bool | Any] | None:
+def choisir_decision_combat(stats: dict, role: str,p_tour:int) -> tuple[int | None | Any, bool | Any, int]:
     """
     Permet au joueur de choisir quoi faire avant le combat
     :param stats: Les statistiques du role choisis
     :param role: La sous-classe choisis
+    :param p_tour: Le nombre de tour avant de pouvoir utilisé l'attaque
     :return: Les points de vie du joueur et du dragon
     """
-    tour: int = 0
     # Attaques
     attaques: list[int] = stats[role]["Dégats"]
-    attaque = 0 # Par défaut
+    p_attaque = None # Par défaut
     attaques_speciale = stats[role]["Att.Spé."]
     # Chance attaque/esquive
     chance_esquive = [True,True,False]
-    esquive = False # Par défaut
+    p_esquive = False # Par défaut
     # Choix combat
-    while pv_dragon > 0 and pv_joueur > 0:
-        if tour > 0:
-            tour -= 1
+    if p_tour > 0:
+        p_tour -= 1
+    decision = input(f"\nLe dragon se prépare à attaquer. Que voulez-vous faire?\n"
+          f"Attaquer (1) ou esquiver (2): ")
+    while decision not in ["1","2"]:
+        print(f"\nVeuillez choisir une action valide")
+        time.sleep(0.5)
         decision = input(f"\nLe dragon se prépare à attaquer. Que voulez-vous faire?\n"
-              f"Attaquer (1) ou esquiver (2): ")
-        while decision not in ["1","2"]:
-            print(f"\nVeuillez choisir une action valide")
-            time.sleep(0.5)
-            decision = input(f"\nLe dragon se prépare à attaquer. Que voulez-vous faire?\n"
-                                      f"Attaquer (1) ou esquiver (2): ")
-        match decision:
-            case "1": # Le joueur attaque
+                                  f"Attaquer (1) ou esquiver (2): ")
+    match decision:
+        case "1": # Le joueur attaque
+            choix_attaque = input(f"\nSouhaitez-vous faire une attaque normale ou une attaque spéciale?\n"
+              f"Attaque (1) ou attaque spéciale (2): ")
+            while choix_attaque not in ["1","2"]:
+                print(f"\nVeuillez sélectionner un choix valide")
+                time.sleep(0.5)
                 choix_attaque = input(f"\nSouhaitez-vous faire une attaque normale ou une attaque spéciale?\n"
-                  f"Attaque (1) ou attaque spéciale (2): ")
-                while choix_attaque not in ["1","2"]:
-                    print(f"\nVeuillez sélectionner un choix valide")
-                    time.sleep(0.5)
-                    choix_attaque = input(f"\nSouhaitez-vous faire une attaque normale ou une attaque spéciale?\n"
-                                          f"Attaque (1) ou attaque spéciale (2): ")
-                match choix_attaque:
-                    case "1":
-                        attaque = random.choice(attaques)
-                    case "2":
-                        if tour != 0:
-                            print(f"\nVous ne pouvez pas utiliser votre attaque spéciale!\n"
-                                  f"Attendez {tour} tour")
-                            time.sleep(1)
-                            continue
-                        else:
-                            attaque = random.choice(attaques_speciale)
-                            tour += 3
-            case "2": # Le joueur esquive
-                esquive = random.choice(chance_esquive)
-        return attaque,esquive
+                                      f"Attaque (1) ou attaque spéciale (2): ")
+            match choix_attaque:
+                case "1":
+                    p_attaque = random.choice(attaques)
+                case "2":
+                    if p_tour != 0:
+                        print(f"\nVous ne pouvez pas utiliser votre attaque spéciale!\n"
+                              f"Attendez {p_tour} tour")
+                        time.sleep(1)
+                    else:
+                        p_attaque = random.choice(attaques_speciale)
+                        p_tour += 3
+        case "2": # Le joueur esquive
+            p_esquive = random.choice(chance_esquive)
+            p_attaque = 0
+    return p_attaque,p_esquive,p_tour
 
 
-def combat_dragon(stats:dict,role:str,attaque:int,esquive:bool):
-    # Point de vie
-    pv_dragon: int = 600
-    pv_joueur: int = stats[role]["PV"]
+def combat_dragon(stats:dict, role:str, p_attaque:int, p_esquive:bool,pv_dragon:int,pv_joueur:int):
+    """
+    Combat entre le joueur et le dragon. Détermine comment un tour se déroule
+    en fonction des choix du joueur.
+    :param stats: Les statistiques du joueur.
+    :param role: La sous-classe du joueur.
+    :param p_attaque: Les dégats que le joueur inflige.
+    :param p_esquive: True si il réussit à esquiver, False sinon.
+    :param pv_dragon: Les points de vie restant du dragon.
+    :param pv_joueur: Les points de vie restant du joueur.
+    :return: Les points de vie du joueur et du dragon.
+    """
+    # Attaque dragon
+    attaques_dragon = [120,90]
+    chance_att_dragon = [True,False]
     arme = stats[role]["Arme"] # Arme utilisé
-    if esquive:
+    if p_esquive:
         print("\nVous esquiver l'attaque du dragon")
     else:
-        print(f"\nVous attaquer le dragon! Vous utilisez {arme} et lui infligé {attaque} dégats!")
-        pv_dragon -= attaque
-        time.sleep(1)
+        if p_attaque > 0:
+            print(f"\nVous attaquer le dragon! Vous utilisez {arme} et lui infligé {p_attaque} dégats!")
+            pv_dragon -= p_attaque
+            time.sleep(1)
+            if pv_dragon > 0:
+                print(f"\nIl lui reste {pv_dragon} point de vie")
+                time.sleep(1)
+            if pv_dragon <= 0:
+                print(f"\nLe dragon n'a plus de point de vie")
+            time.sleep(1)
+        else:
+            print(f"\nVous n'avez pas réussis à esquiver à temps")
+            time.sleep(0.5)
         if pv_dragon > 0:
-            print(f"Il lui reste {pv_dragon} point de vie")
-        if pv_dragon <= 0:
-            print(f"Le dragon n'a plus de point de vie")
-        time.sleep(1)
-        if pv_dragon
+            chance = random.choice(chance_att_dragon)
+            if chance:
+                attaque_dragon = random.choice(attaques_dragon)
+                print(f"\nLe dragon attaque! Il vous inflige {attaque_dragon} dégats.")
+                pv_joueur -= attaque_dragon
+                time.sleep(1)
+            if not chance:
+                print(f"\nLe dragon à échouer son attaque!")
+                time.sleep(1)
 
+    return pv_dragon,pv_joueur
 

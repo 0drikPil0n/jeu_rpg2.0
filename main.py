@@ -1,6 +1,7 @@
 import time
 import random
 from textwrap import dedent
+import quete_dragon
 
 # Création du personnage
 def verifier_nom(p_prenom: str, p_nom: str) -> str:
@@ -122,7 +123,7 @@ list_sous_classes:dict[str, list[str]] = {"Royauté": ["Prince","Princesse","Roi
                                      "Armée": ["Archer","Cavalier","Infanterie","Mercenaire"]}
 
 
-Stats_role = {
+stats_role = {
         "Prince":{    "Arme": "Poignard",           "PV": 200,  "Dégats": [20,15],         "Att.Spé.": [60,40]},
         "Princesse":{ "Arme": "Dague",              "PV": 175,  "Dégats": [30,10],         "Att.Spé.": [50]},
         "Roi":{       "Arme": "Épée",               "PV": 250,  "Dégats": [50,40,20,20],   "Att.Spé.": [75]},
@@ -270,7 +271,17 @@ if __name__ == '__main__':
 
     match str(aventure[0]):
         case "1":
-            print(f"Vous avez choisis {aventure[1]}")
+            quete_dragon.afficher_dragon()
+            pv_dragon = 600
+            pv_joueur = stats_role[sous_classe]["PV"]
+            tour = 0
+            while pv_dragon > 0 and pv_joueur > 0:
+                attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
+                pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
+            if pv_dragon <= 0:
+                print("Dragon mort")
+            if pv_joueur <= 0:
+                print("Joueur mort")
         case "2":
             pass
         case "3":
