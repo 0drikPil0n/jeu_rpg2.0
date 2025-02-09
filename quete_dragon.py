@@ -136,3 +136,20 @@ def combat_dragon(stats:dict, role:str, p_attaque:int, p_esquive:bool,pv_dragon:
 
     return pv_dragon,pv_joueur
 
+
+def resultat_dragon(pv_dragon:int,pv_joueur:int) -> bool:
+    """
+    Indique si le joueur a gagné ou a perdu.
+    :param pv_dragon: Les points de vie du dragon.
+    :param pv_joueur: Les points de vie du joueur
+    :return: True si le joueur gagne, False sinon.
+    """
+    p_victoire = False
+    if pv_dragon <= 0:
+        print(f"\nFélicitation! Vous avez vaincu le dragon!\n"
+              f"Il vous reste {pv_joueur} PV.\n")
+        p_victoire = True
+    elif pv_joueur <= 0:
+        print("\nVous êtes mort. Le dragon vous a tuer\n")
+    time.sleep(1)
+    return p_victoire
