@@ -167,6 +167,21 @@ def verifier_aventure(numero:int, p_list_aventure) -> tuple[int, str]:
             break
     return numero, liste_aventure[numero - 1]
 
+
+def resultat_quete(p_victoire:bool):
+    if p_victoire:
+        print(f"\nVous avez compléter cette quête!")
+        time.sleep(0.5)
+        p_choix = input("\nSouhaitez-vous en faire une autre? (oui/non): ")
+        while p_choix not in ['OUI'.lower().strip(), 'NON'.lower().strip()]:
+            print("\nVeuillez choisir 'oui' ou 'non'! ")
+            time.sleep(1)
+            p_choix = input("Souhaitez-vous en faire une autre? (oui/non): ")
+        if p_choix == "oui":
+            return True
+        elif p_choix == "non":
+            print("")
+
 if __name__ == '__main__':
     while True:
         # Choix du nom du personnage
@@ -255,38 +270,37 @@ if __name__ == '__main__':
         if debut_aventure == "oui":
             break
     while True:
-        try:
-            print("\nVoici les missions disponibles:")
-            for pos, mission in enumerate(liste_aventure):
-                print(f"{pos + 1} - {mission}")
-                time.sleep(0.3)
-            num_aventure_choisi = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
-                                            f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
-            aventure = verifier_aventure(num_aventure_choisi, liste_aventure)
-        except ValueError:
-            print("\nVeuillez choisir un nombre entier\n")
-            time.sleep(1)
-        else:
-            break
+        while True:
+            try:
+                print("\nVoici les missions disponibles:")
+                for pos, mission in enumerate(liste_aventure):
+                    print(f"{pos + 1} - {mission}")
+                    time.sleep(0.3)
+                num_aventure_choisi = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
+                                                f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
+                aventure = verifier_aventure(num_aventure_choisi, liste_aventure)
+            except ValueError:
+                print("\nVeuillez choisir un nombre entier\n")
+                time.sleep(1)
+            else:
+                break
 
-    match str(aventure[0]):
-        case "1":
-            quete_dragon.afficher_dragon()
-            pv_dragon = 600
-            pv_joueur = stats_role[sous_classe]["PV"]
-            tour = 0
-            while pv_dragon > 0 and pv_joueur > 0:
-                attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
-                pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
-            if pv_dragon <= 0:
-                print("Dragon mort")
-            if pv_joueur <= 0:
-                print("Joueur mort")
-        case "2":
-            pass
-        case "3":
-            pass
-        case "4":
-            pass
+        match str(aventure[0]):
+            case "1":
+                quete_dragon.afficher_dragon()
+                pv_dragon = 600
+                pv_joueur = stats_role[sous_classe]["PV"]
+                tour = 0
+                while pv_dragon > 0 and pv_joueur > 0:
+                    attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
+                    pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
+                victoire = quete_dragon.resultat_dragon(pv_dragon,pv_joueur)
+
+            case "2":
+                pass
+            case "3":
+                pass
+            case "4":
+                pass
 
 
