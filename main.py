@@ -1,3 +1,4 @@
+import sys
 import time
 import random
 from textwrap import dedent
@@ -29,8 +30,8 @@ races: list[dict] = [{"Race": "Humain", "Âge_permis": [18, 120]},
 
 def verifier_race(numero: int) -> dict:
     """
-    Vérifie si le numéro choisis correspond à une race
-    :param numero: Le numéro de race choisis
+    Vérifie si le numéro choisi correspond à une race
+    :param numero: Le numéro de race choisi
     :return: La race choisis
     """
     while True:
@@ -52,8 +53,8 @@ genres: list = ["Homme","Femme","Autre"]
 
 def verifier_genre(p_genre: str) -> str:
     """
-    Vérifie si le genre choisis est correcte
-    :param p_genre: Le genre choisis
+    Vérifie si le genre choisi est correcte
+    :param p_genre: Le genre choisi
     :return: Le genre choisis
     """
     while True:
@@ -169,19 +170,36 @@ def verifier_aventure(numero:int, p_list_aventure) -> tuple[int, str]:
 
 
 def resultat_quete(p_victoire:bool):
+    """
+    Permet à l'utilisateur de choisir ce qu'il veut faire après sa quête, selon s'il a réussi ou s'il a échoué
+    :param p_victoire: True si le joueur a réussi sa quête, False sinon.
+    :return:
+    """
     if p_victoire:
         print(f"\nVous avez compléter cette quête!")
         time.sleep(0.5)
-        p_choix = input("\nSouhaitez-vous en faire une autre? (oui/non): ")
-        while p_choix not in ['OUI'.lower().strip(), 'NON'.lower().strip()]:
+    if not p_victoire:
+        print(f"\nVous avez échouer cette quête...")
+        time.sleep(0.5)
+        p_choix2 = input("\nVoulez-vous recommencer? (oui/non): ")
+        while p_choix2 not in ["oui","non"]:
             print("\nVeuillez choisir 'oui' ou 'non'! ")
             time.sleep(1)
-            p_choix = input("Souhaitez-vous en faire une autre? (oui/non): ")
-        if p_choix == "oui":
+            p_choix2 = input("\nVoulez-vous recommencer? (oui/non): ")
+        if p_choix2 == "oui":
             return True
-        elif p_choix == "non":
-            print("")
-
+        elif p_choix2 == "non":
+            pass
+    p_choix3 = input("\nSouhaitez-vous en faire une autre? (oui/non): ").strip().lower()
+    while p_choix3 not in ["oui", "non"]:
+        print("\nVeuillez choisir 'oui' ou 'non'! ")
+        time.sleep(1)
+        p_choix3 = input("Souhaitez-vous en faire une autre? (oui/non): ").strip().lower()
+    if p_choix3 == "oui":
+        return False
+    elif p_choix3 == "non":
+        print(f"Au revoir, {classe} {nom_complet}!")
+        sys.exit()
 if __name__ == '__main__':
     while True:
         # Choix du nom du personnage
@@ -287,15 +305,18 @@ if __name__ == '__main__':
 
         match str(aventure[0]):
             case "1":
-                quete_dragon.afficher_dragon()
-                pv_dragon = 600
-                pv_joueur = stats_role[sous_classe]["PV"]
-                tour = 0
-                while pv_dragon > 0 and pv_joueur > 0:
-                    attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
-                    pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
-                victoire = quete_dragon.resultat_dragon(pv_dragon,pv_joueur)
-
+                while True:
+                    quete_dragon.afficher_dragon()
+                    pv_dragon = 600
+                    pv_joueur = stats_role[sous_classe]["PV"]
+                    while pv_dragon > 0 and pv_joueur > 0:
+                        tour = 0
+                        attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
+                        pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
+                    victoire = quete_dragon.resultat_dragon(pv_dragon,pv_joueur)
+                    result = resultat_quete(victoire)
+                    if not result:
+                        break
             case "2":
                 pass
             case "3":
