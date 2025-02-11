@@ -147,9 +147,9 @@ def resultat_dragon(pv_dragon:int,pv_joueur:int) -> bool:
     p_victoire = False
     if pv_dragon <= 0:
         print(f"\nFélicitation! Vous avez vaincu le dragon!\n"
-              f"Il vous reste {pv_joueur} PV.\n")
+              f"Il vous reste {pv_joueur} PV.")
         p_victoire = True
     elif pv_joueur <= 0:
-        print("\nVous êtes mort. Le dragon vous a tuer\n")
+        print("\nVous êtes mort. Le dragon vous a tuer")
     time.sleep(1)
     return p_victoire

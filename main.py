@@ -309,8 +309,8 @@ if __name__ == '__main__':
                     quete_dragon.afficher_dragon()
                     pv_dragon = 600
                     pv_joueur = stats_role[sous_classe]["PV"]
+                    tour = 0
                     while pv_dragon > 0 and pv_joueur > 0:
-                        tour = 0
                         attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
                         pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
                     victoire = quete_dragon.resultat_dragon(pv_dragon,pv_joueur)
