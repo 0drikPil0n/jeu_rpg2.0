@@ -75,3 +75,65 @@ def position_depart(map_):
     return position_depart, int(hauteur), int(largeur)
 
 
+def avancer_map(map_:dict,hauteur:int,largeur:int):
+    """
+    Permet au joueur d'avancer sur la carte dans la direction de son choix
+    :param map_: La carte
+    :param hauteur: La position en Y du joueur
+    :param largeur: La positiion en X du joueur
+    :return: Sa nouvele position
+    """
+    position_map = map_[hauteur][largeur]
+    while True:
+        try:
+            direction = int(input(f"Dans quelle directions voulez-vous aller?\n"
+                              f"Haut(0), Bas(1), Gauche(2), Droite(3): "))
+            if direction not in (0, 1, 2, 3):
+                raise ValueError
+        except ValueError:
+            print("Veuillez écrire un numéro valide.")
+        else:
+            break
+    if direction == 0:
+        try:
+            hauteur = hauteur - 1
+            position_map = map_[hauteur][largeur]
+        except (IndexError,KeyError):
+            hauteur = hauteur + 1
+            position_map = map_[hauteur][largeur]
+            print("Vous ne pouvez pas aller dans cette direction")
+        else:
+            pass
+    if direction == 1:
+        try:
+            hauteur = hauteur + 1
+            position_map = map_[hauteur][largeur]
+        except (IndexError,KeyError):
+            hauteur = hauteur - 1
+            position_map = map_[hauteur][largeur]
+            print("Vous ne pouvez pas aller dans cette direction")
+        else:
+            pass
+    if direction == 2:
+        try:
+            largeur = largeur - 1
+            position_map = map_[hauteur][largeur]
+        except (IndexError,KeyError):
+            largeur = largeur + 1
+            position_map = map_[hauteur][largeur]
+            print("Vous ne pouvez pas aller dans cette direction")
+        else:
+            pass
+    if direction == 3:
+        try:
+            largeur = largeur + 1
+            position_map = map_[hauteur][largeur]
+        except (IndexError,KeyError):
+            largeur = largeur - 1
+            position_map = map_[hauteur][largeur]
+            print("Vous ne pouvez pas aller dans cette direction")
+        else:
+            pass
+    return position_map, hauteur, largeur
+
+
