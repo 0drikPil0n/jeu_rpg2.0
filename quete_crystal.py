@@ -59,20 +59,23 @@ def choisir_spot_crystal(p_map:dict):
 
     return p_map
 
-
+# Déplacement sur la map
 def position_depart(map_):
     """
     Choisis la position de départ du joueur sur la carte
     :param map_: La carte
     :return: La position du joueur sur la carte
     """
+    # Initialize les variable
     p_position_depart = None
+    hauteur = None
+    largeur = None
     while p_position_depart != "S":
         hauteur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         largeur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         p_position_depart = map_[hauteur][largeur]
 
-    return position_depart, int(hauteur), int(largeur)
+    return p_position_depart, int(hauteur), int(largeur)
 
 
 def avancer_map(map_:dict,hauteur:int,largeur:int):
@@ -137,3 +140,52 @@ def avancer_map(map_:dict,hauteur:int,largeur:int):
     return position_map, hauteur, largeur
 
 
+
+def attaque_ennemi(pv_joueur:int, att_joueur:int):
+    victoire = False
+    liste_ennemis = [["Chauve-sourie", 50, 5], ["Squelette", 75, 10], ["Zombie", 60, 15]]
+    ennemi = random.choice(liste_ennemis)
+    pv_ennemi = ennemi[1]
+    att_ennemi = ennemi[2]
+    print(f"\nVous tomber sur {ennemi[0]}")
+    time.sleep(0.5)
+    choix = int(input(f"\nQue voulez-vous faire? Attaquer ou essayer de pousser l'ennemi dans le vide?\n"
+                  f"Attaquer(0) ou Pousser(1): "))
+    while choix not in [0,1]:
+        choix = int(input(f"\nVeuillez sélectionner un choix valide.\n"
+                      f"Attaquer(0) ou Pousser(1): "))
+    if choix == 0:
+        while pv_joueur >= 0 and pv_ennemi >= 0:
+            print(f"\n{ennemi[0]} vous inflige {att_ennemi} dégats")
+            pv_joueur = pv_joueur - att_ennemi
+            time.sleep(0.5)
+            print(f"\nIl vous reste {pv_joueur} PV.")
+            time.sleep(0.5)
+            print(f"\nVous attaquer {ennemi[0]}. Vous lui infligé {att_joueur} dégats.")
+            pv_ennemi = pv_ennemi - att_joueur
+            time.sleep(0.5)
+            if pv_ennemi > 0:
+                print(f"Il reste {pv_ennemi} PV à {ennemi[0]}.")
+            time.sleep(0.5)
+        if pv_ennemi <= 0:
+            print(f"Vous avez vaincu {ennemi[0]}.")
+            victoire = True
+            time.sleep(0.5)
+        if pv_joueur <= 0:
+            print(f"{ennemi[0]} vous à vaincu.")
+            time.sleep(0.5)
+            victoire = False
+    if choix == 1:
+        if ennemi[0] == "Chauve-Sourie":
+            pousser = False
+        else:
+            pousser = random.choice([False,True])
+        if pousser:
+            print("Vous poussez l'ennemi dans le vide.")
+            pv_ennemi -= pv_ennemi
+            time.sleep(0.5)
+        if not pousser:
+            print("\nVous n'avez pas réussis a pousser l'ennemi dans le vide.")
+            time.sleep(0.5)
+
+    return victoire
