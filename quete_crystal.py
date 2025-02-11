@@ -26,4 +26,35 @@ def afficher_crystal():
     print("ou pire")
     return None
 
-pilier = ["S", "S", "S", "T", "T", "E"] # S pour solide, T pour tombant et E pour ennemi
+
+piliers = ["S", "S", "S", "T", "T", "E"] # S pour solide, T pour tombant et E pour ennemi
+
+
+def creer_carte_pilier(p_piliers:list):
+    """
+    Crée la carte de pilier que le joueur devra traverser
+    :param p_piliers: La liste des types de piliers
+    :return: La carte de pilier
+    """
+    carte_pilier = {}
+    for i in range(10):
+        rangee_pilier = []
+        for j in range(10):
+            pilier = random.choice(p_piliers)
+            rangee_pilier.append(pilier)
+        carte_pilier[i] = rangee_pilier
+    return carte_pilier
+
+
+def choisir_spot_crystal(p_map:dict):
+    """
+    Choisis aléatoirement l'emplacement du crystal secret que le joueur devra trouver
+    :param p_map: La carte de base
+    :return: La carte avec le crystal
+    """
+    rangee_choisi = random.choice(p_map)
+    spot_choisi = random.choice([0,1,2,3,4,5,6,7,8,9])
+    rangee_choisi.pop(spot_choisi)
+    rangee_choisi.insert(spot_choisi, "C")
+
+    return p_map
