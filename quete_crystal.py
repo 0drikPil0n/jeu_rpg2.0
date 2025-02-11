@@ -26,7 +26,7 @@ def afficher_crystal():
     print("ou pire")
     return None
 
-
+# Création de la carte
 piliers = ["S", "S", "S", "T", "T", "E"] # S pour solide, T pour tombant et E pour ennemi
 
 
@@ -58,3 +58,20 @@ def choisir_spot_crystal(p_map:dict):
     rangee_choisi.insert(spot_choisi, "C")
 
     return p_map
+
+
+def position_depart(map_):
+    """
+    Choisis la position de départ du joueur sur la carte
+    :param map_: La carte
+    :return: La position du joueur sur la carte
+    """
+    p_position_depart = None
+    while p_position_depart != "S":
+        hauteur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        largeur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        p_position_depart = map_[hauteur][largeur]
+
+    return position_depart, int(hauteur), int(largeur)
+
+
