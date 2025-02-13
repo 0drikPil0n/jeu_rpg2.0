@@ -140,7 +140,34 @@ def avancer_map(map_:dict,hauteur:int,largeur:int):
     return position_map, hauteur, largeur
 
 
+def situation_piliers(position):
+    """
+    Détermine ce qui arrive au joueur en fonction du type de pilier sur lequel il atterrit
+    :param position: La position du joueur
+    :return: None si le pilier est solide, False si le pilier tombe, retourne la victoire si le joueur croise un ennemi
+    """
+    if position == "S":
+        time.sleep(0.5)
+        print("Le pilier ne bouge pas. Vous êtes en sécurité")
+        time.sleep(0.5)
+        return None
+    elif position == "T":
+        time.sleep(0.5)
+        print("Vous tomber dans le vide")
+        time.sleep(0.5)
+        return False
+    elif position == "E":
+        time.sleep(0.5)
+        victoire = attaque_ennemi(250,80)
+        return victoire
 
+# Affichage de la carte
+def afficher_map(p_map:dict):
+    for chiffre,rangee in p_map.items():
+        print(f"{rangee}\n")
+    return None
+
+# Combat
 def attaque_ennemi(pv_joueur:int, att_joueur:int):
     victoire = False
     liste_ennemis = [["Chauve-sourie", 50, 5], ["Squelette", 75, 10], ["Zombie", 60, 15]]
