@@ -27,20 +27,19 @@ def afficher_crystal():
     return None
 
 # Création de la carte
-piliers = ["S", "S", "S", "T", "T", "E"] # S pour solide, T pour tombant et E pour ennemi
 
 
-def creer_carte_pilier(p_piliers:list):
+def creer_carte_pilier():
     """
     Crée la carte de pilier que le joueur devra traverser
-    :param p_piliers: La liste des types de piliers
     :return: La carte de pilier
     """
+    piliers = ["S", "S", "S", "T", "T", "E"]  # S pour solide, T pour tombant et E pour ennemi
     carte_pilier = {}
     for i in range(10):
         rangee_pilier = []
         for j in range(10):
-            pilier = random.choice(p_piliers)
+            pilier = random.choice(piliers)
             rangee_pilier.append(pilier)
         carte_pilier[i] = rangee_pilier
     return carte_pilier
