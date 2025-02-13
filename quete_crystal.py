@@ -76,7 +76,7 @@ def position_depart(map_):
     p_co_x = largeur + 1
     p_co_y = -(hauteur + 1) + 11
 
-    return p_position_depart, int(p_co_y), int(p_co_x)
+    return p_position_depart, int(largeur), int(hauteur), (int(p_co_x), int(p_co_y))
 
 
 def avancer_map(map_:dict,hauteur:int,largeur:int):
@@ -141,7 +141,7 @@ def avancer_map(map_:dict,hauteur:int,largeur:int):
 
     p_co_x = largeur + 1
     p_co_y = -(hauteur + 1) + 11
-    return position_map, p_co_y, p_co_x
+    return position_map, int(largeur), int(hauteur), (int(p_co_x), int(p_co_y))
 
 
 def situation_piliers(position:str, pv_joueur:int,atts_joueur:list,):

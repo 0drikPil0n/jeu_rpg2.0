@@ -323,7 +323,7 @@ if __name__ == '__main__':
                     quete_crystal.afficher_crystal()
                     carte_sc = quete_crystal.creer_carte_pilier() # sc = sans-crystal
                     carte = quete_crystal.choisir_spot_crystal(carte_sc)
-                    position, co_y, co_x = quete_crystal.position_depart(carte)
+                    position, largeur, hauteur, coordonnees = quete_crystal.position_depart(carte)
                     while position != "C":
                         pv_joueur = stats_role[sous_classe]["PV"]
                         attaques_joueur = stats_role[sous_classe]["Dégats"]
@@ -340,9 +340,9 @@ if __name__ == '__main__':
                             case "1":
                                 quete_crystal.afficher_map(carte)
                             case "2":
-                                quete_crystal.afficher_coordonnees(co_x, co_y)
+                                quete_crystal.afficher_coordonnees(coordonnees[0], coordonnees[1])
                             case "3":
-                                position, co_y, co_x = quete_crystal.avancer_map(carte,co_y,co_x)
+                                position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte,largeur,hauteur)
                                 quete_crystal.situation_piliers(position ,pv_joueur, attaques_joueur)
 
 
