@@ -160,11 +160,33 @@ def situation_piliers(position):
         time.sleep(0.5)
         victoire = attaque_ennemi(250,80)
         return victoire
+    elif position == "C":
+        time.sleep(0.5)
+        print("Vous avez trouver le crystal !")
+        time.sleep(0.5)
+        return None
 
 # Affichage de la carte
 def afficher_map(p_map:dict):
+    """
+    Affiche la carte
+    :param p_map: La carte
+    :return: None
+    """
     for chiffre,rangee in p_map.items():
         print(f"{rangee}\n")
+    return None
+
+
+def afficher_coordonnees(co_x:int, co_y:int):
+    """
+    Afficher les coordonnées du joueur sur la carte
+    :param co_x: Sa position sur l'axe X
+    :param co_y: Sa position sur l'axe Y
+    :return: None
+    """
+    print(f"Coordonnée de l'axe X: {co_x}\n"
+          f"Coordonnée de l'axe Y: {co_y}")
     return None
 
 # Combat
