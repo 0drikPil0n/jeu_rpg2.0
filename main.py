@@ -3,6 +3,7 @@ import time
 import random
 from textwrap import dedent
 import quete_dragon
+import quete_crystal
 
 # Création du personnage
 def verifier_nom(p_prenom: str, p_nom: str) -> str:
@@ -318,7 +319,33 @@ if __name__ == '__main__':
                     if not result:
                         break
             case "2":
-                pass
+                while True:
+                    quete_crystal.afficher_crystal()
+                    carte_sc = quete_crystal.creer_carte_pilier() # sc = sans-crystal
+                    carte = quete_crystal.choisir_spot_crystal(carte_sc)
+                    position, co_y, co_x = quete_crystal.position_depart(carte)
+                    while position != "C":
+                        pv_joueur = stats_role[sous_classe]["PV"]
+                        attaques_joueur = stats_role[sous_classe]["Dégats"]
+                        while True:
+                            choix = input(f"Que voulez-vous faire?\n"
+                                          f"1 - Voir la carte\n"
+                                          f"2 - Voir vos coordonées\n"
+                                          f"3 - Avancer sur un pilier")
+                            if choix not in ["1", "2", "3"]:
+                                print("Veuillez choisir un choix valide")
+                            else:
+                                break
+                        match choix:
+                            case "1":
+                                quete_crystal.afficher_map(carte)
+                            case "2":
+                                quete_crystal.afficher_coordonnees(co_x, co_y)
+                            case "3":
+                                position, co_y, co_x = quete_crystal.avancer_map(carte,co_y,co_x)
+                                quete_crystal.situation_piliers(position ,pv_joueur, attaques_joueur)
+
+
             case "3":
                 pass
             case "4":

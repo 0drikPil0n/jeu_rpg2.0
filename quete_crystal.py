@@ -73,8 +73,10 @@ def position_depart(map_):
         hauteur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         largeur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         p_position_depart = map_[hauteur][largeur]
+    p_co_x = largeur + 1
+    p_co_y = -(hauteur + 1) + 11
 
-    return p_position_depart, int(hauteur), int(largeur)
+    return p_position_depart, int(p_co_y), int(p_co_x)
 
 
 def avancer_map(map_:dict,hauteur:int,largeur:int):
@@ -136,13 +138,18 @@ def avancer_map(map_:dict,hauteur:int,largeur:int):
             print("Vous ne pouvez pas aller dans cette direction")
         else:
             pass
-    return position_map, hauteur, largeur
+
+    p_co_x = largeur + 1
+    p_co_y = -(hauteur + 1) + 11
+    return position_map, p_co_y, p_co_x
 
 
-def situation_piliers(position):
+def situation_piliers(position:str, pv_joueur:int,atts_joueur:list,):
     """
     Détermine ce qui arrive au joueur en fonction du type de pilier sur lequel il atterrit
     :param position: La position du joueur
+    :param pv_joueur: Les points de vie du joueur
+    :param atts_joueur: Les attaques du joueur
     :return: None si le pilier est solide, False si le pilier tombe, retourne la victoire si le joueur croise un ennemi
     """
     if position == "S":
@@ -157,7 +164,7 @@ def situation_piliers(position):
         return False
     elif position == "E":
         time.sleep(0.5)
-        victoire = attaque_ennemi(250,80)
+        victoire = attaque_ennemi(pv_joueur,atts_joueur)
         return victoire
     elif position == "C":
         time.sleep(0.5)
@@ -189,7 +196,7 @@ def afficher_coordonnees(co_x:int, co_y:int):
     return None
 
 # Combat
-def attaque_ennemi(pv_joueur:int, att_joueur:int):
+def attaque_ennemi(pv_joueur:int, atts_joueur:list):
     victoire = False
     liste_ennemis = [["Chauve-sourie", 50, 5], ["Squelette", 75, 10], ["Zombie", 60, 15]]
     ennemi = random.choice(liste_ennemis)
@@ -204,6 +211,7 @@ def attaque_ennemi(pv_joueur:int, att_joueur:int):
                       f"Attaquer(0) ou Pousser(1): "))
     if choix == 0:
         while pv_joueur >= 0 and pv_ennemi >= 0:
+            att_joueur = random.choice(atts_joueur)
             print(f"\n{ennemi[0]} vous inflige {att_ennemi} dégats")
             pv_joueur = pv_joueur - att_ennemi
             time.sleep(0.5)
