@@ -201,6 +201,7 @@ def resultat_quete(p_victoire:bool):
     elif p_choix3 == "non":
         print(f"Au revoir, {classe} {nom_complet}!")
         sys.exit()
+
 if __name__ == '__main__':
     while True:
         # Choix du nom du personnage
@@ -288,6 +289,7 @@ if __name__ == '__main__':
                 break
         if debut_aventure == "oui":
             break
+    # Début aventure
     while True:
         while True:
             try:
@@ -321,7 +323,7 @@ if __name__ == '__main__':
             case "2":
                 while True:
                     quete_crystal.afficher_crystal()
-                    carte_sc = quete_crystal.creer_carte_pilier() # sc = sans-crystal
+                    carte_sc = quete_crystal.creer_carte_pilier() # sc = sans crystal
                     carte = quete_crystal.choisir_spot_crystal(carte_sc)
                     position, largeur, hauteur, coordonnees = quete_crystal.position_depart(carte)
                     while position != "C":

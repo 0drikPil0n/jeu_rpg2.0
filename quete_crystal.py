@@ -1,5 +1,6 @@
 import random
 import time
+from colorama import Fore
 
 def afficher_crystal():
     """
@@ -34,7 +35,7 @@ def creer_carte_pilier():
     Crée la carte de pilier que le joueur devra traverser
     :return: La carte de pilier
     """
-    piliers = ["S", "S", "S", "T", "T", "E"]  # S pour solide, T pour tombant et E pour ennemi
+    piliers = ["S", "S", "S", "S", "T", "E"]  # S pour solide, T pour tombant et E pour ennemi
     carte_pilier = {}
     for i in range(10):
         rangee_pilier = []
@@ -44,7 +45,6 @@ def creer_carte_pilier():
         carte_pilier[i] = rangee_pilier
     return carte_pilier
 
-
 def choisir_spot_crystal(p_map:dict):
     """
     Choisis aléatoirement l'emplacement du crystal secret que le joueur devra trouver
@@ -52,7 +52,7 @@ def choisir_spot_crystal(p_map:dict):
     :return: La carte avec le crystal
     """
     rangee_choisi = random.choice(p_map)
-    spot_choisi = random.choice([0,1,2,3,4,5,6,7,8,9])
+    spot_choisi = random.choice(range(0,(len(rangee_choisi)-1)))
     rangee_choisi.pop(spot_choisi)
     rangee_choisi.insert(spot_choisi, "C")
 
@@ -70,11 +70,12 @@ def position_depart(map_):
     hauteur = None
     largeur = None
     while p_position_depart != "S":
-        hauteur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        largeur = random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        hauteur = random.choice(range(0,(len(map_))))
+        largeur = random.choice(range(0,(len(map_[hauteur]))))
         p_position_depart = map_[hauteur][largeur]
     p_co_x = largeur + 1
-    p_co_y = -(hauteur + 1) + 11
+    p_co_y = -hauteur + 10
+
 
     return p_position_depart, int(largeur), int(hauteur), (int(p_co_x), int(p_co_y))
 
@@ -140,7 +141,7 @@ def avancer_map(map_:dict,hauteur:int,largeur:int):
             pass
 
     p_co_x = largeur + 1
-    p_co_y = -(hauteur + 1) + 11
+    p_co_y = -hauteur + 10
     return position_map, int(largeur), int(hauteur), (int(p_co_x), int(p_co_y))
 
 
@@ -245,3 +246,6 @@ def attaque_ennemi(pv_joueur:int, atts_joueur:list):
             time.sleep(0.5)
 
     return victoire
+
+pos = position_depart(creer_carte_pilier())
+print(f"{pos[0]} et {pos[1]}")
