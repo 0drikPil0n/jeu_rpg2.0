@@ -80,7 +80,7 @@ def position_depart(map_):
     return p_position_depart, int(largeur), int(hauteur), (int(p_co_x), int(p_co_y))
 
 
-def avancer_map(map_:dict,hauteur:int,largeur:int):
+def avancer_map(map_:dict,largeur:int,hauteur:int):
     """
     Permet au joueur d'avancer sur la carte dans la direction de son choix
     :param map_: La carte
@@ -246,6 +246,3 @@ def attaque_ennemi(pv_joueur:int, atts_joueur:list):
             time.sleep(0.5)
 
     return victoire
-
-pos = position_depart(creer_carte_pilier())
-print(f"{pos[0]} et {pos[1]}")
