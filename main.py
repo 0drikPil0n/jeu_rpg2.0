@@ -1,8 +1,7 @@
 import sys
 import time
-import random
 from textwrap import dedent
-import quete_dragon
+from Quete_dragon import quete_dragon
 import quete_crystal
 
 # Création du personnage
@@ -313,20 +312,21 @@ if __name__ == '__main__':
                     pv_joueur = stats_role[sous_classe]["PV"]
                     tour = 0
                     while pv_dragon > 0 and pv_joueur > 0:
-                        attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role,sous_classe,tour)
-                        pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role,sous_classe,attaque,esquive,pv_dragon,pv_joueur)
-                    victoire = quete_dragon.resultat_dragon(pv_dragon,pv_joueur)
+                        attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role, sous_classe, tour)
+                        pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role, sous_classe, attaque, esquive, pv_dragon, pv_joueur)
+                    victoire = quete_dragon.resultat_dragon(pv_dragon, pv_joueur)
                     result = resultat_quete(victoire)
                     if not result:
                         break
             case "2":
                 while True:
+                    survie = None
+                    pv_joueur = stats_role[sous_classe]["PV"]
                     quete_crystal.afficher_crystal()
                     carte_sc = quete_crystal.creer_carte_pilier() # sc = sans crystal
                     carte = quete_crystal.choisir_spot_crystal(carte_sc)
                     position, largeur, hauteur, coordonnees = quete_crystal.position_depart(carte)
-                    while position != "C":
-                        pv_joueur = stats_role[sous_classe]["PV"]
+                    while position != "C" and survie is not False:
                         attaques_joueur = stats_role[sous_classe]["Dégats"]
                         while True:
                             choix = input(f"-------------------------\n"
@@ -347,7 +347,12 @@ if __name__ == '__main__':
                                 quete_crystal.afficher_coordonnees(coordonnees[0], coordonnees[1])
                             case "3":
                                 position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte,largeur,hauteur)
-                                quete_crystal.situation_piliers(position ,pv_joueur, attaques_joueur)
+                                survie = quete_crystal.situation_piliers(position ,pv_joueur, attaques_joueur)
+                    if position == "C":
+                        survie = True
+
+
+
 
 
             case "3":

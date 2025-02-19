@@ -249,3 +249,12 @@ def attaque_ennemi(pv_joueur:int, atts_joueur:list):
             time.sleep(0.5)
 
     return victoire
+
+# Vérifier réussite
+def resultat_crystal(victoire:bool, position: str):
+    """
+    Indique si le joueur a gagné ou perdu
+    :param victoire: La victoire de la mission
+    :param position: La position du joueur
+    :return: True si le joueur gagne, False sinon
+    """
