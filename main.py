@@ -2,7 +2,8 @@ import sys
 import time
 from textwrap import dedent
 from Quete_dragon import quete_dragon
-import quete_crystal
+from Quête_crystal import quete_crystal
+
 
 # Création du personnage
 def verifier_nom(p_prenom: str, p_nom: str) -> str:
@@ -346,8 +347,8 @@ if __name__ == '__main__':
                             case "2":
                                 quete_crystal.afficher_coordonnees(coordonnees[0], coordonnees[1])
                             case "3":
-                                position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte,largeur,hauteur)
-                                survie = quete_crystal.situation_piliers(position ,pv_joueur, attaques_joueur)
+                                position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte, largeur, hauteur)
+                                survie = quete_crystal.situation_piliers(position, pv_joueur, attaques_joueur)
                     victoire = quete_crystal.resultat_crystal(survie, position)
                     result = resultat_quete(victoire)
                     if not result:
