@@ -155,7 +155,7 @@ def verifier_aventure(numero:int, p_list_aventure) -> tuple[int, str]:
     :return: L'aventure choisi par le joueur
     """
     while True:
-        if numero not in range(len(p_list_aventure)):
+        if numero not in range(len(p_list_aventure) + 1):
             print("\nVeuillez choisir un numéro de missions valide")
             time.sleep(1)
             print("\nVoici les missions disponibles:")
@@ -334,8 +334,8 @@ if __name__ == '__main__':
                                           f"1 - Voir la carte\n"
                                           f"2 - Voir vos coordonées\n"
                                           f"3 - Avancer sur un pilier\n"
-                                          f"Choisissez une option: "
-                                          f"-------------------------")
+                                          f"-------------------------\n"
+                                          f"Choisissez une option: ")
                             if choix not in ["1", "2", "3"]:
                                 print("Veuillez choisir un choix valide")
                             else:

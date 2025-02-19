@@ -179,10 +179,10 @@ def afficher_map(p_map:dict):
     :param p_map: La carte
     :return: None
     """
-    print("><><><><><><><><><><><><><><><><><")
+    print("><><><><><><><><><><><><><><><><><><><><><><><><><><\n")
     for chiffre,rangee in p_map.items():
         print(f"{rangee}\n")
-    print("><><><><><><><><><><><><><><><><><")
+    print("><><><><><><><><><><><><><><><><><><><><><><><><><><")
     return None
 
 
