@@ -10,20 +10,21 @@ def afficher_crystal():
     print("Dans un désert loins de la civilisation, se trouve un temple ancien en ruine depuis des années.\n"
           "Le temple était autrefois un sanctuaire pour les dieux, des shaman se réunissaient pour les vénérés.\n"
           "Ils s'agenouilaient autour du centre du temple, duquel jaïssait un vaisseau de lumière très intense.\n")
-    # time.sleep(10)
+    input("Appuyer sur entrée pour continuer\n")
     print("Ce vaisseau de lumière, portait avec lui la puissance nécessaire pour alimenter toute une ville en électricité,\n"
           "cependant, les shamans n'avait absolument aucune idée d'où cette puissance pouvait bien provenir.\n"
           "Aujourd'hui, nous possédons la technologie pour allerexplorer ces ruines, mais ça ne se passe pas comme prévu.\n")
-    # time.sleep(10)
+    input("Appuyer sur entrée pour continuer\n")
     print("Tout au fin fond des ruines du temples, se trouve une oasis, avec au milieu, un crystal.\n"
           "Le problème, est que cette oasis est isolé du reste du temple, malgé qu'elle sois situé en son centre.\n"
           "Elle est entouré de pilier de roche, certain stable, d'autre tombe lorsque qu'on met les pieds dessus.\n")
-    # time.sleep(10)
+    input("Appuyer sur entrée pour continuer\n")
     print("Pour une raison inconnu, les piliers reviennent toujours, et ne sont jamais les mêmes à chaque fois.\n"
           "Votre but est d'aller chercher le crystal et le ramener au royaume, sans tomber dans le vide inconnu,\n"
           "vous pourriez mourir de votre chute...\n")
-    # time.sleep(5)
+    time.sleep(5)
     print("ou pire")
+    input("Appuyer sur entrée pour continuer\n")
     return None
 
 # Création de la carte
@@ -170,7 +171,7 @@ def situation_piliers(position:str, pv_joueur:int,atts_joueur:list,):
         time.sleep(0.5)
         print("Vous avez trouver le crystal !")
         time.sleep(0.5)
-        return None
+        return True
 
 # Affichage de la carte
 def afficher_map(p_map:dict):
@@ -193,7 +194,7 @@ def afficher_coordonnees(co_x:int, co_y:int):
     :param co_y: Sa position sur l'axe Y
     :return: None
     """
-    print(f"*****************************\n"
+    print(f"\n*****************************\n"
           f"Coordonnée de l'axe X: {co_x}\n"
           f"Coordonnée de l'axe Y: {co_y}\n"
           f"*****************************\n")
@@ -251,10 +252,23 @@ def attaque_ennemi(pv_joueur:int, atts_joueur:list):
     return victoire
 
 # Vérifier réussite
-def resultat_crystal(victoire:bool, position: str):
+def resultat_crystal(survie:bool, pos: str):
     """
     Indique si le joueur a gagné ou perdu
-    :param victoire: La victoire de la mission
-    :param position: La position du joueur
+    :param survie: La victoire de la mission
+    :param pos: La position du joueur
     :return: True si le joueur gagne, False sinon
     """
+    p_victoire = False
+    if survie:
+        print("\nFélicitation aventurier! Vous avez trouvé le crystal magique!")
+        p_victoire = True
+    if not survie:
+        if pos == "E":
+            print("\nVous avez été vaincu.. vous êtes mort!")
+        elif pos == "T":
+            print("\nVous avez tomber dans le vide.. vous êtes mort!")
+
+    return p_victoire
+
+

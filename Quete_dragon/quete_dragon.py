@@ -6,33 +6,33 @@ from typing import Any
 def afficher_dragon():
     """
     Affiche la description et l'introduction à la mission
-    :return: Rien
+    :return: None
     """
     print("*" * 30)
     print("Dans cette mission, l'objectif est de traquer et de tuer un dragon redoutable qui\n"
           "terrorise un village voisin. Le dragon, qui vis dans une grotte profonde\n"
           "et obscure, est hostile et crache du feu sur quiconque ose pénétrer son domaine.\n")
-    # time.sleep(10)
-    # print("Les aventuriers doivent se préparer en rassemblant des armes. Après une des longues\n "
-    #       "semaines de préparation, vous décidez de vous mettre en marche vers cette grotte\n "
-    #       "hostile dans les montagnes. Une fois arriver à cette grotte, vous êtes incapable\n "
-    #       "de vaincre votre peur.\n")
-    # time.sleep(10)
-    # print("Des frissons parcours votre corps, vos dents se met à claquer,\n"
-    #       "vos jambes se met à trembler. C'est alors que vous prenez une grande inspiration et\n "
-    #       "vous prenez votre courage à deux mains. En entrant dans la grotte une odeur nauséabonde \n"
-    #       "s'empare de votre corps, vous n'avez jamais senti quelque chose d'aussi mauvais.\n")
-    # time.sleep(10)
-    # print("C'est alors qu'un craquement se fait surgir comme quelqu'un qui marche sur une branche.\n "
-    #       "Vous décidez de baisser le regard et c'est à ce moment que vous remarquez que vous\n "
-    #       "marchez sur les cadavres de vos camarades qui, eux aussi, avaient essayé de vaincre se\n "
-    #       "fameux dragons. C'est alors qu'un bruit se fait entendre dans le fond de la grotte.\n")
-    # time.sleep(10)
-    # print("Au fur et à mesure que le bruit se rapproche, vous distinguez une silhouette énorme\n "
-    #       "se dirigeant vers vous. C'est alors que le dragon apparait et sans même vous laissez le temps\n"
-    #       "de réagir, vous envoie au sol d'un bref coup circulaire avec sa queue. Vous vous relever,\n "
-    #       "adrenaline dans le sang, vengeance dans l'esprit et vous vous élancer arme dans la main pour\n "
-    #       "peut être la dernière fois!\n")
+    time.sleep(10)
+    print("Les aventuriers doivent se préparer en rassemblant des armes. Après une des longues\n "
+          "semaines de préparation, vous décidez de vous mettre en marche vers cette grotte\n "
+          "hostile dans les montagnes. Une fois arriver à cette grotte, vous êtes incapable\n "
+          "de vaincre votre peur.\n")
+    time.sleep(10)
+    print("Des frissons parcours votre corps, vos dents se met à claquer,\n"
+          "vos jambes se met à trembler. C'est alors que vous prenez une grande inspiration et\n "
+          "vous prenez votre courage à deux mains. En entrant dans la grotte une odeur nauséabonde \n"
+          "s'empare de votre corps, vous n'avez jamais senti quelque chose d'aussi mauvais.\n")
+    time.sleep(10)
+    print("C'est alors qu'un craquement se fait surgir comme quelqu'un qui marche sur une branche.\n "
+          "Vous décidez de baisser le regard et c'est à ce moment que vous remarquez que vous\n "
+          "marchez sur les cadavres de vos camarades qui, eux aussi, avaient essayé de vaincre se\n "
+          "fameux dragons. C'est alors qu'un bruit se fait entendre dans le fond de la grotte.\n")
+    time.sleep(10)
+    print("Au fur et à mesure que le bruit se rapproche, vous distinguez une silhouette énorme\n "
+          "se dirigeant vers vous. C'est alors que le dragon apparait et sans même vous laissez le temps\n"
+          "de réagir, vous envoie au sol d'un bref coup circulaire avec sa queue. Vous vous relever,\n "
+          "adrenaline dans le sang, vengeance dans l'esprit et vous vous élancer arme dans la main pour\n "
+          "peut être la dernière fois!\n")
 
     return None
 

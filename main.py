@@ -348,8 +348,10 @@ if __name__ == '__main__':
                             case "3":
                                 position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte,largeur,hauteur)
                                 survie = quete_crystal.situation_piliers(position ,pv_joueur, attaques_joueur)
-                    if position == "C":
-                        survie = True
+                    victoire = quete_crystal.resultat_crystal(survie, position)
+                    result = resultat_quete(victoire)
+                    if not result:
+                        break
 
 
 
