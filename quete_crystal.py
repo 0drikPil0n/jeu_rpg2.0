@@ -180,8 +180,10 @@ def afficher_map(p_map:dict):
     :param p_map: La carte
     :return: None
     """
+    print("><><><><><><><><><><><><><><><><><")
     for chiffre,rangee in p_map.items():
         print(f"{rangee}\n")
+    print("><><><><><><><><><><><><><><><><><")
     return None
 
 
@@ -192,8 +194,10 @@ def afficher_coordonnees(co_x:int, co_y:int):
     :param co_y: Sa position sur l'axe Y
     :return: None
     """
-    print(f"Coordonnée de l'axe X: {co_x}\n"
-          f"Coordonnée de l'axe Y: {co_y}")
+    print(f"*****************************\n"
+          f"Coordonnée de l'axe X: {co_x}\n"
+          f"Coordonnée de l'axe Y: {co_y}\n"
+          f"*****************************\n")
     return None
 
 # Combat

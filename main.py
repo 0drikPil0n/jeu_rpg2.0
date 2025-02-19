@@ -330,10 +330,13 @@ if __name__ == '__main__':
                         pv_joueur = stats_role[sous_classe]["PV"]
                         attaques_joueur = stats_role[sous_classe]["Dégats"]
                         while True:
-                            choix = input(f"Que voulez-vous faire?\n"
+                            choix = input(f"-------------------------\n"
+                                          f"Que voulez-vous faire?\n"
                                           f"1 - Voir la carte\n"
                                           f"2 - Voir vos coordonées\n"
-                                          f"3 - Avancer sur un pilier")
+                                          f"3 - Avancer sur un pilier\n"
+                                          f"Choisissez une option: "
+                                          f"-------------------------")
                             if choix not in ["1", "2", "3"]:
                                 print("Veuillez choisir un choix valide")
                             else:
