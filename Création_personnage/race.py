@@ -1,7 +1,10 @@
 class Race:
+    """
+    La race fantastique d'un personnage (ex: Cyclope, ogre, elf, etc).
+    """
     def __init__(self, race: str, age_min: int, age_max: int):
         """
-        La race fantastique d'un personnage (ex: Cyclope, ogre, elf, etc).
+        Initialise le nom de la race et sa limite d'âge.
         :param race: Le nom de la race.
         :param age_min: L'âge minimum pour atteindre l'autonomie.
         :param age_max: L'âge maximum qu'une race peut atteindre avant de mourir.
