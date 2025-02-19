@@ -144,8 +144,7 @@ stats_role = {
         "Mercenaire":{"Arme": "Double dague",       "PV": 200,  "Dégats": [75,40,30,30],   "Att.Spé.": [125,90]}}
 
 # Choix de la mission
-liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique",
-                                        "Sauver la princesse de la tour", "Vaincre l'armée de Gobelin"]
+liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique"]
 
 
 def verifier_aventure(numero:int, p_list_aventure) -> tuple[int, str]:
