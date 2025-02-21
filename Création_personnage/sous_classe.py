@@ -13,34 +13,45 @@ class SousClasse:
         """
         self._nom = nom
         self._arme = arme
-        self._pv = None
-        self.set_pv(pv)
-        self._degats = None
-        self.set_degats(degats)
-        self._atts_spe = None
-        self.set_atts_spe(atts_spe)
+        self._pv = pv
+        self._degats = degats
+        self._atts_spe = atts_spe
 
-    def get_pv(self):
+    @property # Nom
+    def nom(self):
+        return self._nom
+
+    @property # Arme
+    def arme(self):
+        return self._arme
+
+    @property # Point de vie
+    def pv(self):
         return self._pv
 
-    def set_pv(self, pv: int):
+    @pv.setter
+    def pv(self, pv: int):
         if pv < 1:
             raise ValueError("Les points de vie doivent être au moins de 1")
         self._pv = pv
 
-    def get_degats(self):
+    @property # Dégats
+    def degats(self):
         return self._degats
 
-    def set_degats(self, degats):
+    @degats.setter
+    def degats(self, degats):
         for degat in degats:
             if degat < 0:
                 raise ValueError("Un dégat doit être au minimum de 1")
         self._degats = degats
 
-    def get_att_spe(self):
+    @property # Attaques spéciales
+    def atts_spe(self):
         return self._atts_spe
 
-    def set_atts_spe(self, atts_spe):
+    @atts_spe.setter
+    def atts_spe(self, atts_spe):
         for att_spe in atts_spe:
             if att_spe < 0:
                 raise ValueError("Une attaque spéciale doit être au minimum de 1")

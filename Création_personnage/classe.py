@@ -13,10 +13,13 @@ class Classe:
         :param sous_classes: Les sous-classes
         """
         self._nom = nom
-        self._sous_classes = None
+        self._sous_classes = sous_classes
 
-    def get_sous_classes(self):
+    @property
+    def nom(self):
+        return self._nom
+
+    @property
+    def sous_classes(self):
         return self._sous_classes
 
-    def set_sous_classes(self, sous_classes):
-        self._sous_classes = sous_classes
