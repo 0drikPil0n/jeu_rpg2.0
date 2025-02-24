@@ -15,7 +15,7 @@ class Race:
         self._limite_age = [age_min, age_max]
 
     @property
-    def race(self) -> str:
+    def nom(self) -> str:
         """
         :return: Le nom de la race
         """
