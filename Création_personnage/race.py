@@ -2,24 +2,24 @@ class Race:
     """
     La race fantastique d'un personnage (ex: Cyclope, ogre, elf, etc).
     """
-    def __init__(self, race: str, age_min: int, age_max: int):
+    def __init__(self, nom: str, age_min: int, age_max: int):
         """
         Initialise le nom de la race et sa limite d'âge.
-        :param race: Le nom de la race.
+        :param nom: Le nom de la race.
         :param age_min: L'âge minimum pour atteindre l'autonomie.
         :param age_max: L'âge maximum qu'une race peut atteindre avant de mourir.
         """
-        self._race = race
+        self._nom = nom
         self._age_min = age_min
         self._age_max = age_max
-        self.limite_age = [age_min, age_max]
+        self._limite_age = [age_min, age_max]
 
     @property
     def race(self) -> str:
         """
         :return: Le nom de la race
         """
-        return self._race
+        return self._nom
 
     @property
     def age_min(self) -> int:
