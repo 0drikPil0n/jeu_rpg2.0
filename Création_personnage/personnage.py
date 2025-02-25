@@ -21,7 +21,7 @@ class Personnage:
 
     @property
     def prenom(self):
-        return self.prenom
+        return self._prenom
 
     @prenom.setter
     def prenom(self, prenom):

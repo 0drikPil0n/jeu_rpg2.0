@@ -12,7 +12,7 @@ class Race:
         self.nom = nom
         self.age_min = age_min
         self.age_max = age_max
-        self._limite_age = [age_min, age_max]
+        self.limite_age = [age_min, age_max]
 
     @property
     def nom(self) -> str:

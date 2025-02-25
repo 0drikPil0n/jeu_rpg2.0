@@ -8,7 +8,7 @@ import time
 # Races
 humain = Race(nom="Humain",age_min=18, age_max=120)
 ogre = Race(nom="Ogre",age_min=18, age_max=150)
-nain = Race(nom="nain", age_min=15, age_max=250)
+nain = Race(nom="Nain", age_min=15, age_max=250)
 elf = Race(nom="Elf", age_min=16, age_max=500)
 
 liste_races = [humain, ogre, nain, elf]
@@ -62,7 +62,7 @@ def choisir_nom():
 
     return p_nom_complet
 
-def choisir_race(p_races, p_nom):
+def choisir_race(p_races: list[Race], p_nom):
     """
     Permet au joueur de choisir sa race
     :param p_races: La liste des races disponibles
@@ -75,7 +75,7 @@ def choisir_race(p_races, p_nom):
             print(f"{i + 1} - {race.nom}")
             time.sleep(0.5)
         try:
-            race_choisis:int = int(input(f"De quelle race êtes vous, {p_nom}?\n"
+            race_choisis:int = int(input(f"De quelle race êtes vous, aventurier?\n"
                                         f"Choisissez un numéro entre 1 et {len(p_races)}: "))
         except ValueError:
             print(f"\nVeuillez écrire un nombre entre 1 et {len(p_races)}")
@@ -85,10 +85,78 @@ def choisir_race(p_races, p_nom):
                 print(f"\nVeuillez écrire un nombre entre 1 et {len(p_races)}")
                 time.sleep(1)
             else:
-                break
+                print("\nExcellent !\n")
+                time.sleep(1)
+                return p_races[race_choisis - 1].nom
+
+def choisir_genre():
+    """
+    Permet au joueur de choisir son genre
+    :return: Le genre du joueur
+    """
+    while True:
+        p_genre = input("\nQuel est votre genre, aventurier?\n"
+                        "(Homme/femme/autre): ").capitalize().strip()
+        if p_genre not in ["Homme", "Femme", "Autre"]:
+            print("\nVeuillez choisir un genre entre Homme/Femme/Autre")
+            time.sleep(1)
+        else:
+            print("\nExcellent !\n")
+            time.sleep(1)
+            return p_genre
+
+def choisir_age(p_race: Race):
+    """
+    Permet au joueur de choisir son âge.
+    :param p_race: La race choisis
+    :return: L'âge du joueur
+    """
+    while True:
+        try:
+            p_age:int = int(input(f"\nQuel est votre age, aventurier?\n"
+                          f"Limite d'âges: {p_race.limite_age}\n"
+                                  f"Votre âge: "))
+            if p_age < p_race.age_min or p_age > p_race.age_max:
+                raise ValueError
+        except ValueError:
+            print(f"Veuillez écrire écrire un nombre entre {p_race.age_min} et {p_race.age_max}")
+            time.sleep(1)
+        else:
+            print("\nExcellent !\n")
+            time.sleep(1)
+            return p_age
+
+def choisir_classe(p_classes: list[Classe]):
+    """
+    Permet au joueur de choisir sa classe
+    :param p_classes: La liste de classe diponibles
+    :return: La classe choisit
+    """
+    while True:
+        print("\nVoici les classes disponibles:")
+        for i, cla in enumerate(p_classes,start=1):
+            print(f"{i} - {cla.nom}")
+            time.sleep(0.5)
+        try:
+            p_classe: int = int(input("\nQuel est votre classe, aventurier?\n"
+                             "Classe choisi: "))
+            if p_classe not in range(1, (len(p_classes) + 1)):
+                raise ValueError
+        except ValueError:
+            print("\nVeuillez choisir une classe valide")
+            time.sleep(1)
+        else:
+            print("\nExcellent !\n")
+            time.sleep(1)
+            return p_classes[p_classe - 1].nom
+
+
 
 nom = choisir_nom()
-choisir_race(liste_races, nom)
+race = choisir_race(liste_races, nom)
+genre = choisir_genre()
+age = choisir_age(nain)
+classe = choisir_classe(liste_classes)
 
 
 

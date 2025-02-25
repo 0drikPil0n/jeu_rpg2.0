@@ -17,7 +17,7 @@ class Classe:
 
     @property
     def nom(self):
-        return self.nom
+        return self._nom
 
     @nom.setter
     def nom(self, nom):
@@ -27,7 +27,7 @@ class Classe:
 
     @property
     def sous_classes(self):
-        return self.sous_classes
+        return self._sous_classes
 
     @sous_classes.setter
     def sous_classes(self, sous_classes):
