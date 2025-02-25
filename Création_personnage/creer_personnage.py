@@ -3,6 +3,8 @@ from classe import Classe
 from sous_classe import SousClasse
 from race import Race
 
+import time
+
 # Races
 humain = Race(nom="Humain",age_min=18, age_max=120)
 ogre = Race(nom="Ogre",age_min=18, age_max=150)
@@ -38,11 +40,14 @@ def choisir_nom():
     :return: Le nom, complet du joueur
     """
     p_prenom = input("Quel est votre prénom, aventurier?\n"
-                     "Pénom: ")
+                     "Pénom: ").capitalize().strip()
     while not p_prenom.isalpha():
-        p_prenom = input("Entrer un prénom correcte: ").capitalize().strip()
+        print("\nEntrez un prénom correcte")
+        time.sleep(1)
+        p_prenom = input("\nQuel est votre prénom, aventurier?\n"
+                         "Pénom: ").capitalize().strip()
     p_nom = input("Quel est votre nom de famille, aventurier?\n"
-                    "Nom de famille: ")
+                    "Nom de famille: ").capitalize().strip()
     while not p_nom.isalpha():
         p_nom = input("Entrer un nom de famille correcte: ").capitalize().strip()
     p_nom_complet = p_prenom + " " + p_nom

@@ -11,23 +11,35 @@ class SousClasse:
         :param degats: Les dégats que cette sous-classe peut infligé
         :param atts_spe: Les attaques spéciales de cette sous-classe
         """
-        self._nom = nom
-        self._arme = arme
-        self._pv = pv
-        self._degats = degats
-        self._atts_spe = atts_spe
+        self.nom = nom
+        self.arme = arme
+        self.pv = pv
+        self.degats = degats
+        self.atts_spe = atts_spe
 
     @property # Nom
     def nom(self):
-        return self._nom
+        return self.nom
+
+    @nom.setter
+    def nom(self, nom):
+        if not isinstance(nom, str):
+            raise TypeError("Le nom de la sous-classe doit être de type str")
+        self._nom = nom
 
     @property # Arme
     def arme(self):
-        return self._arme
+        return self.arme
+
+    @arme.setter
+    def arme(self, arme):
+        if not isinstance(arme, str):
+            raise TypeError("L'arme doit être de type str")
+        self._arme = arme
 
     @property # Point de vie
     def pv(self):
-        return self._pv
+        return self.pv
 
     @pv.setter
     def pv(self, pv: int):
@@ -37,7 +49,7 @@ class SousClasse:
 
     @property # Dégats
     def degats(self):
-        return self._degats
+        return self.degats
 
     @degats.setter
     def degats(self, degats):

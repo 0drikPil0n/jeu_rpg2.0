@@ -10,7 +10,7 @@ class Personnage:
     Un avatar créé par le joueur
     """
     def __init__(self, prenom:str, nom:str, age:int, genre: str,race: Race, classe: Classe, sous_classe: SousClasse):
-        self._prenom = prenom
+        self.prenom = prenom
         self._nom = nom
         self._age = age
         self._genre = genre
@@ -18,6 +18,14 @@ class Personnage:
         self._classe = classe
         self._sous_classe = sous_classe
         self.nom_complet = prenom + " " + nom
+
+    @property
+    def prenom(self):
+        return self.prenom
+
+    @prenom.setter
+    def prenom(self, prenom):
+        self._prenom = prenom
 
     def enregistrer_personnage(self):
         with open('personnage.json', 'r') as fichier_perso:

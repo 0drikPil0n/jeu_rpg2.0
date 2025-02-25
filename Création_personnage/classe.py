@@ -12,14 +12,26 @@ class Classe:
         :param nom: Le nom de la classe
         :param sous_classes: Les sous-classes
         """
-        self._nom = nom
-        self._sous_classes = sous_classes
+        self.nom = nom
+        self.sous_classes = sous_classes
 
     @property
     def nom(self):
-        return self._nom
+        return self.nom
+
+    @nom.setter
+    def nom(self, nom):
+        if not isinstance(nom, str):
+            raise TypeError("Le nom de la classe doit être de type str")
+        self._nom = nom
 
     @property
     def sous_classes(self):
-        return self._sous_classes
+        return self.sous_classes
+
+    @sous_classes.setter
+    def sous_classes(self, sous_classes):
+        if not isinstance(sous_classes, list):
+            raise TypeError("Les sous-classes doivent être dans une liste (list[SousClasse])")
+        self._sous_classes = sous_classes
 

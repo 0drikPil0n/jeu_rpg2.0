@@ -9,9 +9,9 @@ class Race:
         :param age_min: L'âge minimum pour atteindre l'autonomie.
         :param age_max: L'âge maximum qu'une race peut atteindre avant de mourir.
         """
-        self._nom = nom
-        self._age_min = age_min
-        self._age_max = age_max
+        self.nom = nom
+        self.age_min = age_min
+        self.age_max = age_max
         self._limite_age = [age_min, age_max]
 
     @property
@@ -20,6 +20,12 @@ class Race:
         :return: Le nom de la race
         """
         return self._nom
+
+    @nom.setter
+    def nom(self, nom: str):
+        if not isinstance(nom, str):
+            raise TypeError("Le nom de la race doit être de type str")
+        self._nom = nom
 
     @property
     def age_min(self) -> int:
