@@ -10,6 +10,7 @@ humain = Race(nom="Humain",age_min=18, age_max=120)
 ogre = Race(nom="Ogre",age_min=18, age_max=150)
 nain = Race(nom="nain", age_min=15, age_max=250)
 elf = Race(nom="Elf", age_min=16, age_max=500)
+
 liste_races = [humain, ogre, nain, elf]
 # Sous-classes
 prince = SousClasse(nom="Prince",arme="Poignard",pv=200, degats=[20,15], atts_spe=[60,40])
@@ -34,6 +35,8 @@ villageois = Classe(nom="Villageois",sous_classes=[fermier,forgeron,boucher,pech
 magicien = Classe(nom="Magicien",sous_classes=[mage,sorcier,alchimiste,shaman])
 armee = Classe(nom="Armée",sous_classes=[archer,cavalier,infanterie,mercenaire])
 
+liste_classes = [royaute,villageois,magicien,armee]
+
 def choisir_nom():
     """
     Permet au joueur de choisir son nom
@@ -46,10 +49,15 @@ def choisir_nom():
         time.sleep(1)
         p_prenom = input("\nQuel est votre prénom, aventurier?\n"
                          "Pénom: ").capitalize().strip()
-    p_nom = input("Quel est votre nom de famille, aventurier?\n"
+    p_nom = input("\nQuel est votre nom de famille, aventurier?\n"
                     "Nom de famille: ").capitalize().strip()
     while not p_nom.isalpha():
-        p_nom = input("Entrer un nom de famille correcte: ").capitalize().strip()
+        print("\nEntrez un nom de famille correcte")
+        time.sleep(1)
+        p_nom = input("\nQuel est votre nom de famille, aventurier?\n"
+                      "Nom de famille: ").capitalize().strip()
+    print("\nExcellent !\n")
+    time.sleep(1)
     p_nom_complet = p_prenom + " " + p_nom
 
     return p_nom_complet
@@ -62,20 +70,26 @@ def choisir_race(p_races, p_nom):
     :return: La race choisis
     """
     while True:
-        print("Voici les races disponibles:")
+        print("\nVoici les races disponibles:")
         for i,race in enumerate(p_races):
             print(f"{i + 1} - {race.nom}")
+            time.sleep(0.5)
         try:
             race_choisis:int = int(input(f"De quelle race êtes vous, {p_nom}?\n"
                                         f"Choisissez un numéro entre 1 et {len(p_races)}: "))
         except ValueError:
-            print("Veuillez écrire un nombre")
+            print(f"\nVeuillez écrire un nombre entre 1 et {len(p_races)}")
+            time.sleep(1)
         else:
-            while race_choisis not in range(1, (len(p_races) + 1)):
-                print("Veuillez choisir un nombre correspondant à une race")
+            if race_choisis not in range(1, (len(p_races) + 1)):
+                print(f"\nVeuillez écrire un nombre entre 1 et {len(p_races)}")
+                time.sleep(1)
+            else:
+                break
 
 nom = choisir_nom()
 choisir_race(liste_races, nom)
+
 
 
 
