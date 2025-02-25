@@ -87,7 +87,7 @@ def choisir_race(p_races: list[Race], p_nom):
             else:
                 print("\nExcellent !\n")
                 time.sleep(1)
-                return p_races[race_choisis - 1].nom
+                return p_races[race_choisis - 1]
 
 def choisir_genre():
     """
@@ -148,16 +148,39 @@ def choisir_classe(p_classes: list[Classe]):
         else:
             print("\nExcellent !\n")
             time.sleep(1)
-            return p_classes[p_classe - 1].nom
+            return p_classes[p_classe - 1]
 
-
+def choisir_sous_classe(p_classe: Classe):
+    """
+    Permet au joueur de choisir sa sous-classe
+    :param p_classe: La classe choisi
+    :return: La sous-classe choisi
+    """
+    while True:
+        p_sous_classes = p_classe.sous_classes
+        print("\nVoici les sous-classes disponibles:")
+        for i, sous in enumerate(p_sous_classes,start=1):
+            print(f"{i} - {sous.nom}")
+            time.sleep(0.5)
+        try:
+            p_sous:int = int(input("\nQuel est votre sous-classe, aventurier?\n"
+                           "Classe choisi: "))
+            if p_sous not in range(1, (len(p_sous_classes) + 1)):
+                raise ValueError
+        except ValueError:
+            print("\nVeuillez choisir une sous-class valide")
+            time.sleep(1)
+        else:
+            print("\nExcellent !\n")
+            time.sleep(1)
+            return p_sous_classes[p_sous - 1]
 
 nom = choisir_nom()
 race = choisir_race(liste_races, nom)
 genre = choisir_genre()
 age = choisir_age(nain)
 classe = choisir_classe(liste_classes)
-
+sous_classe = choisir_sous_classe(classe)
 
 
 
