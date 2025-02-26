@@ -1,1 +1,84 @@
-[]
+[
+    {
+        "py/object": "Cr\u00e9ation_personnage.personnage.Personnage",
+        "_nom": "Odrik Pilon",
+        "_age": 115,
+        "_genre": "Homme",
+        "_race": {
+            "py/object": "Cr\u00e9ation_personnage.race.Race",
+            "_nom": "Nain",
+            "_age_min": 15,
+            "_age_max": 250,
+            "limite_age": [
+                15,
+                250
+            ]
+        },
+        "_classe": {
+            "py/object": "Cr\u00e9ation_personnage.classe.Classe",
+            "_nom": "Magicien",
+            "_sous_classes": [
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Mage",
+                    "_arme": "Livre de sort",
+                    "_pv": 250,
+                    "_degats": [
+                        40,
+                        30
+                    ],
+                    "_atts_spe": [
+                        100
+                    ]
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Sorcier",
+                    "_arme": "Baguette magique",
+                    "_pv": 250,
+                    "_degats": [
+                        50,
+                        35,
+                        25
+                    ],
+                    "_atts_spe": [
+                        110
+                    ]
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Alchimiste",
+                    "_arme": "Potions magiques",
+                    "_pv": 250,
+                    "_degats": [
+                        50,
+                        35,
+                        25
+                    ],
+                    "_atts_spe": [
+                        110
+                    ]
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Shaman",
+                    "_arme": "Invocation d'esprit",
+                    "_pv": 230,
+                    "_degats": [
+                        60,
+                        40,
+                        20
+                    ],
+                    "_atts_spe": [
+                        125,
+                        90
+                    ]
+                }
+            ]
+        },
+        "_sous_classe": {
+            "py/id": 9
+        }
+    }
+
+]

@@ -1,10 +1,10 @@
-import json
 import jsonpickle
-from race import Race
-from classe import Classe
-from sous_classe import SousClasse
+from Création_personnage.race import Race
+from Création_personnage.classe import Classe
+from Création_personnage.sous_classe import SousClasse
+from pathlib import Path
 
-
+CHEMIN_PERSO = Path("Création_personnage\personnage.json")
 class Personnage:
     """
     Un avatar créé par le joueur
@@ -26,10 +26,10 @@ class Personnage:
         self._nom = nom
 
     def enregistrer_personnage(self):
-        with open('personnage.json', 'r') as fichier_perso:
+        with open(file=CHEMIN_PERSO, mode='r') as fichier_perso:
             liste_personnage = jsonpickle.decode(fichier_perso.read())
         liste_personnage.append(self)
-        with open("personnage.json", "w", encoding="utf-8") as fichier_perso:
+        with open(file=CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
 
