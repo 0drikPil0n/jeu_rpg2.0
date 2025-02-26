@@ -178,7 +178,7 @@ def choisir_sous_classe(p_classe: Classe):
 nom = choisir_nom()
 race = choisir_race(liste_races, nom)
 genre = choisir_genre()
-age = choisir_age(nain)
+age = choisir_age(race)
 classe = choisir_classe(liste_classes)
 sous_classe = choisir_sous_classe(classe)
 
