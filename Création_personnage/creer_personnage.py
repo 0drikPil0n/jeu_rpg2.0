@@ -1,7 +1,6 @@
-from personnage import Personnage
-from classe import Classe
-from sous_classe import SousClasse
-from race import Race
+from Création_personnage.classe import Classe
+from Création_personnage.sous_classe import SousClasse
+from Création_personnage.race import Race
 
 import time
 
@@ -174,13 +173,6 @@ def choisir_sous_classe(p_classe: Classe):
             print("\nExcellent !\n")
             time.sleep(1)
             return p_sous_classes[p_sous - 1]
-
-nom = choisir_nom()
-race = choisir_race(liste_races, nom)
-genre = choisir_genre()
-age = choisir_age(race)
-classe = choisir_classe(liste_classes)
-sous_classe = choisir_sous_classe(classe)
 
 
 
