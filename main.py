@@ -4,13 +4,15 @@ from textwrap import dedent
 import jsonpickle
 from pathlib import Path
 
-from Création_personnage.creer_personnage import (choisir_nom, choisir_age, choisir_genre, choisir_race, choisir_classe,
-                                                  choisir_sous_classe, liste_classes, liste_races)
+from Création_personnage.creer_personnage import (choisir_nom, choisir_age, choisir_genre, choisir_race,
+                                                  choisir_classe,choisir_sous_classe, liste_classes, liste_races)
 from Création_personnage.personnage import Personnage
+
+from Quete_dragon.quete_dragon import (afficher_dragon,combat_dragon,choisir_decision_combat,resultat_dragon)
 
 # Choix de la mission
 liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique"]
-CHEMIN_PERSO = Path("Création_personnage\personnage.json")
+CHEMIN_PERSO = Path("Création_personnage/personnage.json")
 
 
 def choisir_aventure() -> tuple[int, str]:
@@ -135,73 +137,78 @@ if __name__ == '__main__':
                     time.sleep(1)
                     continue
                 else:
-                    for i, personnage in enumerate(liste_personnage, start=1):
-                        print(f"{i} - {personnage.nom}")
                     while True:
                         try:
-                            numero = int(input("\nQuel sauvegarde voulez-vous prendre?\n"
+                            for i, personnage in enumerate(liste_personnage, start=1):
+                                print(f"{i} - {personnage.nom}\n"
+                                      f"    - {personnage.race.nom}\n"
+                                      f"    - {personnage.genre}\n"
+                                      f"    - {personnage.age}\n"
+                                      f"    - {personnage.classe.nom}\n"
+                                      f"    - {personnage.sous_classe.nom}\n")
+                            numero = int(input("Quel sauvegarde voulez-vous prendre?\n"
                                                "Sélectionnez le numéro correspondant: "))
-                        except ValueError:
+                            personnage_choisi = liste_personnage[numero - 1]
+                        except (ValueError,IndexError):
                             print("\nVeuillez choisir une sauvegarde valide\n")
                             time.sleep(1)
                         else:
-                            personnage_choisi = liste_personnage[numero - 1]
                             break
                 personnage = commencer_quete(sauvegarde,personnage_choisi)
                 if personnage is not None:
                     break
     # Début aventure
-    # while True:
-    #     aventure = choisir_aventure()
-    #     num_aventure = aventure[0]
-    #     match num_aventure:
-    #         case "1":
-    # while True:
-    #     quete_dragon.afficher_dragon()
-    #     pv_dragon = 600
-    #     pv_joueur = stats_role[sous_classe]["PV"]
-    #     tour = 0
-    #     while pv_dragon > 0 and pv_joueur > 0:
-    #             attaque,esquive,tour = quete_dragon.choisir_decision_combat(stats_role, sous_classe, tour)
-    #             pv_dragon,pv_joueur = quete_dragon.combat_dragon(stats_role, sous_classe, attaque, esquive, pv_dragon, pv_joueur)
-    #         victoire = quete_dragon.resultat_dragon(pv_dragon, pv_joueur)
-    #         result = resultat_quete(victoire)
-    #         if not result:
-    #             break
-    # case "2":
-    #     while True:
-    #         survie = None
-    #         pv_joueur = stats_role[sous_classe]["PV"]
-    #         quete_crystal.afficher_crystal()
-    #         carte_sc = quete_crystal.creer_carte_pilier() # sc = sans crystal
-    #         carte = quete_crystal.choisir_spot_crystal(carte_sc)
-    #         position, largeur, hauteur, coordonnees = quete_crystal.position_depart(carte)
-    #         while position != "C" and survie is not False:
-    #             attaques_joueur = stats_role[sous_classe]["Dégats"]
+    while True:
+        aventure = choisir_aventure()
+        num_aventure = aventure[0]
+        match num_aventure:
+            case "1":
+                while True:
+                    afficher_dragon()
+                    pv_dragon = 600
+    #                 pv_joueur = stats_role[sous_classe]["PV"]
+    #                 tour = 0
+    #                 while pv_dragon > 0 and pv_joueur > 0:
+    #                         attaque,esquive,tour = choisir_decision_combat(stats_role, sous_classe, tour)
+    #                         pv_dragon,pv_joueur = combat_dragon(stats_role, sous_classe, attaque, esquive, pv_dragon, pv_joueur)
+    #                     victoire = resultat_dragon(pv_dragon, pv_joueur)
+    #                     result = resultat_quete(victoire)
+    #                     if not result:
+    #                         break
+    #         case "2":
     #             while True:
-    #                 choix = input(f"-------------------------\n"
-    #                               f"Que voulez-vous faire?\n"
-    #                               f"1 - Voir la carte\n"
-    #                               f"2 - Voir vos coordonées\n"
-    #                               f"3 - Avancer sur un pilier\n"
-    #                               f"-------------------------\n"
-    #                               f"Choisissez une option: ")
-    #                 if choix not in ["1", "2", "3"]:
-    #                     print("Veuillez choisir un choix valide")
-    #                 else:
+    #                 survie = None
+    #                 pv_joueur = stats_role[sous_classe]["PV"]
+    #                 quete_crystal.afficher_crystal()
+    #                 carte_sc = quete_crystal.creer_carte_pilier() # sc = sans crystal
+    #                 carte = quete_crystal.choisir_spot_crystal(carte_sc)
+    #                 position, largeur, hauteur, coordonnees = quete_crystal.position_depart(carte)
+    #                 while position != "C" and survie is not False:
+    #                     attaques_joueur = stats_role[sous_classe]["Dégats"]
+    #                     while True:
+    #                         choix = input(f"-------------------------\n"
+    #                                       f"Que voulez-vous faire?\n"
+    #                                       f"1 - Voir la carte\n"
+    #                                       f"2 - Voir vos coordonées\n"
+    #                                       f"3 - Avancer sur un pilier\n"
+    #                                       f"-------------------------\n"
+    #                                       f"Choisissez une option: ")
+    #                         if choix not in ["1", "2", "3"]:
+    #                             print("Veuillez choisir un choix valide")
+    #                         else:
+    #                             break
+    #                     match choix:
+    #                         case "1":
+    #                             quete_crystal.afficher_map(carte)
+    #                         case "2":
+    #                             quete_crystal.afficher_coordonnees(coordonnees[0], coordonnees[1])
+    #                         case "3":
+    #                             position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte, largeur, hauteur)
+    #                             survie = quete_crystal.situation_piliers(position, pv_joueur, attaques_joueur)
+    #                 victoire = quete_crystal.resultat_crystal(survie, position)
+    #                 result = resultat_quete(victoire)
+    #                 if not result:
     #                     break
-    #             match choix:
-    #                 case "1":
-    #                     quete_crystal.afficher_map(carte)
-    #                 case "2":
-    #                     quete_crystal.afficher_coordonnees(coordonnees[0], coordonnees[1])
-    #                 case "3":
-    #                     position, largeur, hauteur, coordonnees= quete_crystal.avancer_map(carte, largeur, hauteur)
-    #                     survie = quete_crystal.situation_piliers(position, pv_joueur, attaques_joueur)
-    #         victoire = quete_crystal.resultat_crystal(survie, position)
-    #         result = resultat_quete(victoire)
-    #         if not result:
-    #             break
     #
     #
     #
