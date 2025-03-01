@@ -1,22 +1,25 @@
-import jsonpickle
 from Création_personnage.race import Race
 from Création_personnage.classe import Classe
 from Création_personnage.sous_classe import SousClasse
+
+import jsonpickle
 from pathlib import Path
+import random
+import time
 
 CHEMIN_PERSO = Path("Création_personnage/personnage.json")
 class Personnage:
     """
     Un avatar créé par le joueur
     """
-    def __init__(self,nom:str, age:int, genre: str,race: Race, classe: Classe, sous_classe: SousClasse):
+    def __init__(self,nom:str, age:int, genre: str,race: Race, classe: Classe, sous_classe: SousClasse, chance_esquive:float=0.8):
         self._nom = nom
         self._age = age
         self._genre = genre
         self._race = race
         self._classe = classe
         self._sous_classe = sous_classe
-
+        self.chance_esquive = chance_esquive
     @property
     def nom(self):
         return self._nom
@@ -77,6 +80,16 @@ class Personnage:
             raise TypeError("Pas la bonne classe")
         self._sous_classe = sous_classe
 
+    @property
+    def chance_esquive(self):
+        return self.chance_esquive
+
+    @chance_esquive.setter
+    def chance_esquive(self,chance_esquive):
+        if chance_esquive > 1 or chance_esquive < 0:
+            raise TypeError("La chance d'esquive doit être un nombre entre 0 et 1")
+        self._chance_esquive = chance_esquive
+
 
     def enregistrer_personnage(self):
         with open(file=CHEMIN_PERSO, mode='r') as fichier_perso:
@@ -85,8 +98,19 @@ class Personnage:
         with open(file=CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
+    def attaquer(self):
+        pass
 
-
-
-
-
+    def esquiver(self):
+        """
+        Permet au joueur d'esquiver la prochaine attaque. A une chance d'échouer.
+        :return: True s'il esquive, False sinon.
+        """
+        if self.chance_esquive > random.random:
+            print("\nVous esquiver la prochaine attaque!")
+            time.sleep(0.5)
+            return True
+        else:
+            print("\nVous n'avez pas réussis à esquiver l'attaque...")
+            time.sleep(0.5)
+            return False
