@@ -8,21 +8,29 @@ import random
 import time
 
 CHEMIN_PERSO = Path("Création_personnage/personnage.json")
+
 class Personnage:
     """
     Un avatar créé par le joueur
     """
-    def __init__(self,nom:str, age:int, genre: str,race: Race, classe: Classe, sous_classe: SousClasse, chance_esquive:float=0.8):
-        self._nom = nom
-        self._age = age
-        self._genre = genre
-        self._race = race
-        self._classe = classe
-        self._sous_classe = sous_classe
-        self.chance_esquive = chance_esquive
+
+    def __init__(self, nom: str, age: int, genre: str, race: Race, classe: Classe, sous_classe: SousClasse,
+                 esquive: bool = False):
+        self.nom = nom
+        self.age = age
+        self.genre = genre
+        self.race = race
+        self.classe = classe
+        self.sous_classe = sous_classe
+        self.esquive = esquive
+        self.pv = sous_classe.pv
+        self.degats = sous_classe.degats
+        self.atts_spe = sous_classe.atts_spe
+        self.arme = sous_classe.arme
+
     @property
     def nom(self):
-        return self._nom
+        return self.nom
 
     @nom.setter
     def nom(self, nom):
@@ -32,7 +40,7 @@ class Personnage:
 
     @property
     def age(self):
-        return self._age
+        return self.age
 
     @age.setter
     def age(self, age):
@@ -42,7 +50,7 @@ class Personnage:
 
     @property
     def genre(self):
-        return self._genre
+        return self.genre
 
     @genre.setter
     def genre(self, genre):
@@ -52,7 +60,7 @@ class Personnage:
 
     @property
     def race(self):
-        return self._race
+        return self.race
 
     @race.setter
     def race(self, race):
@@ -62,7 +70,7 @@ class Personnage:
 
     @property
     def classe(self):
-        return self._classe
+        return self.classe
 
     @classe.setter
     def classe(self, classe):
@@ -72,7 +80,7 @@ class Personnage:
 
     @property
     def sous_classe(self):
-        return self._sous_classe
+        return self.sous_classe
 
     @sous_classe.setter
     def sous_classe(self, sous_classe):
@@ -81,15 +89,14 @@ class Personnage:
         self._sous_classe = sous_classe
 
     @property
-    def chance_esquive(self):
-        return self.chance_esquive
+    def esquive(self):
+        return self.esquive
 
-    @chance_esquive.setter
-    def chance_esquive(self,chance_esquive):
-        if chance_esquive > 1 or chance_esquive < 0:
-            raise TypeError("La chance d'esquive doit être un nombre entre 0 et 1")
-        self._chance_esquive = chance_esquive
-
+    @esquive.setter
+    def esquive(self, esquive):
+        if esquive is not isinstance(esquive, bool):
+            raise TypeError("L'esquive doit être sois True ou False")
+        self._esquive = esquive
 
     def enregistrer_personnage(self):
         with open(file=CHEMIN_PERSO, mode='r') as fichier_perso:
@@ -106,11 +113,16 @@ class Personnage:
         Permet au joueur d'esquiver la prochaine attaque. A une chance d'échouer.
         :return: True s'il esquive, False sinon.
         """
-        if self.chance_esquive > random.random:
+        self.esquive = False
+        chance = [5,1]
+        esquive = random.choices([True,False],chance)
+        if esquive:
             print("\nVous esquiver la prochaine attaque!")
             time.sleep(0.5)
-            return True
+            self.esquive = True
         else:
             print("\nVous n'avez pas réussis à esquiver l'attaque...")
             time.sleep(0.5)
-            return False
+
+
+

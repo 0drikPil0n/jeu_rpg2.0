@@ -1,4 +1,4 @@
-
+import random
 
 class Attaque:
     def __init__(self, nom:str, degats:list[int],chances:list[int]):
@@ -43,3 +43,11 @@ class Attaque:
         if chances != self._degats:
             raise ValueError("Il doit y avoir une chance pour chaque dégats")
         self._chances = chances
+
+    def degat_infliger(self):
+        """
+        Définit les dégats infligés par l'attaque.
+        :return:
+        """
+        degat = random.choices(self.degats,weights=self.chances,k=1)
+        return degat

@@ -19,7 +19,7 @@ class SousClasse:
 
     @property # Nom
     def nom(self):
-        return self._nom
+        return self.nom
 
     @nom.setter
     def nom(self, nom):
@@ -29,7 +29,7 @@ class SousClasse:
 
     @property # Arme
     def arme(self):
-        return self._arme
+        return self.arme
 
     @arme.setter
     def arme(self, arme):
@@ -39,7 +39,7 @@ class SousClasse:
 
     @property # Point de vie
     def pv(self):
-        return self._pv
+        return self.pv
 
     @pv.setter
     def pv(self, pv: int):
@@ -49,7 +49,7 @@ class SousClasse:
 
     @property # Dégats
     def degats(self):
-        return self._degats
+        return self.degats
 
     @degats.setter
     def degats(self, degats):
@@ -60,7 +60,7 @@ class SousClasse:
 
     @property # Attaques spéciales
     def atts_spe(self):
-        return self._atts_spe
+        return self.atts_spe
 
     @atts_spe.setter
     def atts_spe(self, atts_spe):

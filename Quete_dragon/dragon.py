@@ -1,4 +1,5 @@
 import random
+from Création_personnage.personnage import Personnage
 from Quete_dragon.attaque_dragon import Attaque
 
 class Dragon:
@@ -25,11 +26,17 @@ class Dragon:
         if atts is not isinstance(atts, list):
             raise ValueError("Les")
 
-    def attaquer(self,):
+    def attaquer(self,p_perso: Personnage):
         """
         Lance une attaque choisit au hasard dans la liste d'attaque
         :return: L'attaque lancé
         """
-
+        chance_reussite
         attaque = random.choice(self.atts)
-        return attaque
+        degat = attaque.degat_infliger()
+        if not p_perso.esquive:
+            print(f"Le dragon utilise {attaque.nom} et vous inflige {degat} dégats")
+            p_perso.pv -= degat
+        else:
+            print(f"Le dragon tente")
+
