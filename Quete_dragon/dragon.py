@@ -1,4 +1,5 @@
 import random
+import time
 from Création_personnage.personnage import Personnage
 from Quete_dragon.attaque_dragon import Attaque
 
@@ -13,8 +14,8 @@ class Dragon:
 
     @pv.setter
     def pv(self,pv):
-        if pv is not isinstance(pv, int):
-            raise TypeError("Les points de vie doivent être un nombre entier")
+        if not isinstance(pv, int) or pv <= 0:
+            raise TypeError("Les points de vie doivent être un nombre entier plus grand que 0")
         self._pv = pv
 
     @property
@@ -23,20 +24,22 @@ class Dragon:
 
     @atts.setter
     def atts(self, atts):
-        if atts is not isinstance(atts, list):
+        if not isinstance(atts, list):
             raise ValueError("Les")
 
     def attaquer(self,p_perso: Personnage):
         """
         Lance une attaque choisit au hasard dans la liste d'attaque
-        :return: L'attaque lancé
+        :return: None
         """
-        chance_reussite
+        reussite = random.choice([True,False])
         attaque = random.choice(self.atts)
         degat = attaque.degat_infliger()
         if not p_perso.esquive:
-            print(f"Le dragon utilise {attaque.nom} et vous inflige {degat} dégats")
-            p_perso.pv -= degat
-        else:
-            print(f"Le dragon tente")
-
+            if reussite:
+                print(f"\nLe dragon utilise {attaque.nom} et vous inflige {degat} dégats")
+                p_perso.pv -= degat
+                time.sleep(0.5)
+            else:
+                print(f"\nLe dragon tente {attaque.nom}, mais il échoue...")
+                time.sleep(0.5)

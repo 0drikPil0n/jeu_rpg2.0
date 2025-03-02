@@ -39,7 +39,7 @@ liste_classes = [royaute,villageois,magicien,armee]
 def choisir_nom():
     """
     Permet au joueur de choisir son nom
-    :return: Le nom, complet du joueur
+    :return: Le nom complet du joueur
     """
     p_prenom = input("\nQuel est votre prénom, aventurier?\n"
                      "Pénom: ").capitalize().strip()
@@ -57,7 +57,7 @@ def choisir_nom():
                       "Nom de famille: ").capitalize().strip()
     print("\nExcellent !\n")
     time.sleep(1)
-    p_nom_complet = p_prenom + " " + p_nom
+    p_nom_complet = f"{p_prenom} {p_nom}"
 
     return p_nom_complet
 

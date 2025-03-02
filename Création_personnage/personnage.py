@@ -34,8 +34,8 @@ class Personnage:
 
     @nom.setter
     def nom(self, nom):
-        if nom is not isinstance(nom, str):
-            raise TypeError("Le nom doit être un string")
+        if not isinstance(nom, str):
+            raise TypeError("Le nom doit être une string")
         self._nom = nom
 
     @property
@@ -44,7 +44,7 @@ class Personnage:
 
     @age.setter
     def age(self, age):
-        if age is not isinstance(age, int):
+        if not isinstance(self.age, int):
             raise TypeError("Ça prend un int")
         self._age = age
 
@@ -54,7 +54,7 @@ class Personnage:
 
     @genre.setter
     def genre(self, genre):
-        if genre is not isinstance(genre, str):
+        if not isinstance(genre, str):
             raise TypeError("Cela doit être un str")
         self._genre = genre
 
@@ -64,7 +64,7 @@ class Personnage:
 
     @race.setter
     def race(self, race):
-        if race is not isinstance(race, Race):
+        if not isinstance(race, Race):
             raise TypeError("Pas la bonne classe")
         self._race = race
 
@@ -74,7 +74,7 @@ class Personnage:
 
     @classe.setter
     def classe(self, classe):
-        if classe is not isinstance(classe, Classe):
+        if not isinstance(classe, Classe):
             raise TypeError("Pas la bonne classe")
         self._classe = classe
 
@@ -84,7 +84,7 @@ class Personnage:
 
     @sous_classe.setter
     def sous_classe(self, sous_classe):
-        if sous_classe is not isinstance(sous_classe, SousClasse):
+        if not isinstance(sous_classe, SousClasse):
             raise TypeError("Pas la bonne classe")
         self._sous_classe = sous_classe
 
@@ -94,7 +94,7 @@ class Personnage:
 
     @esquive.setter
     def esquive(self, esquive):
-        if esquive is not isinstance(esquive, bool):
+        if not isinstance(esquive, bool):
             raise TypeError("L'esquive doit être sois True ou False")
         self._esquive = esquive
 
@@ -105,7 +105,8 @@ class Personnage:
         with open(file=CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
-    def attaquer(self):
+    def attaquer(self, ennemi):
+
         pass
 
     def esquiver(self):
