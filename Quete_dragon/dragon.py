@@ -43,3 +43,4 @@ class Dragon:
             else:
                 print(f"\nLe dragon tente {attaque.nom}, mais il échoue...")
                 time.sleep(0.5)
+

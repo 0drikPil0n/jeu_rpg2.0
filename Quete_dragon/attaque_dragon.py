@@ -51,3 +51,6 @@ class Attaque:
         """
         degat = random.choices(self.degats,weights=self.chances,k=1)
         return degat
+
+
+coup_queue = Attaque(nom="Coup de queue")

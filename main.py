@@ -8,7 +8,8 @@ from Création_personnage.creer_personnage import (choisir_nom, choisir_age, cho
                                                   choisir_classe,choisir_sous_classe, liste_classes, liste_races)
 from Création_personnage.personnage import Personnage
 
-from Quete_dragon.quete_dragon import (afficher_dragon,combat_dragon,choisir_decision_combat,resultat_dragon)
+from Quete_dragon.dragon import Dragon
+from Quete_dragon.attaque_dragon import Attaque
 
 # Choix de la mission
 liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique"]
@@ -164,8 +165,9 @@ if __name__ == '__main__':
         match num_aventure:
             case "1":
                 while True:
-                    afficher_dragon()
-                    pv_dragon = 600
+
+                    # afficher_dragon()
+                    # pv_dragon = 600
     #                 pv_joueur = stats_role[sous_classe]["PV"]
     #                 tour = 0
     #                 while pv_dragon > 0 and pv_joueur > 0:

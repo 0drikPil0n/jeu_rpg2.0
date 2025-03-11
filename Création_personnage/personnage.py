@@ -113,13 +113,12 @@ class Personnage:
         Permet au joueur d'esquiver la prochaine attaque. A une chance d'échouer.
         :return: True s'il esquive, False sinon.
         """
-        self.esquive = False
         chance = [5,1]
         esquive = random.choices([True,False],chance)
         if esquive:
+            self.esquive = True
             print("\nVous esquiver la prochaine attaque!")
             time.sleep(0.5)
-            self.esquive = True
         else:
             print("\nVous n'avez pas réussis à esquiver l'attaque...")
             time.sleep(0.5)
