@@ -44,7 +44,7 @@ class Personnage:
 
     @age.setter
     def age(self, age):
-        if not isinstance(self.age, int):
+        if not isinstance(age, int):
             raise TypeError("Ça prend un int")
         self._age = age
 

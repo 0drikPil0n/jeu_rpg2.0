@@ -42,7 +42,7 @@ def choisir_nom():
     :return: Le nom complet du joueur
     """
     p_prenom = input("\nQuel est votre prénom, aventurier?\n"
-                     "Pénom: ").capitalize().strip()
+                     "Prénom: ").capitalize().strip()
     while not p_prenom.isalpha():
         print("\nEntrez un prénom correcte")
         time.sleep(1)

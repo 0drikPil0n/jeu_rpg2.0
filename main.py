@@ -26,13 +26,13 @@ def choisir_aventure() -> tuple[int, str]:
             for p_pos, p_mission in enumerate(liste_aventure):
                 print(f"{p_pos + 1} - {p_mission}")
                 time.sleep(0.3)
-            numero = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
+            p_numero = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
                                f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
         except ValueError:
             print("\nVeuillez choisir un nombre entier\n")
             time.sleep(1)
         else:
-            return numero, liste_aventure[numero - 1]
+            return numero, liste_aventure[p_numero - 1]
 
 
 def commencer_quete(p_sauvegarde:int,p_perso: Personnage = None,):
@@ -108,7 +108,7 @@ if __name__ == '__main__':
         match sauvegarde:
             case 1:
                 nom = choisir_nom()
-                race = choisir_race(liste_races, nom)
+                race = choisir_race(liste_races)
                 genre = choisir_genre()
                 age = choisir_age(race)
                 classe = choisir_classe(liste_classes)
