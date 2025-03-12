@@ -2,6 +2,16 @@ import random
 import time
 from typing import Any
 
+from attaque_dragon import Attaque
+from dragon import Dragon
+from Création_personnage.personnage import Personnage
+
+# Attaque du dragon
+coup_queue = Attaque(nom="Coup de queue", degats=[50, 55], chances=[2, 1])
+lance_flamme = Attaque(nom="Lance flamme", degats=[75, 80], chances=[2, 1])
+coup_griffe = Attaque(nom="Coup de griffe", degats=[30, 35], chances=[2, 1])
+# Le dragon
+dragon = Dragon(pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
 
 def afficher_dragon():
     """
@@ -36,8 +46,29 @@ def afficher_dragon():
     input("Appuyer sur entrée pour continuer\n")
     return None
 
+def choisir_decision_combat(joueur:Personnage,p_dragon:Dragon):
+    """
+    Permet au joueur de choisir que faire avant le combat
+    :param joueur: Le personnage du joueur
+    :param p_dragon: Le dragon
+    :return: None
+    """
+    p_choix = input("Le dragon se prépare à attaquer... Que voulez-vous faire?\n"
+                    "Attaquer (1) ou esquiver (2): ")
+    while p_choix not in ["1", "2"]:
+        print("Veuillez sélectionner un choix valide...")
+        time.sleep(0.5)
+        p_choix = input("Le dragon se prépare à attaquer... Que voulez-vous faire?\n"
+                        "Attaquer (1) ou esquiver (2): ")
+    match p_choix:
+        case "1":
+            joueur.attaquer()
 
-def choisir_decision_combat(stats: dict, role: str,p_tour:int) -> tuple[int | None | Any, bool | Any, int]:
+
+
+
+
+def choisir_decision_comba(stats: dict, role: str,p_tour:int) -> tuple[int | None | Any, bool | Any, int]:
     """
     Permet au joueur de choisir quoi faire avant le combat
     :param stats: Les statistiques du role choisis
