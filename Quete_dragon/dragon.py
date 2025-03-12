@@ -1,7 +1,7 @@
 import random
 import time
 from Création_personnage.personnage import Personnage
-from Quete_dragon.attaque_dragon import Attaque
+from Générale.Attaque import Attaque
 
 class Dragon:
     def __init__(self,pv:int, atts:list[Attaque], chances:list[int]):

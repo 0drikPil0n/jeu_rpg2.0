@@ -2,7 +2,7 @@ import random
 import time
 from typing import Any
 
-from attaque_dragon import Attaque
+from Générale.Attaque import Attaque
 from dragon import Dragon
 from Création_personnage.personnage import Personnage
 
@@ -46,7 +46,7 @@ def afficher_dragon():
     input("Appuyer sur entrée pour continuer\n")
     return None
 
-def choisir_decision_combat(joueur:Personnage,p_dragon:Dragon):
+def combat(joueur:Personnage,p_dragon:Dragon):
     """
     Permet au joueur de choisir que faire avant le combat
     :param joueur: Le personnage du joueur
@@ -62,7 +62,16 @@ def choisir_decision_combat(joueur:Personnage,p_dragon:Dragon):
                         "Attaquer (1) ou esquiver (2): ")
     match p_choix:
         case "1":
-            joueur.attaquer()
+            choix_atts = input("Quelle attaque voulez-vous utilisée?\n"
+                               "Attaque normale (1) | Attaque spéciale (2)")
+            while choix_atts not in ["1", "2"]:
+                print("Veuillez sélectionner un choix valide...")
+                time.sleep(0.5)
+                choix_atts = input("Quelle attaque voulez-vous utilisée?\n"
+                                   "Attaque normale (1) | Attaque spéciale (2)")
+            match choix_atts:
+                case "1":
+                    joueur.attaquer()
 
 
 

@@ -1,15 +1,17 @@
+from Générale.Attaque import Attaque
+
 class SousClasse:
     """
     Une sous-catégorie de classe procurant au joueur ses statistiques
     """
-    def __init__(self, nom: str, arme: str, pv: int, degats: list[int], atts_spe: list[int]):
+    def __init__(self, nom: str, arme: str, pv: int, att: Attaque, att_sp: Attaque):
         """
         Initialize le nom de la classe et les autres paramètres
         :param nom: Le nom de la sous-classe
         :param arme: L'arme utilisée par cette sous-classe
         :param pv: Les points de vie de cette sous-classe
-        :param degats: Les dégats que cette sous-classe peut infligé
-        :param atts_spe: Les attaques spéciales de cette sous-classe
+        :param att: L'attaque de base de cette sous-classe
+        :param att_sp: L'attaque spéciale de cette sous-classe
         """
         self.nom = nom
         self.arme = arme

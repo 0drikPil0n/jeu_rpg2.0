@@ -105,11 +105,15 @@ class Personnage:
         with open(file=CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
-    def attaquer(self, ennemi,):
-        attaque = random.choice(self.degats)
-        print(f"Vous utiliser {attaque.nom}")
-        ennemi.pv -= attaque
-        pass
+    def attaquer(self, ennemi, choix):
+        match choix:
+            case "1":
+                attaque = random.choice(self.degats)
+                print(f"Vous utiliser {}")
+                ennemi.pv -=
+            case "2":
+                attaque = random.choice(self.atts_spe)
+
 
     def esquiver(self):
         """
@@ -125,6 +129,4 @@ class Personnage:
         else:
             print("\nVous n'avez pas réussis à esquiver l'attaque...")
             time.sleep(0.5)
-
-
 

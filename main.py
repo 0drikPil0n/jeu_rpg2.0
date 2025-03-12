@@ -10,7 +10,7 @@ from Création_personnage.creer_personnage import (choisir_nom, choisir_age, cho
 from Création_personnage.personnage import Personnage
 
 from Quete_dragon.dragon import Dragon
-from Quete_dragon.attaque_dragon import Attaque
+from Générale.Attaque import Attaque
 
 # Choix de la mission
 liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique"]
