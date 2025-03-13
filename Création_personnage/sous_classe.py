@@ -4,7 +4,7 @@ class SousClasse:
     """
     Une sous-catégorie de classe procurant au joueur ses statistiques
     """
-    def __init__(self, nom: str, arme: str, pv: int, att: Attaque, att_sp: Attaque):
+    def __init__(self, nom: str, arme: str, pv: int, attaque: Attaque, attaque_speciale: Attaque):
         """
         Initialize le nom de la classe et les autres paramètres
         :param nom: Le nom de la sous-classe
@@ -16,8 +16,8 @@ class SousClasse:
         self.nom = nom
         self.arme = arme
         self.pv = pv
-        self.degats = degats
-        self.atts_spe = atts_spe
+        self.attaque = attaque
+        self.attaque_speciale = attaque_speciale
 
     @property # Nom
     def nom(self):
@@ -50,23 +50,23 @@ class SousClasse:
         self._pv = pv
 
     @property # Dégats
-    def degats(self):
-        return self._degats
+    def attaque(self):
+        return self._attaque
 
-    @degats.setter
-    def degats(self, degats):
-        for degat in degats:
-            if degat < 0:
+    @attaque.setter
+    def attaque(self, attaque):
+        for att in attaque:
+            if att < 0:
                 raise ValueError("Un dégat doit être au minimum de 1")
-        self._degats = degats
+        self._attaque = attaque
 
     @property # Attaques spéciales
-    def atts_spe(self):
-        return self._atts_spe
+    def attaque_speciale(self):
+        return self._attaque_speciale
 
-    @atts_spe.setter
-    def atts_spe(self, atts_spe):
-        for att_spe in atts_spe:
+    @attaque_speciale.setter
+    def attaque_speciale(self, attaque_speciale):
+        for att_spe in attaque_speciale:
             if att_spe < 0:
                 raise ValueError("Une attaque spéciale doit être au minimum de 1")
-        self._atts_spe = atts_spe
+        self._attaque_speciale = attaque_speciale

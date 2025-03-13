@@ -24,8 +24,8 @@ class Personnage:
         self.sous_classe = sous_classe
         self.esquive = esquive
         self.pv = sous_classe.pv
-        self.degats = sous_classe.degats
-        self.atts_spe = sous_classe.atts_spe
+        self.attaque = sous_classe.attaque
+        self.attaque_speciale = sous_classe.attaque_speciale
         self.arme = sous_classe.arme
 
     @property
@@ -108,11 +108,11 @@ class Personnage:
     def attaquer(self, ennemi, choix):
         match choix:
             case "1":
-                attaque = random.choice(self.degats)
-                print(f"Vous utiliser {}")
-                ennemi.pv -=
+                attaque = random.choice(self.attaque)
+                print(f"Vous utiliser {attaque.nom}")
+                ennemi.pv -= attaque.degat_infliger()
             case "2":
-                attaque = random.choice(self.atts_spe)
+                attaque = random.choice(self.attaque_speciale)
 
 
     def esquiver(self):
