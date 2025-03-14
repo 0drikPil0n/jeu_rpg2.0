@@ -7,22 +7,21 @@ from pathlib import Path
 import random
 import time
 
-CHEMIN_PERSO = Path("Création_personnage/personnage.json")
 
 class Personnage:
     """
     Un avatar créé par le joueur
     """
+    CHEMIN_PERSO = Path("Création_personnage/personnage.json")
 
-    def __init__(self, nom: str, age: int, genre: str, race: Race, classe: Classe, sous_classe: SousClasse,
-                 esquive: bool = False):
+    def __init__(self, nom: str, age: int, genre: str, race: Race, classe: Classe, sous_classe: SousClasse):
         self.nom = nom
         self.age = age
         self.genre = genre
         self.race = race
         self.classe = classe
         self.sous_classe = sous_classe
-        self.esquive = esquive
+        self.esquive = False
         self.pv = sous_classe.pv
         self.attaque = sous_classe.attaque
         self.attaque_speciale = sous_classe.attaque_speciale
@@ -99,10 +98,10 @@ class Personnage:
         self._esquive = esquive
 
     def enregistrer_personnage(self):
-        with open(file=CHEMIN_PERSO, mode='r') as fichier_perso:
+        with open(file=Personnage.CHEMIN_PERSO, mode='r') as fichier_perso:
             liste_personnage = jsonpickle.decode(fichier_perso.read())
         liste_personnage.append(self)
-        with open(file=CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
+        with open(file=Personnage.CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
     def attaquer(self, ennemi, choix):
@@ -114,14 +113,13 @@ class Personnage:
             case "2":
                 attaque = random.choice(self.attaque_speciale)
 
-
     def esquiver(self):
         """
         Permet au joueur d'esquiver la prochaine attaque. A une chance d'échouer.
         :return: True s'il esquive, False sinon.
         """
-        chance = [5,1]
-        esquive = random.choices([True,False],chance)
+        chance = [5, 1]
+        esquive = random.choices([True, False], chance)
         if esquive:
             self.esquive = True
             print("\nVous esquiver la prochaine attaque!")
@@ -129,4 +127,3 @@ class Personnage:
         else:
             print("\nVous n'avez pas réussis à esquiver l'attaque...")
             time.sleep(0.5)
-

@@ -1,7 +1,8 @@
 import random
 
+
 class Attaque:
-    def __init__(self, nom:str, degats:list[int],chances:list[int]):
+    def __init__(self, nom: str, degats: list[int], chances: list[int]):
         self.nom = nom
         self.degats = degats
         self.chances = chances
@@ -22,7 +23,7 @@ class Attaque:
 
     @degats.setter
     def degats(self, degats):
-        if not isinstance(degats,list):
+        if not isinstance(degats, list):
             raise TypeError("Les dégats de cette attaque doivent être dans une liste")
         for degat in degats:
             if not isinstance(degat, int):
@@ -34,7 +35,7 @@ class Attaque:
         return self.chances
 
     @chances.setter
-    def chances(self,chances):
+    def chances(self, chances):
         if not isinstance(chances, list):
             raise TypeError("Les chances relatives au dégats doivvent être dans une liste")
         for chance in chances:
@@ -49,5 +50,5 @@ class Attaque:
         Définit les dégats infligés par l'attaque.
         :return:
         """
-        degat = random.choices(self.degats,weights=self.chances,k=1)
+        degat = random.choices(self.degats, weights=self.chances, k=1)
         return degat

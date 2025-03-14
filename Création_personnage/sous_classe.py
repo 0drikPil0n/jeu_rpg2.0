@@ -10,8 +10,8 @@ class SousClasse:
         :param nom: Le nom de la sous-classe
         :param arme: L'arme utilisée par cette sous-classe
         :param pv: Les points de vie de cette sous-classe
-        :param att: L'attaque de base de cette sous-classe
-        :param att_sp: L'attaque spéciale de cette sous-classe
+        :param attaque: L'attaque de base de cette sous-classe
+        :param attaque_speciale: L'attaque spéciale de cette sous-classe
         """
         self.nom = nom
         self.arme = arme
@@ -55,8 +55,8 @@ class SousClasse:
 
     @attaque.setter
     def attaque(self, attaque):
-        for att in attaque:
-            if att < 0:
+        for degat in attaque:
+            if degat <= 0:
                 raise ValueError("Un dégat doit être au minimum de 1")
         self._attaque = attaque
 
@@ -66,7 +66,7 @@ class SousClasse:
 
     @attaque_speciale.setter
     def attaque_speciale(self, attaque_speciale):
-        for att_spe in attaque_speciale:
-            if att_spe < 0:
+        for degat in attaque_speciale:
+            if degat <= 0:
                 raise ValueError("Une attaque spéciale doit être au minimum de 1")
         self._attaque_speciale = attaque_speciale

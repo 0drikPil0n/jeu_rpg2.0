@@ -1,6 +1,5 @@
 import sys
 import time
-from idlelib.configdialog import changes
 from textwrap import dedent
 import jsonpickle
 from pathlib import Path
@@ -166,7 +165,7 @@ if __name__ == '__main__':
         match num_aventure:
             case "1":
                 while True:
-
+                    pass
                     # afficher_dragon()
                     # pv_dragon = 600
     #                 pv_joueur = stats_role[sous_classe]["PV"]
