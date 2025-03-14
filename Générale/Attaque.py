@@ -41,7 +41,7 @@ class Attaque:
         for chance in chances:
             if not isinstance(chance, int):
                 raise TypeError("Une chance doit être un nombre entier")
-        if chances != self._degats:
+        if len(chances) != len(self._degats):
             raise ValueError("Il doit y avoir une chance pour chaque dégats")
         self._chances = chances
 

@@ -10,6 +10,7 @@ from Création_personnage.personnage import Personnage
 
 from Quete_dragon.dragon import Dragon
 from Générale.Attaque import Attaque
+from Quete_dragon.quete_dragon import (afficher_dragon, combat)
 
 # Choix de la mission
 liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique"]
@@ -124,12 +125,8 @@ if __name__ == '__main__':
                              f"Classe choisis: {classe.nom}\n"
                              f"Sous-classe choisis: {sous_classe.nom}\n"
                              f"**********************************************************************************"))
-                nouveau_perso = Personnage(nom=nom, race=race, genre=genre, age=age, classe=classe,
+                personnage = Personnage(nom=nom, race=race, genre=genre, age=age, classe=classe,
                                            sous_classe=sous_classe)
-                personnage = commencer_quete(sauvegarde,nouveau_perso)
-                if personnage is not None:
-                    break
-
             case 2:
                 with open(file=CHEMIN_PERSO, mode="r") as perso_json:
                     liste_personnage = jsonpickle.decode(perso_json.read())
@@ -140,24 +137,24 @@ if __name__ == '__main__':
                 else:
                     while True:
                         try:
-                            for i, personnage in enumerate(liste_personnage, start=1):
-                                print(f"{i} - {personnage.nom}\n"
-                                      f"    - {personnage.race.nom}\n"
-                                      f"    - {personnage.genre}\n"
-                                      f"    - {personnage.age}\n"
-                                      f"    - {personnage.classe.nom}\n"
-                                      f"    - {personnage.sous_classe.nom}\n")
+                            for i, perso in enumerate(liste_personnage, start=1):
+                                print(f"{i} - {perso.nom}\n"
+                                      f"    - {perso.race.nom}\n"
+                                      f"    - {perso.genre}\n"
+                                      f"    - {perso.age}\n"
+                                      f"    - {perso.classe.nom}\n"
+                                      f"    - {perso.sous_classe.nom}\n")
                             numero = int(input("Quel sauvegarde voulez-vous prendre?\n"
                                                "Sélectionnez le numéro correspondant: "))
-                            personnage_choisi = liste_personnage[numero - 1]
+                            personnage = liste_personnage[numero - 1]
                         except (ValueError,IndexError):
                             print("\nVeuillez choisir une sauvegarde valide\n")
                             time.sleep(1)
                         else:
                             break
-                personnage = commencer_quete(sauvegarde,personnage_choisi)
-                if personnage is not None:
-                    break
+        perso_joueur = commencer_quete(sauvegarde,personnage)
+        if perso_joueur is not None:
+            break
     # Début aventure
     while True:
         aventure = choisir_aventure()
@@ -165,7 +162,17 @@ if __name__ == '__main__':
         match num_aventure:
             case "1":
                 while True:
-                    pass
+                    # Attaque du dragon
+                    coup_queue = Attaque(nom="Coup de queue", degats=[50, 55], chances=[2, 1])
+                    lance_flamme = Attaque(nom="Lance flamme", degats=[75, 80], chances=[2, 1])
+                    coup_griffe = Attaque(nom="Coup de griffe", degats=[30, 35], chances=[2, 1])
+                    # Le dragon
+                    dragon = Dragon(pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
+                    afficher_dragon()
+                    n_tour_recharge = 0
+                    while perso_joueur.pv <= 0 and dragon.pv <= 0:
+                        combat(perso_joueur, dragon, n_tour_recharge)
+
                     # afficher_dragon()
                     # pv_dragon = 600
     #                 pv_joueur = stats_role[sous_classe]["PV"]

@@ -3,15 +3,9 @@ import time
 from typing import Any
 
 from Générale.Attaque import Attaque
-from dragon import Dragon
+from Quete_dragon.dragon import Dragon
 from Création_personnage.personnage import Personnage
 
-# Attaque du dragon
-coup_queue = Attaque(nom="Coup de queue", degats=[50, 55], chances=[2, 1])
-lance_flamme = Attaque(nom="Lance flamme", degats=[75, 80], chances=[2, 1])
-coup_griffe = Attaque(nom="Coup de griffe", degats=[30, 35], chances=[2, 1])
-# Le dragon
-dragon = Dragon(pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
 
 def afficher_dragon():
     """
@@ -46,32 +40,41 @@ def afficher_dragon():
     input("Appuyer sur entrée pour continuer\n")
     return None
 
-def combat(joueur:Personnage,p_dragon:Dragon):
+def combat(joueur:Personnage,p_dragon:Dragon,n_tour_recharge):
     """
     Permet au joueur de choisir que faire avant le combat
     :param joueur: Le personnage du joueur
     :param p_dragon: Le dragon
+    :param n_tour_recharge: Le nombre de tour avant de pouvoir recharger l'attaque spéciale
     :return: None
     """
-    p_choix = input("Le dragon se prépare à attaquer... Que voulez-vous faire?\n"
+    if n_tour_recharge > 0:
+        n_tour_recharge -= 1
+    # Tour du joueur
+    p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
                     "Attaquer (1) ou esquiver (2): ")
     while p_choix not in ["1", "2"]:
-        print("Veuillez sélectionner un choix valide...")
+        print("\nVeuillez sélectionner un choix valide...")
         time.sleep(0.5)
-        p_choix = input("Le dragon se prépare à attaquer... Que voulez-vous faire?\n"
+        p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
                         "Attaquer (1) ou esquiver (2): ")
     match p_choix:
         case "1":
-            choix_atts = input("Quelle attaque voulez-vous utilisée?\n"
-                               "Attaque normale (1) | Attaque spéciale (2)")
+            choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
+                               "Attaque normale (1) | Attaque spéciale (2): ")
             while choix_atts not in ["1", "2"]:
-                print("Veuillez sélectionner un choix valide...")
+                print("\nVeuillez sélectionner un choix valide...")
                 time.sleep(0.5)
-                choix_atts = input("Quelle attaque voulez-vous utilisée?\n"
-                                   "Attaque normale (1) | Attaque spéciale (2)")
-            match choix_atts:
-                case "1":
-                    joueur.attaquer()
+                choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
+                                   "Attaque normale (1) | Attaque spéciale (2): ")
+            joueur.attaquer(p_dragon,choix_atts, n_tour_recharge)
+            print(f"\nIl reste {p_dragon} PV au dragon.")
+            time.sleep(1)
+        case "2":
+            joueur.esquiver()
+
+
+
 
 
 
@@ -193,3 +196,4 @@ def resultat_dragon(pv_dragon:int,pv_joueur:int) -> bool:
         print("\nVous êtes mort. Le dragon vous a tuer")
     time.sleep(1)
     return p_victoire
+

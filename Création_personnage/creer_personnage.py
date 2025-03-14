@@ -73,7 +73,7 @@ lance = Attaque("Lance", [40, 20, 10], [2, 3, 1])
 lance_s = Attaque("Lance", [80, 75], [3, 4])
 cavalier = SousClasse(nom="Cavalier", arme="Lance", pv=300, attaque=lance, attaque_speciale=lance_s)
 # Infanterie
-fusil = Attaque("Fusil", [60, 40, 30, 20], [2, 3, 1])
+fusil = Attaque("Fusil", [60, 40, 30, 20], [2, 3, 3, 1])
 fusil_s = Attaque("Fusil", [100, 90], [1, 2])
 infanterie = SousClasse(nom="Infantrie", arme="Fusil", pv=275, attaque=fusil, attaque_speciale=fusil_s)
 # Mercenaire

@@ -104,14 +104,22 @@ class Personnage:
         with open(file=Personnage.CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
-    def attaquer(self, ennemi, choix):
+    def attaquer(self, ennemi, choix, tour):
         match choix:
             case "1":
-                attaque = random.choice(self.attaque)
-                print(f"Vous utiliser {attaque.nom}")
-                ennemi.pv -= attaque.degat_infliger()
+                attaque = self.attaque.degat_infliger()
+                print(f"Vous utiliser {self.attaque.nom}")
+                ennemi.pv -= attaque
             case "2":
-                attaque = random.choice(self.attaque_speciale)
+                if tour > 0:
+                    print(f"\nVous devez attendre {tour} tour pour recharger cette attaque...")
+                    time.sleep(0.5)
+                else:
+                    attaque = self.attaque_speciale.degat_infliger()
+                    print(f"Vous utiliser {self.attaque.nom}")
+                    ennemi.pv -= attaque
+                    tour += 3
+
 
     def esquiver(self):
         """

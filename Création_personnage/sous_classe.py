@@ -55,9 +55,8 @@ class SousClasse:
 
     @attaque.setter
     def attaque(self, attaque):
-        for degat in attaque:
-            if degat <= 0:
-                raise ValueError("Un dégat doit être au minimum de 1")
+        if not isinstance(attaque, Attaque):
+            raise TypeError("Une attaque doit être une instance de la classe 'Attaque'.")
         self._attaque = attaque
 
     @property # Attaques spéciales
@@ -66,7 +65,6 @@ class SousClasse:
 
     @attaque_speciale.setter
     def attaque_speciale(self, attaque_speciale):
-        for degat in attaque_speciale:
-            if degat <= 0:
-                raise ValueError("Une attaque spéciale doit être au minimum de 1")
+        if not isinstance(attaque_speciale, Attaque):
+            raise TypeError("Une attaque doit être une instance de la classe 'Attaque'.")
         self._attaque_speciale = attaque_speciale
