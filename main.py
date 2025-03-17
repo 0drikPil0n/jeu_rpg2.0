@@ -109,6 +109,7 @@ if __name__ == '__main__':
                 time.sleep(1)
             else:
                 break
+
         match sauvegarde:
             case 1:
                 nom = choisir_nom()
@@ -151,7 +152,7 @@ if __name__ == '__main__':
                                       f"    - {perso.sous_classe.nom}\n")
                             numero = int(input("Quel sauvegarde voulez-vous prendre?\n"
                                                "Sélectionnez le numéro correspondant: "))
-                            if numero not in range(1, len(liste_personnage)):
+                            if numero not in range(1, len(liste_personnage) + 1):
                                 raise IndexError
                         except (ValueError,IndexError):
                             print("\nVeuillez choisir une sauvegarde valide\n")
@@ -162,6 +163,7 @@ if __name__ == '__main__':
                 perso_joueur: Personnage = commencer_quete(sauvegarde,personnage)
                 if perso_joueur is not None:
                     break
+
     # Début aventure
     while True:
         aventure = choisir_aventure()
