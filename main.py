@@ -34,7 +34,7 @@ def choisir_aventure() -> tuple[int, str]:
             print("\nVeuillez choisir un nombre entier\n")
             time.sleep(1)
         else:
-            return numero, liste_aventure[p_numero - 1]
+            return p_numero, liste_aventure[p_numero - 1]
 
 
 def commencer_quete(p_sauvegarde:int,p_perso: Personnage = None,):
@@ -102,8 +102,10 @@ if __name__ == '__main__':
             try:
                 sauvegarde = int(input("\nSouhaitez-vous commencer une nouvelle partie ou en reprendre une ancienne?\n"
                                        "Commencer (1) | Reprendre (2) : "))
+                if sauvegarde not in [1, 2]:
+                    raise ValueError
             except ValueError:
-                print("\nVeuillez choisir un nombre entier\n")
+                print("\nVeuillez choisir un nombre entier entre 1 et 2\n")
                 time.sleep(1)
             else:
                 break
@@ -127,9 +129,12 @@ if __name__ == '__main__':
                              f"**********************************************************************************"))
                 personnage = Personnage(nom=nom, race=race, genre=genre, age=age, classe=classe,
                                            sous_classe=sous_classe)
+                perso_joueur: Personnage = commencer_quete(sauvegarde,personnage)
+                if perso_joueur is not None:
+                    break
             case 2:
                 with open(file=CHEMIN_PERSO, mode="r") as perso_json:
-                    liste_personnage = jsonpickle.decode(perso_json.read())
+                    liste_personnage: list[Personnage] = jsonpickle.decode(perso_json.read())
                 if not liste_personnage:
                     print("\nVous n'avez aucune sauvegarde. . .")
                     time.sleep(1)
@@ -146,21 +151,23 @@ if __name__ == '__main__':
                                       f"    - {perso.sous_classe.nom}\n")
                             numero = int(input("Quel sauvegarde voulez-vous prendre?\n"
                                                "Sélectionnez le numéro correspondant: "))
-                            personnage = liste_personnage[numero - 1]
+                            if numero not in range(1, len(liste_personnage)):
+                                raise IndexError
                         except (ValueError,IndexError):
                             print("\nVeuillez choisir une sauvegarde valide\n")
                             time.sleep(1)
                         else:
                             break
-        perso_joueur = commencer_quete(sauvegarde,personnage)
-        if perso_joueur is not None:
-            break
+                personnage: Personnage = liste_personnage[numero - 1]
+                perso_joueur: Personnage = commencer_quete(sauvegarde,personnage)
+                if perso_joueur is not None:
+                    break
     # Début aventure
     while True:
         aventure = choisir_aventure()
         num_aventure = aventure[0]
         match num_aventure:
-            case "1":
+            case 1:
                 while True:
                     # Attaque du dragon
                     coup_queue = Attaque(nom="Coup de queue", degats=[50, 55], chances=[2, 1])
@@ -170,7 +177,7 @@ if __name__ == '__main__':
                     dragon = Dragon(pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
                     afficher_dragon()
                     n_tour_recharge = 0
-                    while perso_joueur.pv <= 0 and dragon.pv <= 0:
+                    while perso_joueur.pv > 0 and dragon.pv > 0:
                         combat(perso_joueur, dragon, n_tour_recharge)
 
                     # afficher_dragon()
