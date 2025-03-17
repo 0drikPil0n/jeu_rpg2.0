@@ -1,2 +1,254 @@
 [
+    {
+        "py/object": "Cr\u00e9ation_personnage.personnage.Personnage",
+        "_nom": "R\u00e9my Corri",
+        "_age": 43,
+        "_genre": "Autre",
+        "_race": {
+            "py/object": "Cr\u00e9ation_personnage.race.Race",
+            "_nom": "Ogre",
+            "_age_min": 18,
+            "_age_max": 150,
+            "limite_age": [
+                18,
+                150
+            ]
+        },
+        "_classe": {
+            "py/object": "Cr\u00e9ation_personnage.classe.Classe",
+            "_nom": "Arm\u00e9e",
+            "_sous_classes": [
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Archer",
+                    "_arme": "Arc",
+                    "_pv": 150,
+                    "_degats": [
+                        100,
+                        40,
+                        40,
+                        40
+                    ],
+                    "_atts_spe": [
+                        115,
+                        110
+                    ]
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Cavalier",
+                    "_arme": "Lance",
+                    "_pv": 300,
+                    "_degats": [
+                        40,
+                        20,
+                        20,
+                        10
+                    ],
+                    "_atts_spe": [
+                        80,
+                        75
+                    ]
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Infantrie",
+                    "_arme": "Fusil",
+                    "_pv": 275,
+                    "_degats": [
+                        60,
+                        40,
+                        30,
+                        20
+                    ],
+                    "_atts_spe": [
+                        100,
+                        90
+                    ]
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Mercenaire",
+                    "_arme": "Double dague",
+                    "_pv": 200,
+                    "_degats": [
+                        75,
+                        40,
+                        30,
+                        30
+                    ],
+                    "_atts_spe": [
+                        125,
+                        90
+                    ]
+                }
+            ]
+        },
+        "_sous_classe": {
+            "py/id": 9
+        },
+        "_esquive": false,
+        "pv": 300,
+        "degats": {
+            "py/id": 10
+        },
+        "atts_spe": {
+            "py/id": 11
+        },
+        "arme": "Lance"
+    },
+    {
+        "py/object": "Cr\u00e9ation_personnage.personnage.Personnage",
+        "_nom": "Odrik Pilonn",
+        "_age": 89,
+        "_genre": "Homme",
+        "_race": {
+            "py/object": "Cr\u00e9ation_personnage.race.Race",
+            "_nom": "Nain",
+            "_age_min": 15,
+            "_age_max": 250,
+            "limite_age": [
+                15,
+                250
+            ]
+        },
+        "_classe": {
+            "py/object": "Cr\u00e9ation_personnage.classe.Classe",
+            "_nom": "Magicien",
+            "_sous_classes": [
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Mage",
+                    "_arme": "Livre de sort",
+                    "_pv": 250,
+                    "_attaque": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Livre de sort",
+                        "_degats": [
+                            40,
+                            30
+                        ],
+                        "_chances": [
+                            4,
+                            3
+                        ]
+                    },
+                    "_attaque_speciale": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Livre de sort",
+                        "_degats": [
+                            100
+                        ],
+                        "_chances": [
+                            1
+                        ]
+                    }
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Sorcier",
+                    "_arme": "Baguette magique",
+                    "_pv": 250,
+                    "_attaque": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Baguette magique",
+                        "_degats": [
+                            50,
+                            35,
+                            25
+                        ],
+                        "_chances": [
+                            2,
+                            3,
+                            1
+                        ]
+                    },
+                    "_attaque_speciale": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Baguette magique",
+                        "_degats": [
+                            110
+                        ],
+                        "_chances": [
+                            1
+                        ]
+                    }
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Alchimiste",
+                    "_arme": "Potions magiques",
+                    "_pv": 250,
+                    "_attaque": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Potions",
+                        "_degats": [
+                            50,
+                            35,
+                            25
+                        ],
+                        "_chances": [
+                            3,
+                            4,
+                            2
+                        ]
+                    },
+                    "_attaque_speciale": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Potions",
+                        "_degats": [
+                            110
+                        ],
+                        "_chances": [
+                            1
+                        ]
+                    }
+                },
+                {
+                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
+                    "_nom": "Shaman",
+                    "_arme": "Invocation d'esprit",
+                    "_pv": 230,
+                    "_attaque": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Invocation esprit",
+                        "_degats": [
+                            60,
+                            40,
+                            20
+                        ],
+                        "_chances": [
+                            3,
+                            2,
+                            1
+                        ]
+                    },
+                    "_attaque_speciale": {
+                        "py/object": "G\u00e9n\u00e9rale.Attaque.Attaque",
+                        "_nom": "Invocation esprit",
+                        "_degats": [
+                            125,
+                            90
+                        ],
+                        "_chances": [
+                            1,
+                            2
+                        ]
+                    }
+                }
+            ]
+        },
+        "_sous_classe": {
+            "py/id": 30
+        },
+        "_esquive": false,
+        "pv": 250,
+        "attaque": {
+            "py/id": 31
+        },
+        "attaque_speciale": {
+            "py/id": 34
+        },
+        "arme": "Baguette magique"
+    }
 ]
