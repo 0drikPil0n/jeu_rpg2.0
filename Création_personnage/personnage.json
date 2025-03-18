@@ -1,106 +1,8 @@
 [
     {
         "py/object": "Cr\u00e9ation_personnage.personnage.Personnage",
-        "_nom": "R\u00e9my Corri",
+        "_nom": "Alastor Fadir",
         "_age": 43,
-        "_genre": "Autre",
-        "_race": {
-            "py/object": "Cr\u00e9ation_personnage.race.Race",
-            "_nom": "Ogre",
-            "_age_min": 18,
-            "_age_max": 150,
-            "limite_age": [
-                18,
-                150
-            ]
-        },
-        "_classe": {
-            "py/object": "Cr\u00e9ation_personnage.classe.Classe",
-            "_nom": "Arm\u00e9e",
-            "_sous_classes": [
-                {
-                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
-                    "_nom": "Archer",
-                    "_arme": "Arc",
-                    "_pv": 150,
-                    "_degats": [
-                        100,
-                        40,
-                        40,
-                        40
-                    ],
-                    "_atts_spe": [
-                        115,
-                        110
-                    ]
-                },
-                {
-                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
-                    "_nom": "Cavalier",
-                    "_arme": "Lance",
-                    "_pv": 300,
-                    "_degats": [
-                        40,
-                        20,
-                        20,
-                        10
-                    ],
-                    "_atts_spe": [
-                        80,
-                        75
-                    ]
-                },
-                {
-                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
-                    "_nom": "Infantrie",
-                    "_arme": "Fusil",
-                    "_pv": 275,
-                    "_degats": [
-                        60,
-                        40,
-                        30,
-                        20
-                    ],
-                    "_atts_spe": [
-                        100,
-                        90
-                    ]
-                },
-                {
-                    "py/object": "Cr\u00e9ation_personnage.sous_classe.SousClasse",
-                    "_nom": "Mercenaire",
-                    "_arme": "Double dague",
-                    "_pv": 200,
-                    "_degats": [
-                        75,
-                        40,
-                        30,
-                        30
-                    ],
-                    "_atts_spe": [
-                        125,
-                        90
-                    ]
-                }
-            ]
-        },
-        "_sous_classe": {
-            "py/id": 9
-        },
-        "_esquive": false,
-        "pv": 300,
-        "degats": {
-            "py/id": 10
-        },
-        "atts_spe": {
-            "py/id": 11
-        },
-        "arme": "Lance"
-    },
-    {
-        "py/object": "Cr\u00e9ation_personnage.personnage.Personnage",
-        "_nom": "Odrik Pilonn",
-        "_age": 89,
         "_genre": "Homme",
         "_race": {
             "py/object": "Cr\u00e9ation_personnage.race.Race",
@@ -239,15 +141,15 @@
             ]
         },
         "_sous_classe": {
-            "py/id": 30
+            "py/id": 13
         },
         "_esquive": false,
-        "pv": 250,
+        "_pv": 250,
         "attaque": {
-            "py/id": 31
+            "py/id": 14
         },
         "attaque_speciale": {
-            "py/id": 34
+            "py/id": 17
         },
         "arme": "Baguette magique"
     }

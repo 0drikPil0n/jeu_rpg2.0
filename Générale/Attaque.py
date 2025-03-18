@@ -9,7 +9,7 @@ class Attaque:
 
     @property
     def nom(self):
-        return self.nom
+        return self._nom
 
     @nom.setter
     def nom(self, nom):
@@ -19,7 +19,7 @@ class Attaque:
 
     @property
     def degats(self):
-        return self.degats
+        return self._degats
 
     @degats.setter
     def degats(self, degats):
@@ -32,7 +32,7 @@ class Attaque:
 
     @property
     def chances(self):
-        return self.chances
+        return self._chances
 
     @chances.setter
     def chances(self, chances):
@@ -50,5 +50,5 @@ class Attaque:
         Définit les dégats infligés par l'attaque.
         :return:
         """
-        degat = random.choices(self.degats, weights=self.chances, k=1)
+        degat: int = random.choices(self.degats, weights=self.chances, k=1)
         return degat

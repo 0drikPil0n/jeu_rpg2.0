@@ -97,6 +97,14 @@ class Personnage:
             raise TypeError("L'esquive doit être sois True ou False")
         self._esquive = esquive
 
+    @property
+    def pv(self):
+        return self._pv
+
+    @pv.setter
+    def pv(self, pv):
+        self._pv = pv
+
     def enregistrer_personnage(self):
         with open(file=Personnage.CHEMIN_PERSO, mode='r') as fichier_perso:
             liste_personnage = jsonpickle.decode(fichier_perso.read())
@@ -107,17 +115,17 @@ class Personnage:
     def attaquer(self, ennemi, choix, tour):
         match choix:
             case "1":
-                attaque = self.attaque.degat_infliger()
+                p_attaque: int = self.attaque.degat_infliger()
                 print(f"Vous utiliser {self.attaque.nom}")
-                ennemi.pv -= attaque
+                ennemi.pv -= p_attaque
             case "2":
                 if tour > 0:
                     print(f"\nVous devez attendre {tour} tour pour recharger cette attaque...")
                     time.sleep(0.5)
                 else:
-                    attaque = self.attaque_speciale.degat_infliger()
+                    p_attaque: int = self.attaque_speciale.degat_infliger()
                     print(f"Vous utiliser {self.attaque.nom}")
-                    ennemi.pv -= attaque
+                    ennemi.pv -= p_attaque
                     tour += 3
 
 
@@ -126,12 +134,13 @@ class Personnage:
         Permet au joueur d'esquiver la prochaine attaque. A une chance d'échouer.
         :return: True s'il esquive, False sinon.
         """
-        chance = [5, 1]
+        chance = [4, 1]
         esquive = random.choices([True, False], chance)
-        if esquive:
+        if esquive is True:
             self.esquive = True
             print("\nVous esquiver la prochaine attaque!")
             time.sleep(0.5)
         else:
+            self.esquive = False
             print("\nVous n'avez pas réussis à esquiver l'attaque...")
             time.sleep(0.5)
