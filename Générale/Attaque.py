@@ -48,7 +48,7 @@ class Attaque:
     def degat_infliger(self):
         """
         Définit les dégats infligés par l'attaque.
-        :return:
+        :return: Les dégats infligés par l'attaque.
         """
-        degat: int = random.choices(self.degats, weights=self.chances, k=1)
-        return degat
+        degat = random.choices(self.degats, weights=self.chances, k=1)
+        return degat[0]

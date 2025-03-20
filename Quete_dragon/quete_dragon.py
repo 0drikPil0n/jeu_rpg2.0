@@ -1,8 +1,8 @@
 import random
 import time
+from textwrap import dedent
 from typing import Any
 
-from Générale.Attaque import Attaque
 from Quete_dragon.dragon import Dragon
 from Création_personnage.personnage import Personnage
 
@@ -13,43 +13,46 @@ def afficher_dragon():
     :return: None
     """
     print("*" * 30)
-    print("Dans cette mission, l'objectif est de traquer et de tuer un dragon redoutable qui\n"
-          "terrorise un village voisin. Le dragon, qui vis dans une grotte profonde\n"
-          "et obscure, est hostile et crache du feu sur quiconque ose pénétrer son domaine.\n")
+    print(dedent(
+        "Dans cette mission, l'objectif est de traquer et de tuer un dragon redoutable qui\n"
+        "terrorise un village voisin. Le dragon, qui vis dans une grotte profonde et obscure,\n"
+        "est hostile, et crache du feu sur quiconque ose pénétrer son domaine.\n"))
     input("Appuyer sur entrée pour continuer\n")
-    print("Les aventuriers doivent se préparer en rassemblant des armes. Après une des longues\n "
-          "semaines de préparation, vous décidez de vous mettre en marche vers cette grotte\n "
-          "hostile dans les montagnes. Une fois arriver à cette grotte, vous êtes incapable\n "
-          "de vaincre votre peur.\n")
+    print(dedent(
+        "Les aventuriers doivent se préparer en rassemblant des armes. Après une longue\n"
+        "semaine de préparation, vous décidez de vous mettre en marche vers cette grotte\n"
+        "hostile située dans les montagnes. Une fois arrivé à cette grotte, vous êtes incapable\n"
+        "de vaincre votre peur.\n"))
     input("Appuyer sur entrée pour continuer\n")
-    print("Des frissons parcours votre corps, vos dents se met à claquer,\n"
-          "vos jambes se met à trembler. C'est alors que vous prenez une grande inspiration et\n "
-          "vous prenez votre courage à deux mains. En entrant dans la grotte une odeur nauséabonde \n"
-          "s'empare de votre corps, vous n'avez jamais senti quelque chose d'aussi mauvais.\n")
+    print(dedent(
+        "Des frissons parcourent votre corps, vos dents se mettent a claquées,\n"
+        "vos jambes se mettent a tremblées. C'est alors que vous prenez une grande inspiration, et\n"
+        "vous prenez votre courage à deux mains. En entrant dans la grotte, une odeur nauséabonde \n"
+        "s'empare de votre corps, vous n'avez jamais senti quelque chose d'aussi mauvais.\n"))
     input("Appuyer sur entrée pour continuer\n")
-    print("C'est alors qu'un craquement se fait surgir comme quelqu'un qui marche sur une branche.\n "
-          "Vous décidez de baisser le regard et c'est à ce moment que vous remarquez que vous\n "
-          "marchez sur les cadavres de vos camarades qui, eux aussi, avaient essayé de vaincre se\n "
-          "fameux dragons. C'est alors qu'un bruit se fait entendre dans le fond de la grotte.\n")
+    print(dedent(
+        "C'est alors qu'un craquement se fait surgir comme quelqu'un qui marche sur une branche.\n"
+        "Vous décidez de baisser le regard, et c'est à ce moment que vous remarquez que vous\n"
+        "marchez sur les cadavres de vos camarades qui, eux aussi, avaient essayés de vaincre ce\n"
+        "fameux dragon. C'est alors qu'un bruit se fait entendre dans le fond de la grotte.\n"))
     input("Appuyer sur entrée pour continuer\n")
-    print("Au fur et à mesure que le bruit se rapproche, vous distinguez une silhouette énorme\n "
-          "se dirigeant vers vous. C'est alors que le dragon apparait et sans même vous laissez le temps\n"
-          "de réagir, vous envoie au sol d'un bref coup circulaire avec sa queue. Vous vous relever,\n "
-          "adrenaline dans le sang, vengeance dans l'esprit et vous vous élancer arme dans la main pour\n "
-          "peut être la dernière fois!\n")
+    print(dedent(
+        "Au fur et à mesure que le bruit se rapproche, vous distinguez une silhouette énorme\n"
+        "se dirigeant vers vous. C'est alors que le dragon apparait et sans même vous laissez le temps\n"
+        "de réagir, vous envoie au sol d'un bref coup circulaire avec sa queue. Vous vous relever,\n"
+        "adrénaline dans le sang, vengeance dans l'esprit et vous vous élancer arme dans la main pour\n"
+        "peut être la dernière fois!\n"))
     input("Appuyer sur entrée pour continuer\n")
     return None
 
-def combat(joueur:Personnage,p_dragon:Dragon,n_tour_recharge):
+
+def combat(joueur: Personnage, p_dragon: Dragon):
     """
     Permet au joueur de choisir que faire avant le combat
     :param joueur: Le personnage du joueur
     :param p_dragon: Le dragon
-    :param n_tour_recharge: Le nombre de tour avant de pouvoir recharger l'attaque spéciale
     :return: None
     """
-    if n_tour_recharge > 0:
-        n_tour_recharge -= 1
     # Tour du joueur
     p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
                     "Attaquer (1) ou esquiver (2): ")
@@ -67,20 +70,14 @@ def combat(joueur:Personnage,p_dragon:Dragon,n_tour_recharge):
                 time.sleep(0.5)
                 choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
                                    "Attaque normale (1) | Attaque spéciale (2): ")
-            joueur.attaquer(p_dragon,choix_atts, n_tour_recharge)
-            print(f"\nIl reste {p_dragon} PV au dragon.")
+            joueur.attaquer(p_dragon, choix_atts)
+            print(f"\nIl reste {p_dragon.pv} PV au dragon.")
             time.sleep(1)
         case "2":
             joueur.esquiver()
 
 
-
-
-
-
-
-
-def choisir_decision_comba(stats: dict, role: str,p_tour:int) -> tuple[int | None | Any, bool | Any, int]:
+def choisir_decision_comba(stats: dict, role: str, p_tour: int) -> tuple[int | None | Any, bool | Any, int]:
     """
     Permet au joueur de choisir quoi faire avant le combat
     :param stats: Les statistiques du role choisis
@@ -90,27 +87,27 @@ def choisir_decision_comba(stats: dict, role: str,p_tour:int) -> tuple[int | Non
     """
     # Attaques
     attaques: list[int] = stats[role]["Dégats"]
-    p_attaque = None # Par défaut
+    p_attaque = None  # Par défaut
     attaques_speciale = stats[role]["Att.Spé."]
     # Chance attaque/esquive
-    chance_esquive = [True,True,False]
-    p_esquive = False # Par défaut
+    chance_esquive = [True, True, False]
+    p_esquive = False  # Par défaut
     # Choix combat
     if p_tour > 0:
         p_tour -= 1
     while type(p_attaque) != int:
         decision = input(f"\nLe dragon se prépare à attaquer. Que voulez-vous faire?\n"
-              f"Attaquer (1) ou esquiver (2): ")
-        while decision not in ["1","2"]:
+                         f"Attaquer (1) ou esquiver (2): ")
+        while decision not in ["1", "2"]:
             print(f"\nVeuillez choisir une action valide")
             time.sleep(0.5)
             decision = input(f"\nLe dragon se prépare à attaquer. Que voulez-vous faire?\n"
-                                f"Attaquer (1) ou esquiver (2): ")
+                             f"Attaquer (1) ou esquiver (2): ")
         match decision:
-            case "1": # Le joueur attaque
+            case "1":  # Le joueur attaque
                 choix_attaque = input(f"\nSouhaitez-vous faire une attaque normale ou une attaque spéciale?\n"
-                  f"Attaque (1) ou attaque spéciale (2): ")
-                while choix_attaque not in ["1","2"]:
+                                      f"Attaque (1) ou attaque spéciale (2): ")
+                while choix_attaque not in ["1", "2"]:
                     print(f"\nVeuillez sélectionner un choix valide")
                     time.sleep(0.5)
                     choix_attaque = input(f"\nSouhaitez-vous faire une attaque normale ou une attaque spéciale?\n"
@@ -126,13 +123,13 @@ def choisir_decision_comba(stats: dict, role: str,p_tour:int) -> tuple[int | Non
                         else:
                             p_attaque = random.choice(attaques_speciale)
                             p_tour += 3
-            case "2": # Le joueur esquive
+            case "2":  # Le joueur esquive
                 p_esquive = random.choice(chance_esquive)
                 p_attaque = 0
-    return p_attaque,p_esquive,p_tour
+    return p_attaque, p_esquive, p_tour
 
 
-def combat_dragon(stats:dict, role:str, p_attaque:int, p_esquive:bool,pv_dragon:int,pv_joueur:int):
+def combat_dragon(stats: dict, role: str, p_attaque: int, p_esquive: bool, pv_dragon: int, pv_joueur: int):
     """
     Combat entre le joueur et le dragon. Détermine comment un tour se déroule
     en fonction des choix du joueur.
@@ -145,9 +142,9 @@ def combat_dragon(stats:dict, role:str, p_attaque:int, p_esquive:bool,pv_dragon:
     :return: Les points de vie du joueur et du dragon.
     """
     # Attaque dragon
-    attaques_dragon = [120,90]
-    chance_att_dragon = [True,False]
-    arme = stats[role]["Arme"] # Arme utilisée
+    attaques_dragon = [120, 90]
+    chance_att_dragon = [True, False]
+    arme = stats[role]["Arme"]  # Arme utilisée
     if p_esquive:
         print("\nVous esquiver l'attaque du dragon")
     else:
@@ -177,10 +174,10 @@ def combat_dragon(stats:dict, role:str, p_attaque:int, p_esquive:bool,pv_dragon:
                 print(f"\nLe dragon à échouer son attaque!")
                 time.sleep(1)
 
-    return pv_dragon,pv_joueur
+    return pv_dragon, pv_joueur
 
 
-def resultat_dragon(pv_dragon:int,pv_joueur:int) -> bool:
+def resultat_dragon(pv_dragon: int, pv_joueur: int) -> bool:
     """
     Indique si le joueur a gagné ou a perdu.
     :param pv_dragon: Les points de vie du dragon.
@@ -196,4 +193,3 @@ def resultat_dragon(pv_dragon:int,pv_joueur:int) -> bool:
         print("\nVous êtes mort. Le dragon vous a tuer")
     time.sleep(1)
     return p_victoire
-

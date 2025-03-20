@@ -101,8 +101,10 @@ def choisir_aventure() -> tuple[int, str]:
                 time.sleep(0.3)
             p_numero = int(input(f"\nQuelle aventure souhaitez-vous faire?\n"
                                  f"Choisissez le numéro correspondant de 1 à {(len(liste_aventure))}: "))
-        except ValueError:
-            print("\nVeuillez choisir un nombre entier\n")
+            if p_numero not in range(1, len(liste_aventure) + 1):
+                raise IndexError
+        except (ValueError, IndexError):
+            print("\nVeuillez choisir un nombre correspondant à une mission.\n")
             time.sleep(1)
         else:
             return p_numero, liste_aventure[p_numero - 1]
@@ -185,9 +187,8 @@ if __name__ == '__main__':
                     # Le dragon
                     dragon = Dragon(pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
                     afficher_dragon()
-                    n_tour_recharge = 0
                     while perso_joueur.pv > 0 and dragon.pv > 0:
-                        combat(perso_joueur, dragon, n_tour_recharge)
+                        combat(perso_joueur, dragon)
 
                     # afficher_dragon()
                     # pv_dragon = 600

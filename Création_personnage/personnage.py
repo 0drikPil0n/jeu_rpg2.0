@@ -1,11 +1,14 @@
 from Création_personnage.race import Race
 from Création_personnage.classe import Classe
 from Création_personnage.sous_classe import SousClasse
+from Générale.Attaque import Attaque
 
 import jsonpickle
 from pathlib import Path
 import random
 import time
+
+
 
 
 class Personnage:
@@ -26,6 +29,7 @@ class Personnage:
         self.attaque = sous_classe.attaque
         self.attaque_speciale = sous_classe.attaque_speciale
         self.arme = sous_classe.arme
+        self.tour_avant_recharge: int = 0
 
     @property
     def nom(self):
@@ -105,6 +109,47 @@ class Personnage:
     def pv(self, pv):
         self._pv = pv
 
+    @property
+    def attaque(self):
+        return self._attaque
+
+    @attaque.setter
+    def attaque(self, attaque):
+        if not isinstance(attaque, Attaque):
+            raise TypeError("Une attaque doit être de la classe 'Attaque'.")
+        self._attaque = attaque
+
+    @property
+    def attaque_speciale(self):
+        return self._attaque_speciale
+
+    @attaque_speciale.setter
+    def attaque_speciale(self, attaque_speciale):
+        if not isinstance(attaque_speciale, Attaque):
+            raise TypeError("Une attaque doit être de la classe 'Attaque'.")
+        self._attaque_speciale = attaque_speciale
+
+    @property
+    def arme(self):
+        return self._arme
+
+    @arme.setter
+    def arme(self, arme):
+        if not isinstance(arme, str):
+            raise TypeError("L'arme doit être une string.")
+        self._arme = arme
+
+    @property
+    def tour_avant_recharge(self):
+        return self._tour_avant_recharge
+
+    @tour_avant_recharge.setter
+    def tour_avant_recharge(self, tour_avant_recharge):
+        if not isinstance(tour_avant_recharge, int):
+            raise TypeError("Le nombre de tour avant la recharge doit être un int.")
+        self._tour_avant_recharge = tour_avant_recharge
+
+
     def enregistrer_personnage(self):
         with open(file=Personnage.CHEMIN_PERSO, mode='r') as fichier_perso:
             liste_personnage = jsonpickle.decode(fichier_perso.read())
@@ -112,21 +157,24 @@ class Personnage:
         with open(file=Personnage.CHEMIN_PERSO, mode="w", encoding="utf-8") as fichier_perso:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
-    def attaquer(self, ennemi, choix, tour):
+    def attaquer(self, ennemi, choix):
+        if self.tour_avant_recharge > 0:
+            self.tour_avant_recharge -= 1
         match choix:
             case "1":
                 p_attaque: int = self.attaque.degat_infliger()
-                print(f"Vous utiliser {self.attaque.nom}")
+                print(f"Vous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
                 ennemi.pv -= p_attaque
             case "2":
-                if tour > 0:
-                    print(f"\nVous devez attendre {tour} tour pour recharger cette attaque...")
+                if self.tour_avant_recharge > 0:
+                    print(f"\nVous devez attendre {self.tour_avant_recharge} tour pour recharger cette attaque...")
                     time.sleep(0.5)
                 else:
                     p_attaque: int = self.attaque_speciale.degat_infliger()
-                    print(f"Vous utiliser {self.attaque.nom}")
+                    print(f"\nVous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
+                    time.sleep(0.5)
                     ennemi.pv -= p_attaque
-                    tour += 3
+                    self.tour_avant_recharge += 3
 
 
     def esquiver(self):
@@ -135,7 +183,8 @@ class Personnage:
         :return: True s'il esquive, False sinon.
         """
         chance = [4, 1]
-        esquive = random.choices([True, False], chance)
+        esquive = random.choices([True, False], chance, k=1)
+        esquive = esquive[0]
         if esquive is True:
             self.esquive = True
             print("\nVous esquiver la prochaine attaque!")

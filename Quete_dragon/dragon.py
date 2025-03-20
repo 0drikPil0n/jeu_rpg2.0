@@ -8,6 +8,8 @@ class Dragon:
         self.pv = pv
         self.atts = atts
         self.chances = chances
+        if pv <= 0:
+            raise TypeError("Les points de vie doivent être un nombre entier plus grand que 0")
 
     @property
     def pv(self):
@@ -15,8 +17,8 @@ class Dragon:
 
     @pv.setter
     def pv(self,pv):
-        if not isinstance(pv, int) or pv <= 0:
-            raise TypeError("Les points de vie doivent être un nombre entier plus grand que 0")
+        if not isinstance(pv, int):
+            raise TypeError("Les points de vie doivent être un nombre entier")
         self._pv = pv
 
     @property
