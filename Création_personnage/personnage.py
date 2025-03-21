@@ -8,8 +8,6 @@ import random
 import time
 
 
-
-
 class Personnage:
     """
     Un avatar créé par le joueur
@@ -148,7 +146,6 @@ class Personnage:
             raise TypeError("Le nombre de tour avant la recharge doit être un int.")
         self._tour_avant_recharge = tour_avant_recharge
 
-
     def enregistrer_personnage(self):
         with open(file=Personnage.CHEMIN_PERSO, mode='r') as fichier_perso:
             liste_personnage = jsonpickle.decode(fichier_perso.read())
@@ -160,19 +157,14 @@ class Personnage:
         match choix:
             case "1":
                 p_attaque: int = self.attaque.degat_infliger()
-                print(f"Vous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
+                print(f"\nVous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
                 ennemi.pv -= p_attaque
             case "2":
-                if self.tour_avant_recharge > 0:
-                    print(f"\nVous devez attendre {self.tour_avant_recharge} tour pour recharger cette attaque...")
-                    time.sleep(0.5)
-                else:
-                    p_attaque: int = self.attaque_speciale.degat_infliger()
-                    print(f"\nVous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
-                    time.sleep(0.5)
-                    ennemi.pv -= p_attaque
-                    self.tour_avant_recharge += 4
-
+                p_attaque: int = self.attaque_speciale.degat_infliger()
+                print(f"\nVous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
+                ennemi.pv -= p_attaque
+                self.tour_avant_recharge += 3
+        time.sleep(0.5)
 
     def esquiver(self):
         """

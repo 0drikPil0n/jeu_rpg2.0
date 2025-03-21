@@ -48,13 +48,11 @@ def afficher_dragon():
 
 def combat(joueur: Personnage, p_dragon: Dragon):
     """
-    Permet au joueur de choisir que faire avant le combat
+    Le combat entre le joueur et le draogn. Permet au joueur de choisir que faire avant le combat.
     :param joueur: Le personnage du joueur
     :param p_dragon: Le dragon
     :return: None
     """
-    if joueur.tour_avant_recharge > 0:
-        joueur.tour_avant_recharge -= 1
     # Tour du joueur
     while True:
         p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
@@ -73,11 +71,21 @@ def combat(joueur: Personnage, p_dragon: Dragon):
                     time.sleep(0.5)
                     choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
                                        "Attaque normale (1) | Attaque spéciale (2): ")
+                if choix_atts == "2":
+                    if joueur.tour_avant_recharge > 0:
+                        print(f"\nVous devez attendre {joueur.tour_avant_recharge} tour pour recharger cette attaque...")
+                        time.sleep(1)
+                        continue
                 joueur.attaquer(p_dragon, choix_atts)
                 print(f"\nIl reste {p_dragon.pv} PV au dragon.")
                 time.sleep(1)
+                break
             case "2":
                 joueur.esquiver()
+                break
+    if joueur.tour_avant_recharge > 0:
+        joueur.tour_avant_recharge -= 1
+
 
 
 
