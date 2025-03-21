@@ -1,6 +1,4 @@
-from Création_personnage.classe import Classe
-from Création_personnage.sous_classe import SousClasse
-from Création_personnage.race import Race
+from Création_personnage import Classe, SousClasse, Race
 
 import time
 

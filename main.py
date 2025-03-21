@@ -3,13 +3,14 @@ import time
 from textwrap import dedent
 import jsonpickle
 
-from Création_personnage.creer_personnage import (choisir_nom, choisir_age, choisir_genre, choisir_race,
-                                                  choisir_classe, choisir_sous_classe, liste_classes, liste_races)
-from Création_personnage.personnage import Personnage
-
-from Quete_dragon.dragon import Dragon
 from Générale.Attaque import Attaque
-from Quete_dragon.quete_dragon import (afficher_dragon, combat)
+
+from Création_personnage import (Personnage, choisir_nom, choisir_race, liste_races, choisir_genre,
+                                 choisir_age, choisir_classe, liste_classes, choisir_sous_classe)
+
+from Quete_dragon import Dragon, afficher_dragon, combat
+
+
 
 
 liste_aventure = ["Tuer le dragon de la grotte", "Récupérer le crystal magique"]

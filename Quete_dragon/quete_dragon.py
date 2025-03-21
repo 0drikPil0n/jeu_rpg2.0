@@ -3,8 +3,8 @@ import time
 from textwrap import dedent
 from typing import Any
 
-from Quete_dragon.dragon import Dragon
-from Création_personnage.personnage import Personnage
+from Quete_dragon import Dragon
+from Création_personnage import Personnage
 
 
 def afficher_dragon():

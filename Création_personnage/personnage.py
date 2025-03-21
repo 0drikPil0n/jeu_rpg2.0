@@ -1,6 +1,5 @@
-from Création_personnage.race import Race
-from Création_personnage.classe import Classe
-from Création_personnage.sous_classe import SousClasse
+from Création_personnage import Race, Classe, SousClasse
+
 from Générale.Attaque import Attaque
 
 import jsonpickle
@@ -158,6 +157,7 @@ class Personnage:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
     def attaquer(self, ennemi, choix):
+        # TODO Rémy faut qui vienne m'aider live genre
         if self.tour_avant_recharge > 0:
             self.tour_avant_recharge -= 1
         match choix:
