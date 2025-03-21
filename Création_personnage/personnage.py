@@ -157,8 +157,6 @@ class Personnage:
             fichier_perso.write(jsonpickle.encode(liste_personnage, indent=4))
 
     def attaquer(self, ennemi, choix):
-        if self.tour_avant_recharge > 0:
-            self.tour_avant_recharge -= 1
         match choix:
             case "1":
                 p_attaque: int = self.attaque.degat_infliger()
@@ -173,7 +171,7 @@ class Personnage:
                     print(f"\nVous utiliser {self.attaque.nom} et infligé {p_attaque} dégats.")
                     time.sleep(0.5)
                     ennemi.pv -= p_attaque
-                    self.tour_avant_recharge += 3
+                    self.tour_avant_recharge += 4
 
 
     def esquiver(self):

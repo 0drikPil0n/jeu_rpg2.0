@@ -53,28 +53,32 @@ def combat(joueur: Personnage, p_dragon: Dragon):
     :param p_dragon: Le dragon
     :return: None
     """
+    if joueur.tour_avant_recharge > 0:
+        joueur.tour_avant_recharge -= 1
     # Tour du joueur
-    p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
-                    "Attaquer (1) ou esquiver (2): ")
-    while p_choix not in ["1", "2"]:
-        print("\nVeuillez sélectionner un choix valide...")
-        time.sleep(0.5)
+    while True:
         p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
                         "Attaquer (1) ou esquiver (2): ")
-    match p_choix:
-        case "1":
-            choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
-                               "Attaque normale (1) | Attaque spéciale (2): ")
-            while choix_atts not in ["1", "2"]:
-                print("\nVeuillez sélectionner un choix valide...")
-                time.sleep(0.5)
+        while p_choix not in ["1", "2"]:
+            print("\nVeuillez sélectionner un choix valide...")
+            time.sleep(0.5)
+            p_choix = input("\nLe dragon se prépare à attaquer... Que voulez-vous faire?\n"
+                            "Attaquer (1) ou esquiver (2): ")
+        match p_choix:
+            case "1":
                 choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
                                    "Attaque normale (1) | Attaque spéciale (2): ")
-            joueur.attaquer(p_dragon, choix_atts)
-            print(f"\nIl reste {p_dragon.pv} PV au dragon.")
-            time.sleep(1)
-        case "2":
-            joueur.esquiver()
+                while choix_atts not in ["1", "2"]:
+                    print("\nVeuillez sélectionner un choix valide...")
+                    time.sleep(0.5)
+                    choix_atts = input("\nQuelle attaque voulez-vous utilisée?\n"
+                                       "Attaque normale (1) | Attaque spéciale (2): ")
+                joueur.attaquer(p_dragon, choix_atts)
+                print(f"\nIl reste {p_dragon.pv} PV au dragon.")
+                time.sleep(1)
+            case "2":
+                joueur.esquiver()
+
 
 
 def choisir_decision_comba(stats: dict, role: str, p_tour: int) -> tuple[int | None | Any, bool | Any, int]:
