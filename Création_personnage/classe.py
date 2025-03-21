@@ -1,4 +1,4 @@
-from Création_personnage import SousClasse
+from Création_personnage.sous_classe import SousClasse
 
 
 class Classe:
