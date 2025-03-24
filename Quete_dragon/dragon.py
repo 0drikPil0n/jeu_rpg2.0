@@ -51,7 +51,7 @@ class Dragon:
         Définis si l'attaque réussie ou non.
         :return: True si elle réussit, False sinon.
         """
-        reussite = random.choices([True, False], weights=[2, 1], k=1)
+        reussite = random.choices([True, False], weights=[3, 4], k=1)
         return reussite[0]
 
     def attaque_choisis(self):

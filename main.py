@@ -8,7 +8,7 @@ from Générale.Attaque import Attaque
 from Création_personnage import (Personnage, choisir_nom, choisir_race, liste_races, choisir_genre,
                                  choisir_age, choisir_classe, liste_classes, choisir_sous_classe)
 
-from Quete_dragon import Dragon, afficher_dragon, combat
+from Quete_dragon import Dragon, afficher_dragon, combat, resultat_dragon
 
 
 
@@ -190,6 +190,9 @@ if __name__ == '__main__':
                     afficher_dragon()
                     while perso_joueur.pv > 0 and dragon.pv > 0:
                         combat(perso_joueur, dragon)
+                    victoire = resultat_dragon(perso_joueur, dragon)
+
+
 
                     # afficher_dragon()
                     # pv_dragon = 600
