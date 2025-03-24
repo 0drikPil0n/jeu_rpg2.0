@@ -2,6 +2,8 @@ import sys
 import time
 from textwrap import dedent
 import jsonpickle
+from colorama import Fore, Back, Style, init
+init(autoreset=True)
 
 from Générale.Attaque import Attaque
 
@@ -24,8 +26,10 @@ def choisir_personnage():
     while True:
         while True:
             try:
-                sauvegarde = int(input("\nSouhaitez-vous commencer une nouvelle partie ou en reprendre une ancienne?\n"
-                                       "Commencer (1) | Reprendre (2) : "))
+                sauvegarde = int(input(f"\nSouhaitez-vous commencer une nouvelle partie ou en reprendre une ancienne?\n"
+                                       f"{Back.BLUE}{Fore.LIGHTWHITE_EX}Commencer{Back.RESET} (1) "
+                                       f"{Fore.LIGHTMAGENTA_EX}|"f"{Fore.LIGHTWHITE_EX} {Back.BLUE}"
+                                       f"Reprendre{Back.RESET} (2) : "))
                 if sauvegarde not in [1, 2]:
                     raise ValueError
             except ValueError:
@@ -71,9 +75,8 @@ def choisir_personnage():
                                 print(f"{i} - {perso.nom}\n"
                                       f"    - {perso.race.nom}\n"
                                       f"    - {perso.genre}\n"
-                                      f"    - {perso.age}\n"
-                                      f"    - {perso.classe.nom}\n"
-                                      f"    - {perso.sous_classe.nom}\n")
+                                      f"    - {perso.age} ans\n"
+                                      f"    - {perso.classe.nom} ({perso.sous_classe.nom})\n")
                             numero = int(input("Quel sauvegarde voulez-vous prendre?\n"
                                                "Sélectionnez le numéro correspondant: "))
                             if numero not in range(1, len(liste_personnage) + 1):
@@ -96,7 +99,7 @@ def choisir_aventure() -> tuple[int, str]:
     """
     while True:
         try:
-            print("\nVoici les missions disponibles:")
+            print(f"\n{Fore.WHITE}{Back.LIGHTCYAN_EX}Voici les missions disponibles:")
             for p_pos, p_mission in enumerate(liste_aventure):
                 print(f"{p_pos + 1} - {p_mission}")
                 time.sleep(0.3)
@@ -165,12 +168,13 @@ def resultat_quete(p_victoire: bool, p_joueur: Personnage):
     if p_choix3 == "oui":
         return False
     elif p_choix3 == "non":
-        print(f"Au revoir, {p_joueur.classe} {p_joueur.nom}!")
+        print(f"Au revoir, {p_joueur.sous_classe.nom} {p_joueur.nom}!")
         sys.exit()
 
 
 if __name__ == '__main__':
-    print("Saluation ! Bienvenu(e) au jeu!")
+    print(f"{Fore.LIGHTWHITE_EX}Saluation ! Bienvenu(e) au{Fore.LIGHTGREEN_EX}{Back.BLACK}"
+          f" jeu {Back.RESET}{Fore.LIGHTWHITE_EX}!")
     time.sleep(1)
     # Choix du pesonnage
     perso_joueur = choisir_personnage()
@@ -181,6 +185,9 @@ if __name__ == '__main__':
         match num_aventure:
             case 1:
                 while True:
+                    # Initialisation du joueur
+                    perso_joueur.pv = perso_joueur.sous_classe.pv
+                    perso_joueur.tour_avant_recharge = 0
                     # Attaque du dragon
                     coup_queue = Attaque(nom="Coup de queue", degats=[50, 55], chances=[2, 1])
                     lance_flamme = Attaque(nom="Lance flamme", degats=[75, 80], chances=[2, 1])
@@ -191,6 +198,9 @@ if __name__ == '__main__':
                     while perso_joueur.pv > 0 and dragon.pv > 0:
                         combat(perso_joueur, dragon)
                     victoire = resultat_dragon(perso_joueur, dragon)
+                    resultat = resultat_quete(victoire, perso_joueur)
+                    if not resultat:
+                        break
 
 
 

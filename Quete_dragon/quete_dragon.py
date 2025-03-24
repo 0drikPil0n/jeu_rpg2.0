@@ -77,7 +77,8 @@ def combat(joueur: Personnage, p_dragon: Dragon):
                         time.sleep(1)
                         continue
                 joueur.attaquer(p_dragon, choix_atts)
-                print(f"\nIl reste {p_dragon.pv} PV au dragon.")
+                if p_dragon.pv > 0:
+                    print(f"\nIl reste {p_dragon.pv} PV au dragon.")
                 time.sleep(1)
                 break
             case "2":
@@ -85,13 +86,14 @@ def combat(joueur: Personnage, p_dragon: Dragon):
                 break
     if joueur.tour_avant_recharge > 0:
         joueur.tour_avant_recharge -= 1
-    # Tour du dragon
-    reussite = p_dragon.reussite_attaque()
-    attaque = p_dragon.attaque_choisis()
-    p_dragon.attaquer(p_perso=joueur, attaque=attaque, reussite=reussite)
-    if joueur.pv > 0:
-        print(f"\nIl vous reste {joueur.pv} point de vie")
-    time.sleep(0.5)
+    if p_dragon.pv > 0:
+        # Tour du dragon
+        reussite = p_dragon.reussite_attaque()
+        attaque = p_dragon.attaque_choisis()
+        p_dragon.attaquer(p_perso=joueur, attaque=attaque, reussite=reussite)
+        if joueur.pv > 0:
+            print(f"\nIl vous reste {joueur.pv} point de vie")
+        time.sleep(0.5)
 
 
 def resultat_dragon(joueur, dragon) -> bool:
