@@ -114,7 +114,7 @@ def commencer_quete(p_sauvegarde: int, p_perso: Personnage = None, ):
     """
     Permet au joueur de décider si il veut commencer une quête ou s'il change d'idée
     :param p_perso: Le personnage créer (s'il y a lieu, sinon None)
-    :param p_sauvegarde: La décision du joueur de prendre une suavegarde existente ou non.
+    :param p_sauvegarde: La décision du joueur de prendre une sauvegarde existente ou non.
     :return: Le personnage utilisé
     """
     while True:
@@ -183,12 +183,8 @@ if __name__ == '__main__':
                     # Initialisation du joueur
                     perso_joueur.pv = perso_joueur.sous_classe.pv
                     perso_joueur.tour_avant_recharge = 0
-                    # Attaque du dragon
-                    coup_queue = Attaque(nom="Coup de queue", degats=[50, 55], chances=[2, 1])
-                    lance_flamme = Attaque(nom="Lance flamme", degats=[75, 80], chances=[2, 1])
-                    coup_griffe = Attaque(nom="Coup de griffe", degats=[30, 35], chances=[2, 1])
                     # Le dragon
-                    dragon = Dragon(nom="Le dragon", pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
+                    dragon = Dragon(nom="Le dragon", pv=600)
                     afficher_dragon()
                     while perso_joueur.pv > 0 and dragon.pv > 0:
                         combat(perso_joueur, dragon)
