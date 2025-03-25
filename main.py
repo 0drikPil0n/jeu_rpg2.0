@@ -2,8 +2,6 @@ import sys
 import time
 from textwrap import dedent
 import jsonpickle
-from colorama import Fore, Back, Style, init
-init(autoreset=True)
 
 from Générale.Attaque import Attaque
 
@@ -27,9 +25,7 @@ def choisir_personnage():
         while True:
             try:
                 sauvegarde = int(input(f"\nSouhaitez-vous commencer une nouvelle partie ou en reprendre une ancienne?\n"
-                                       f"{Back.BLUE}{Fore.LIGHTWHITE_EX}Commencer{Back.RESET} (1) "
-                                       f"{Fore.LIGHTMAGENTA_EX}|"f"{Fore.LIGHTWHITE_EX} {Back.BLUE}"
-                                       f"Reprendre{Back.RESET} (2) : "))
+                                       f"Commencer (1) | Reprendre (2) : "))
                 if sauvegarde not in [1, 2]:
                     raise ValueError
             except ValueError:
@@ -99,7 +95,7 @@ def choisir_aventure() -> tuple[int, str]:
     """
     while True:
         try:
-            print(f"\n{Fore.WHITE}{Back.LIGHTCYAN_EX}Voici les missions disponibles:")
+            print(f"\nVoici les missions disponibles:")
             for p_pos, p_mission in enumerate(liste_aventure):
                 print(f"{p_pos + 1} - {p_mission}")
                 time.sleep(0.3)
@@ -173,8 +169,7 @@ def resultat_quete(p_victoire: bool, p_joueur: Personnage):
 
 
 if __name__ == '__main__':
-    print(f"{Fore.LIGHTWHITE_EX}Saluation ! Bienvenu(e) au{Fore.LIGHTGREEN_EX}{Back.BLACK}"
-          f" jeu {Back.RESET}{Fore.LIGHTWHITE_EX}!")
+    print(f"Saluation ! Bienvenu(e) au jeu !")
     time.sleep(1)
     # Choix du pesonnage
     perso_joueur = choisir_personnage()
