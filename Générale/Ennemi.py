@@ -1,4 +1,4 @@
-from . import Attaque
+from Générale import Attaque
 from Création_personnage import Personnage
 
 import random
