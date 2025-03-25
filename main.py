@@ -188,7 +188,7 @@ if __name__ == '__main__':
                     lance_flamme = Attaque(nom="Lance flamme", degats=[75, 80], chances=[2, 1])
                     coup_griffe = Attaque(nom="Coup de griffe", degats=[30, 35], chances=[2, 1])
                     # Le dragon
-                    dragon = Dragon(pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
+                    dragon = Dragon(nom="Le dragon", pv=600, atts=[coup_queue, lance_flamme, coup_griffe], chances=[2, 1, 1])
                     afficher_dragon()
                     while perso_joueur.pv > 0 and dragon.pv > 0:
                         combat(perso_joueur, dragon)

@@ -90,7 +90,7 @@ class Ennemi:
         Lance une attaque choisit au hasard dans la liste d'attaque
         :return: None
         """
-
+        self.reussite_attaque()
         attaque = self.attaque_choisis()
         degats = attaque.degat_infliger()
         if not p_perso.esquive:

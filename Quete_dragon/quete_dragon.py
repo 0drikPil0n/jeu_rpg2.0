@@ -88,9 +88,7 @@ def combat(joueur: Personnage, p_dragon: Dragon):
         joueur.tour_avant_recharge -= 1
     if p_dragon.pv > 0:
         # Tour du dragon
-        reussite = p_dragon.reussite_attaque()
-        attaque = p_dragon.attaque_choisis()
-        p_dragon.attaquer(p_perso=joueur, attaque=attaque, reussite=reussite)
+        p_dragon.attaquer(p_perso=joueur)
         if joueur.pv > 0:
             print(f"\nIl vous reste {joueur.pv} point de vie")
         time.sleep(0.5)
