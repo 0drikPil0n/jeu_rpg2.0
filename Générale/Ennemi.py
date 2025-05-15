@@ -69,7 +69,7 @@ class Ennemi:
         self._attaque_reussite = attaque_reussite
 
 
-    def reussite_attaque(self):
+    def reussite(self):
         """
         Définis si l'attaque réussie ou non.
         :return: True si elle réussit, False sinon.
@@ -90,7 +90,7 @@ class Ennemi:
         Lance une attaque choisit au hasard dans la liste d'attaque
         :return: None
         """
-        self.reussite_attaque()
+        self.reussite()
         attaque = self.attaque_choisis()
         degats = attaque.degat_infliger()
         if not p_perso.esquive:
